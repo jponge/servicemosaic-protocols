@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<toc label="Web services business protocol help">
+    <topic label="Web services business protocol editor" href="xhtml/protocol-editor/index.html">
+        <link toc="toc_editor.xml"/>
+    </topic>
+</toc>

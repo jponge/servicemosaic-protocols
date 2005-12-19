@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<toc label="Web services business protocol editor" href="xhtml/protocol-editor/index.html">
+    <topic label="User interface overview" href="xhtml/protocol-editor/ui-overview.html"/>
+    <topic label="Tasks">
+        <topic label="Creating a new protocol" href="xhtml/protocol-editor/tasks/new-protocol.html"/>
+        <topic label="Editing a protocol" href="xhtml/protocol-editor/tasks/editing.html"/>
+        <topic label="Linking with WSDL" href="xhtml/protocol-editor/tasks/link-wsdl.html"/>
+    </topic>
+    <topic label="Legal" href="xhtml/protocol-editor/legal.html"/>
+</toc>
