@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         id="fr.isima.ponge.wsprotocol.gefeditor"
+         name="%editors.name"
+         point="org.eclipse.ui.editors">
+      <editor
+            class="fr.isima.ponge.wsprotocol.gefeditor.uiparts.ProtocolEditor"
+            contributorClass="fr.isima.ponge.wsprotocol.gefeditor.uiparts.ProtocolEditorActionBarContributor"
+            default="false"
+            extensions="wsprotocol"
+            icon="icons/composite_change.gif"
+            id="fr.isima.ponge.wsprotocol.gefeditor"
+            name="%gefeditor.name"/>
+   </extension>
+   <extension
+         id="fr.isima.ponge.wsprotocol.gefeditor"
+         name="%newWizards.name"
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="fr.isima.ponge.wsprotocol.gefeditor"
+            name="%newWizards.category"/>
+      <wizard
+            category="fr.isima.ponge.wsprotocol.gefeditor"
+            class="fr.isima.ponge.wsprotocol.gefeditor.wizards.NewBusinessProtocolWizard"
+            icon="icons/composite_change.gif"
+            id="fr.isima.ponge.wsprotocol.gefeditor.wizards.NewBusinessProtocolWizard"
+            name="%newWizards.newProtocol"/>
+   </extension>
+
+</plugin>
