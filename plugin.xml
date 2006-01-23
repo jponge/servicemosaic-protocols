@@ -28,5 +28,14 @@
             id="fr.isima.ponge.wsprotocol.gefeditor.wizards.NewBusinessProtocolWizard"
             name="%newWizards.newProtocol"/>
    </extension>
+   <extension
+         id="fr.isima.ponge.wsprotocol.gefeditor"
+         name="%perspectives.name"
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="fr.isima.ponge.wsprotocol.gefeditor.perspective.EditingPerspectiveFactory"
+            id="fr.isima.ponge.wsprotocol.gefeditor.perspectives.editing"
+            name="%editingPerspective.name"/>
+   </extension>
 
 </plugin>
