@@ -163,4 +163,6 @@ public class Messages extends NLS
     public static String initialStateProperty;
 
     public static String finalStateProperty;
+
+    public static String alignMenuEntry;
 }

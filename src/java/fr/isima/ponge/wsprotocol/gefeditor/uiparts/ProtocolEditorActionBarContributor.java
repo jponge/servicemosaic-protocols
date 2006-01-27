@@ -22,15 +22,24 @@
 
 package fr.isima.ponge.wsprotocol.gefeditor.uiparts;
 
+import org.eclipse.draw2d.PositionConstants;
+import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.ui.actions.ActionBarContributor;
+import org.eclipse.gef.ui.actions.AlignmentRetargetAction;
 import org.eclipse.gef.ui.actions.DeleteRetargetAction;
 import org.eclipse.gef.ui.actions.GEFActionConstants;
+import org.eclipse.gef.ui.actions.MatchHeightRetargetAction;
+import org.eclipse.gef.ui.actions.MatchWidthRetargetAction;
 import org.eclipse.gef.ui.actions.RedoRetargetAction;
 import org.eclipse.gef.ui.actions.UndoRetargetAction;
+import org.eclipse.gef.ui.actions.ZoomComboContributionItem;
+import org.eclipse.gef.ui.actions.ZoomInRetargetAction;
+import org.eclipse.gef.ui.actions.ZoomOutRetargetAction;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.actions.RetargetAction;
@@ -55,12 +64,24 @@ public class ProtocolEditorActionBarContributor extends ActionBarContributor
         addRetargetAction(new DeleteRetargetAction());
         addRetargetAction(new UndoRetargetAction());
         addRetargetAction(new RedoRetargetAction());
+        
+        addRetargetAction(new AlignmentRetargetAction(PositionConstants.LEFT));
+        addRetargetAction(new AlignmentRetargetAction(PositionConstants.CENTER));
+        addRetargetAction(new AlignmentRetargetAction(PositionConstants.RIGHT));
+        addRetargetAction(new AlignmentRetargetAction(PositionConstants.TOP));
+        addRetargetAction(new AlignmentRetargetAction(PositionConstants.MIDDLE));
+        addRetargetAction(new AlignmentRetargetAction(PositionConstants.BOTTOM));
+
+        addRetargetAction(new ZoomInRetargetAction());
+        addRetargetAction(new ZoomOutRetargetAction());
+
+        addRetargetAction(new MatchWidthRetargetAction());
+        addRetargetAction(new MatchHeightRetargetAction());
 
         addRetargetAction(new RetargetAction(GEFActionConstants.TOGGLE_SNAP_TO_GEOMETRY,
                 Messages.snapToGrid, IAction.AS_CHECK_BOX));
-
         addRetargetAction(new RetargetAction(GEFActionConstants.TOGGLE_GRID_VISIBILITY,
-                Messages.showGrid, IAction.AS_CHECK_BOX));
+                Messages.showGrid, IAction.AS_CHECK_BOX));       
     }
 
     /*
@@ -72,6 +93,25 @@ public class ProtocolEditorActionBarContributor extends ActionBarContributor
     {
         toolBarManager.add(getAction(ActionFactory.UNDO.getId()));
         toolBarManager.add(getAction(ActionFactory.REDO.getId()));
+
+        toolBarManager.add(new Separator());
+        toolBarManager.add(getAction(GEFActionConstants.ALIGN_LEFT));
+        toolBarManager.add(getAction(GEFActionConstants.ALIGN_CENTER));
+        toolBarManager.add(getAction(GEFActionConstants.ALIGN_RIGHT));
+        
+        toolBarManager.add(new Separator());
+        toolBarManager.add(getAction(GEFActionConstants.ALIGN_TOP));
+        toolBarManager.add(getAction(GEFActionConstants.ALIGN_MIDDLE));
+        toolBarManager.add(getAction(GEFActionConstants.ALIGN_BOTTOM));
+
+        toolBarManager.add(new Separator());
+        toolBarManager.add(getAction(GEFActionConstants.MATCH_WIDTH));
+        toolBarManager.add(getAction(GEFActionConstants.MATCH_HEIGHT));
+
+        toolBarManager.add(new Separator());
+        String[] zoomStrings = new String[] { ZoomManager.FIT_ALL, ZoomManager.FIT_HEIGHT,
+                ZoomManager.FIT_WIDTH };
+        toolBarManager.add(new ZoomComboContributionItem(getPage(), zoomStrings));
     }
 
     /*
@@ -82,8 +122,20 @@ public class ProtocolEditorActionBarContributor extends ActionBarContributor
     public void contributeToMenu(IMenuManager menuManager)
     {
         MenuManager viewMenu = new MenuManager(Messages.viewMenu);
+
+        viewMenu.add(getAction(GEFActionConstants.ZOOM_IN));
+        viewMenu.add(getAction(GEFActionConstants.ZOOM_OUT));
+        
+        viewMenu.add(new Separator());
+        
         viewMenu.add(getAction(GEFActionConstants.TOGGLE_GRID_VISIBILITY));
         viewMenu.add(getAction(GEFActionConstants.TOGGLE_SNAP_TO_GEOMETRY));
+        
+        viewMenu.add(new Separator());
+        
+        viewMenu.add(getAction(GEFActionConstants.MATCH_WIDTH));
+        viewMenu.add(getAction(GEFActionConstants.MATCH_HEIGHT));
+
         menuManager.insertAfter(IWorkbenchActionConstants.M_EDIT, viewMenu);
     }
 
@@ -94,6 +146,8 @@ public class ProtocolEditorActionBarContributor extends ActionBarContributor
      */
     protected void declareGlobalActionKeys()
     {
+        addGlobalActionKey(ActionFactory.PRINT.getId());
+        addGlobalActionKey(ActionFactory.SELECT_ALL.getId());
         addGlobalActionKey(ActionFactory.DELETE.getId());
     }
 

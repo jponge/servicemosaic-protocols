@@ -28,7 +28,11 @@ import org.eclipse.gef.ui.actions.ActionRegistry;
 import org.eclipse.gef.ui.actions.GEFActionConstants;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.ui.actions.ActionFactory;
+
+import fr.isima.ponge.wsprotocol.gefeditor.Messages;
 
 /**
  * The context menu provider for the editor.
@@ -67,10 +71,51 @@ public class ProtocolEditorContextMenuProvider extends ContextMenuProvider
         // Add standard action groups to the menu
         GEFActionConstants.addStandardActionGroups(menu);
 
-        // Add actions to the menu
-        menu.appendToGroup(GEFActionConstants.GROUP_UNDO, getAction(ActionFactory.UNDO.getId()));
-        menu.appendToGroup(GEFActionConstants.GROUP_UNDO, getAction(ActionFactory.REDO.getId()));
-        menu.appendToGroup(GEFActionConstants.GROUP_EDIT, getAction(ActionFactory.DELETE.getId()));
+        IAction action;
+        action = getAction(ActionFactory.UNDO.getId());
+        menu.appendToGroup(GEFActionConstants.GROUP_UNDO, action);
+
+        action = getAction(ActionFactory.REDO.getId());
+        menu.appendToGroup(GEFActionConstants.GROUP_UNDO, action);
+
+        action = getAction(ActionFactory.DELETE.getId());
+        if (action.isEnabled())
+            menu.appendToGroup(GEFActionConstants.GROUP_EDIT, action);
+
+        // Alignment actions
+        MenuManager submenu = new MenuManager(Messages.alignMenuEntry);
+
+        action = getAction(GEFActionConstants.ALIGN_LEFT);
+        if (action.isEnabled())
+            submenu.add(action);
+
+        action = getAction(GEFActionConstants.ALIGN_CENTER);
+        if (action.isEnabled())
+            submenu.add(action);
+
+        action = getAction(GEFActionConstants.ALIGN_RIGHT);
+        if (action.isEnabled())
+            submenu.add(action);
+
+        submenu.add(new Separator());
+
+        action = getAction(GEFActionConstants.ALIGN_TOP);
+        if (action.isEnabled())
+            submenu.add(action);
+
+        action = getAction(GEFActionConstants.ALIGN_MIDDLE);
+        if (action.isEnabled())
+            submenu.add(action);
+
+        action = getAction(GEFActionConstants.ALIGN_BOTTOM);
+        if (action.isEnabled())
+            submenu.add(action);
+
+        if (!submenu.isEmpty())
+            menu.appendToGroup(GEFActionConstants.GROUP_REST, submenu);
+
+        action = getAction(ActionFactory.SAVE.getId());
+        menu.appendToGroup(GEFActionConstants.GROUP_SAVE, action);
     }
 
     /**

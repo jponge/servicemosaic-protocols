@@ -29,7 +29,9 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.EventObject;
+import java.util.List;
 
 import org.dom4j.DocumentException;
 import org.eclipse.core.resources.IFile;
@@ -38,6 +40,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.gef.ContextMenuProvider;
 import org.eclipse.gef.DefaultEditDomain;
 import org.eclipse.gef.EditPartViewer;
@@ -45,24 +48,37 @@ import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gef.SnapToGeometry;
 import org.eclipse.gef.SnapToGrid;
 import org.eclipse.gef.editparts.ScalableFreeformRootEditPart;
+import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.palette.PaletteRoot;
 import org.eclipse.gef.ui.actions.ActionRegistry;
+import org.eclipse.gef.ui.actions.AlignmentAction;
+import org.eclipse.gef.ui.actions.CopyTemplateAction;
+import org.eclipse.gef.ui.actions.MatchHeightAction;
+import org.eclipse.gef.ui.actions.MatchWidthAction;
 import org.eclipse.gef.ui.actions.ToggleGridAction;
+import org.eclipse.gef.ui.actions.ToggleRulerVisibilityAction;
 import org.eclipse.gef.ui.actions.ToggleSnapToGeometryAction;
+import org.eclipse.gef.ui.actions.ZoomInAction;
+import org.eclipse.gef.ui.actions.ZoomOutAction;
 import org.eclipse.gef.ui.palette.FlyoutPaletteComposite.FlyoutPreferences;
 import org.eclipse.gef.ui.parts.ContentOutlinePage;
 import org.eclipse.gef.ui.parts.GraphicalEditorWithFlyoutPalette;
 import org.eclipse.gef.ui.parts.GraphicalViewerKeyHandler;
 import org.eclipse.gef.ui.parts.TreeViewer;
+import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.dialogs.SaveAsDialog;
@@ -139,22 +155,106 @@ public class ProtocolEditor extends GraphicalEditorWithFlyoutPalette implements
     {
         super.configureGraphicalViewer();
 
+        ScalableFreeformRootEditPart rootEditPart = new ScalableFreeformRootEditPart();
         GraphicalViewer viewer = getGraphicalViewer();
+
+        List zoomLevels = new ArrayList(3);
+        zoomLevels.add(ZoomManager.FIT_ALL);
+        zoomLevels.add(ZoomManager.FIT_WIDTH);
+        zoomLevels.add(ZoomManager.FIT_HEIGHT);
+        rootEditPart.getZoomManager().setZoomLevelContributions(zoomLevels);
+
+        IAction zoomIn = new ZoomInAction(rootEditPart.getZoomManager());
+        IAction zoomOut = new ZoomOutAction(rootEditPart.getZoomManager());
+        getActionRegistry().registerAction(zoomIn);
+        getActionRegistry().registerAction(zoomOut);
+        getSite().getKeyBindingService().registerAction(zoomIn);
+        getSite().getKeyBindingService().registerAction(zoomOut);
+
+        viewer.setRootEditPart(rootEditPart);
         viewer.setEditPartFactory(new BusinessProtocolEditPartFactory());
-        viewer.setRootEditPart(new ScalableFreeformRootEditPart());
         viewer.setKeyHandler(new GraphicalViewerKeyHandler(viewer));
-
-        viewer.setProperty(SnapToGrid.PROPERTY_GRID_VISIBLE, Boolean.FALSE);
-        viewer.setProperty(SnapToGeometry.PROPERTY_SNAP_ENABLED, Boolean.FALSE);
-
-        getActionRegistry().registerAction(new ToggleSnapToGeometryAction(getGraphicalViewer()));
-        getActionRegistry().registerAction(new ToggleGridAction(getGraphicalViewer()));
 
         ContextMenuProvider provider = new ProtocolEditorContextMenuProvider(viewer,
                 getActionRegistry());
         viewer.setContextMenu(provider);
         getSite().registerContextMenu("fr.isima.ponge.wsprotocol.gefeditor.editor.contextmenu", //$NON-NLS-1$
                 provider, viewer);
+
+        viewer.setProperty(SnapToGrid.PROPERTY_GRID_VISIBLE, Boolean.FALSE);
+        viewer.setProperty(SnapToGeometry.PROPERTY_SNAP_ENABLED, Boolean.FALSE);
+
+        IAction showRulers = new ToggleRulerVisibilityAction(getGraphicalViewer());
+        getActionRegistry().registerAction(showRulers);
+        IAction snapAction = new ToggleSnapToGeometryAction(getGraphicalViewer());
+        getActionRegistry().registerAction(snapAction);
+        IAction showGrid = new ToggleGridAction(getGraphicalViewer());
+        getActionRegistry().registerAction(showGrid);
+
+        Listener listener = new Listener() {
+            public void handleEvent(Event event)
+            {
+                IAction copy = null;
+                if (event.type == SWT.Deactivate)
+                    copy = getActionRegistry().getAction(ActionFactory.COPY.getId());
+                if (getEditorSite().getActionBars().getGlobalActionHandler(
+                        ActionFactory.COPY.getId()) != copy)
+                {
+                    getEditorSite().getActionBars().setGlobalActionHandler(
+                            ActionFactory.COPY.getId(), copy);
+                    getEditorSite().getActionBars().updateActionBars();
+                }
+            }
+        };
+        getGraphicalControl().addListener(SWT.Activate, listener);
+        getGraphicalControl().addListener(SWT.Deactivate, listener);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.gef.ui.parts.GraphicalEditor#createActions()
+     */
+    protected void createActions()
+    {
+        super.createActions();
+        ActionRegistry registry = getActionRegistry();
+        IAction action;
+
+        action = new CopyTemplateAction(this);
+        registry.registerAction(action);
+
+        action = new MatchWidthAction(this);
+        registry.registerAction(action);
+        getSelectionActions().add(action.getId());
+
+        action = new MatchHeightAction(this);
+        registry.registerAction(action);
+        getSelectionActions().add(action.getId());
+
+        action = new AlignmentAction((IWorkbenchPart) this, PositionConstants.LEFT);
+        registry.registerAction(action);
+        getSelectionActions().add(action.getId());
+
+        action = new AlignmentAction((IWorkbenchPart) this, PositionConstants.RIGHT);
+        registry.registerAction(action);
+        getSelectionActions().add(action.getId());
+
+        action = new AlignmentAction((IWorkbenchPart) this, PositionConstants.TOP);
+        registry.registerAction(action);
+        getSelectionActions().add(action.getId());
+
+        action = new AlignmentAction((IWorkbenchPart) this, PositionConstants.BOTTOM);
+        registry.registerAction(action);
+        getSelectionActions().add(action.getId());
+
+        action = new AlignmentAction((IWorkbenchPart) this, PositionConstants.CENTER);
+        registry.registerAction(action);
+        getSelectionActions().add(action.getId());
+
+        action = new AlignmentAction((IWorkbenchPart) this, PositionConstants.MIDDLE);
+        registry.registerAction(action);
+        getSelectionActions().add(action.getId());
     }
 
     /*
@@ -194,7 +294,8 @@ public class ProtocolEditor extends GraphicalEditorWithFlyoutPalette implements
             InputStreamReader reader = new InputStreamReader(file.getContents());
             XmlIOManager manager = new XmlIOManager(new BusinessProtocolFactoryImpl());
             setModel(manager.readBusinessProtocol(reader));
-            getModel().putExtraProperty(ModelExtraPropertiesConstants.PROTOCOL_IFILE_RESOURCE, file);
+            getModel()
+                    .putExtraProperty(ModelExtraPropertiesConstants.PROTOCOL_IFILE_RESOURCE, file);
             reader.close();
             setPartName(file.getName());
         }
@@ -384,6 +485,8 @@ public class ProtocolEditor extends GraphicalEditorWithFlyoutPalette implements
     {
         if (type == IContentOutlinePage.class)
             return new ProtocolOutlinePage(new TreeViewer());
+        if (type == ZoomManager.class)
+            return getGraphicalViewer().getProperty(ZoomManager.class.toString());
         return super.getAdapter(type);
     }
 

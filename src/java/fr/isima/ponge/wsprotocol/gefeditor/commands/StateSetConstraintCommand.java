@@ -23,7 +23,6 @@
 package fr.isima.ponge.wsprotocol.gefeditor.commands;
 
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 
@@ -45,9 +44,6 @@ public class StateSetConstraintCommand extends Command
     // The new bounds
     private Rectangle newBounds;
 
-    // The request to change the bounds
-    private ChangeBoundsRequest request;
-
     // The state whose bounds have to be changed
     private State state;
 
@@ -65,25 +61,10 @@ public class StateSetConstraintCommand extends Command
     {
         super();
 
-        this.request = request;
         this.state = state;
         this.newBounds = bounds.getCopy();
 
         setLabel(Messages.moveResize);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.eclipse.gef.commands.Command#canExecute()
-     */
-    public boolean canExecute()
-    {
-        Object type = request.getType();
-        return (RequestConstants.REQ_MOVE.equals(type)
-                || RequestConstants.REQ_MOVE_CHILDREN.equals(type)
-                || RequestConstants.REQ_RESIZE.equals(type) || RequestConstants.REQ_RESIZE_CHILDREN
-                .equals(type));
     }
 
     /*

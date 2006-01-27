@@ -36,7 +36,6 @@ import fr.isima.ponge.wsprotocol.BusinessProtocol;
 import fr.isima.ponge.wsprotocol.State;
 import fr.isima.ponge.wsprotocol.gefeditor.commands.StateCreateCommand;
 import fr.isima.ponge.wsprotocol.gefeditor.commands.StateSetConstraintCommand;
-import fr.isima.ponge.wsprotocol.gefeditor.editparts.StateEditPart;
 
 /**
  * The layout edit policy for business protocols.
@@ -67,12 +66,8 @@ public class BusinessProtocolXYLayoutEditPolicy extends XYLayoutEditPolicy
     protected Command createChangeConstraintCommand(ChangeBoundsRequest request, EditPart child,
             Object constraint)
     {
-        if (child instanceof StateEditPart && constraint instanceof Rectangle)
-        {
-            return new StateSetConstraintCommand((State) child.getModel(), request,
-                    (Rectangle) constraint);
-        }
-        return super.createChangeConstraintCommand(request, child, constraint);
+        return new StateSetConstraintCommand((State) child.getModel(), request,
+                (Rectangle) constraint);
     }
 
     /*
