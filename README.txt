@@ -13,7 +13,7 @@ This library contains the following elements:
 
 
 
-   2, Dependencies
+   2. Dependencies
 
 The library has the following dependencies (jars included in lib/):
 - Apache Commons Logging
