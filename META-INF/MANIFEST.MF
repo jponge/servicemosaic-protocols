@@ -16,3 +16,12 @@ Require-Bundle: fr.isima.ponge.wsprotocol,
  org.eclipse.ui.ide,
  org.dom4j
 Eclipse-AutoStart: true
+Export-Package: fr.isima.ponge.wsprotocol.gefeditor,
+ fr.isima.ponge.wsprotocol.gefeditor.commands,
+ fr.isima.ponge.wsprotocol.gefeditor.editparts,
+ fr.isima.ponge.wsprotocol.gefeditor.editparts.editpolicies,
+ fr.isima.ponge.wsprotocol.gefeditor.editparts.propertysources,
+ fr.isima.ponge.wsprotocol.gefeditor.figures,
+ fr.isima.ponge.wsprotocol.gefeditor.perspective,
+ fr.isima.ponge.wsprotocol.gefeditor.uiparts,
+ fr.isima.ponge.wsprotocol.gefeditor.wizards
