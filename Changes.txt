@@ -1,5 +1,9 @@
 -------------------------------------------------------------------------------
 
+2006.03.29 (Julien Ponge):
+
+    - Applied the CDDL License.
+
 2005.11.27 (Julien Ponge):
 
     - OperationKind support (needed to describe interaction protocols).

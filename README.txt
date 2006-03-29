@@ -27,7 +27,7 @@ The unit tests have the following dependencies (jar included in lib/):
 
    3. Licenses
 
-The WS-Protocol library is covered by a MIT-style license (see LICENSE.txt).
+The WS-Protocol library is covered by the CDDL license (see LICENSE.txt).
 
 The libraries developped by the Apache Software Foundation are covered by the
 Apache Software License (see LICENSE.apache-libraries.txt).
