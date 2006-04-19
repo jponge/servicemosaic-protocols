@@ -6,6 +6,7 @@
         <topic label="Creating a new protocol" href="xhtml/protocol-editor/tasks/new-protocol.html"/>
         <topic label="Editing a protocol" href="xhtml/protocol-editor/tasks/editing.html"/>
         <topic label="Linking with WSDL" href="xhtml/protocol-editor/tasks/link-wsdl.html"/>
+        <topic label="Validating a protocol" href="xhtml/protocol-editor/tasks/validating.html"/>
     </topic>
     <topic label="Legal" href="xhtml/protocol-editor/legal.html"/>
 </toc>
