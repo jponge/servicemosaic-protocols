@@ -17,12 +17,12 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
  * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
  * Use is subject to license terms. 
- */ 
+ */
 
 package fr.isima.ponge.wsprotocol.gefeditor.uiparts;
 
@@ -39,6 +39,9 @@ import java.util.List;
 
 import org.dom4j.DocumentException;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -287,21 +290,66 @@ public class ProtocolEditor extends GraphicalEditorWithFlyoutPalette implements
     /*
      * (non-Javadoc)
      * 
+     * @see org.eclipse.ui.ISaveablePart#isSaveOnCloseNeeded()
+     */
+    public boolean isSaveOnCloseNeeded()
+    {
+        return true;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see org.eclipse.ui.part.EditorPart#setInput(org.eclipse.ui.IEditorInput)
      */
     protected void setInput(IEditorInput input)
     {
         super.setInput(input);
-        IFile file = ((IFileEditorInput) input).getFile();
+
+        final IFile file = ((IFileEditorInput) input).getFile();
+        if (getModel() == null)
+        {
+            loadModel(file);
+
+            /*
+             * Ugly hook to be notified of file renames... Let me know if there is a better way!
+             */
+            IResourceChangeListener listener = new IResourceChangeListener() {
+                IPath currentPath = file.getFullPath();
+
+                public void resourceChanged(IResourceChangeEvent event)
+                {
+                    IResourceDelta delta = event.getDelta().findMember(currentPath);
+                    if (delta != null && delta.getMovedToPath() != null)
+                    {
+                        IPath pathInProject = delta.getMovedToPath().makeAbsolute().removeFirstSegments(1);
+                        IFile newFile = (IFile) file.getProject().findMember(pathInProject);
+                        setInput(new FileEditorInput(newFile));
+                        currentPath = newFile.getFullPath();
+                    }
+                }
+            };
+            file.getWorkspace().addResourceChangeListener(listener,
+                    IResourceChangeEvent.POST_CHANGE);
+        }
+        getModel().putExtraProperty(ModelExtraPropertiesConstants.PROTOCOL_IFILE_RESOURCE, file);
+        setPartName(file.getName());
+    }
+
+    /**
+     * Loads the model.
+     * 
+     * @param input
+     *            The file to load the model from.
+     */
+    protected void loadModel(IFile file)
+    {
         try
         {
             InputStreamReader reader = new InputStreamReader(file.getContents());
             XmlIOManager manager = new XmlIOManager(new BusinessProtocolFactoryImpl());
             setModel(manager.readBusinessProtocol(reader));
-            getModel()
-                    .putExtraProperty(ModelExtraPropertiesConstants.PROTOCOL_IFILE_RESOURCE, file);
             reader.close();
-            setPartName(file.getName());
         }
         catch (DocumentException e)
         {
