@@ -2,7 +2,7 @@
 <feature
       id="fr.isima.ponge.features.wsprotocol"
       label="WS-Protocol feature"
-      version="0.4.0"
+      version="0.4.0.M0"
       provider-name="Julien Ponge">
 
    <description>
@@ -403,7 +403,7 @@ most relevant court of the jurisdiction of France.
    </license>
 
    <url>
-      <discovery label="ServiceMosaic Protocols project update site." url="http://servicemosaic.isima.fr/pub/releases/protocols/update"/>
+      <discovery label="ServiceMosaic Protocols project preview versions update site." url="http://servicemosaic.isima.fr/pub/previews/protocols/update"/>
    </url>
 
    <requires>
