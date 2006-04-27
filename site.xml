@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <description url="http://servicemosaic.isima.fr/pub/releases/protocols/update">
+   <description url="http://servicemosaic.isima.fr/pub/previews/protocols/update">
       ServiceMosaic Protocols project update site.
    </description>
    <feature url="features/fr.isima.ponge.features.wsprotocol_0.4.0.jar" id="fr.isima.ponge.features.wsprotocol" version="0.4.0">
