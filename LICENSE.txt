@@ -1,24 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<feature
-      id="fr.isima.ponge.features.wsprotocol"
-      label="WS-Protocol feature"
-      version="0.4.0"
-      provider-name="Julien Ponge">
-
-   <description url="http://servicemosaic.isima.fr/projects/protocols">
-      Web services protocols modeling and analysis plug-ins from the
-ServiceMosaic project.
-   </description>
-
-   <copyright>
-      Copyright (C) 2005, 2006 Julien Ponge. All rights reserved.
-
-This product includes software developed by
-The Apache Software Foundation (http://www.apache.org/).
-   </copyright>
-
-   <license>
-      Unless otherwise noted, all files in this distribution are released
+Unless otherwise noted, all files in this distribution are released
 under the Common Development and Distribution License (CDDL),
 Version 1.0 only.  Exceptions are noted within the associated
 source files.
@@ -30,36 +10,36 @@ COMMON DEVELOPMENT AND DISTRIBUTION LICENSE Version 1.0
 
 1. Definitions.
 
-    1.1. &quot;Contributor&quot; means each individual or entity that creates
+    1.1. "Contributor" means each individual or entity that creates
          or contributes to the creation of Modifications.
 
-    1.2. &quot;Contributor Version&quot; means the combination of the Original
+    1.2. "Contributor Version" means the combination of the Original
          Software, prior Modifications used by a Contributor (if any),
          and the Modifications made by that particular Contributor.
 
-    1.3. &quot;Covered Software&quot; means (a) the Original Software, or (b)
+    1.3. "Covered Software" means (a) the Original Software, or (b)
          Modifications, or (c) the combination of files containing
          Original Software with files containing Modifications, in
          each case including portions thereof.
 
-    1.4. &quot;Executable&quot; means the Covered Software in any form other
+    1.4. "Executable" means the Covered Software in any form other
          than Source Code.
 
-    1.5. &quot;Initial Developer&quot; means the individual or entity that first
+    1.5. "Initial Developer" means the individual or entity that first
          makes Original Software available under this License.
 
-    1.6. &quot;Larger Work&quot; means a work which combines Covered Software or
+    1.6. "Larger Work" means a work which combines Covered Software or
          portions thereof with code not governed by the terms of this
          License.
 
-    1.7. &quot;License&quot; means this document.
+    1.7. "License" means this document.
 
-    1.8. &quot;Licensable&quot; means having the right to grant, to the maximum
+    1.8. "Licensable" means having the right to grant, to the maximum
          extent possible, whether at the time of the initial grant or
          subsequently acquired, any and all of the rights conveyed
          herein.
 
-    1.9. &quot;Modifications&quot; means the Source Code and Executable form of
+    1.9. "Modifications" means the Source Code and Executable form of
          any of the following:
 
         A. Any file that results from an addition to, deletion from or
@@ -72,25 +52,25 @@ COMMON DEVELOPMENT AND DISTRIBUTION LICENSE Version 1.0
         C. Any new file that is contributed or otherwise made
            available under the terms of this License.
 
-    1.10. &quot;Original Software&quot; means the Source Code and Executable
+    1.10. "Original Software" means the Source Code and Executable
           form of computer software code that is originally released
           under this License.
 
-    1.11. &quot;Patent Claims&quot; means any patent claim(s), now owned or
+    1.11. "Patent Claims" means any patent claim(s), now owned or
           hereafter acquired, including without limitation, method,
           process, and apparatus claims, in any patent Licensable by
           grantor.
 
-    1.12. &quot;Source Code&quot; means (a) the common form of computer software
+    1.12. "Source Code" means (a) the common form of computer software
           code in which modifications are made and (b) associated
           documentation included in or with such code.
 
-    1.13. &quot;You&quot; (or &quot;Your&quot;) means an individual or a legal entity
+    1.13. "You" (or "Your") means an individual or a legal entity
           exercising rights under, and complying with all of the terms
-          of, this License.  For legal entities, &quot;You&quot; includes any
+          of, this License.  For legal entities, "You" includes any
           entity which controls, is controlled by, or is under common
           control with You.  For purposes of this definition,
-          &quot;control&quot; means (a) the power, direct or indirect, to cause
+          "control" means (a) the power, direct or indirect, to cause
           the direction or management of such entity, whether by
           contract or otherwise, or (b) ownership of more than fifty
           percent (50%) of the outstanding shares or beneficial
@@ -205,7 +185,7 @@ COMMON DEVELOPMENT AND DISTRIBUTION LICENSE Version 1.0
 
     You may not offer or impose any terms on any Covered Software in
     Source Code form that alters or restricts the applicable version
-    of this License or the recipients&apos; rights hereunder.  You may
+    of this License or the recipients' rights hereunder.  You may
     choose to offer, and to charge a fee for, warranty, support,
     indemnity or liability obligations to one or more recipients of
     Covered Software.  However, you may do so only on Your own behalf,
@@ -224,7 +204,7 @@ COMMON DEVELOPMENT AND DISTRIBUTION LICENSE Version 1.0
     Your choice, which may contain terms different from this License,
     provided that You are in compliance with the terms of this License
     and that the license for the Executable form does not attempt to
-    limit or alter the recipient&apos;s rights in the Source Code form from
+    limit or alter the recipient's rights in the Source Code form from
     the rights set forth in this License.  If You distribute the
     Covered Software in Executable form under a different license, You
     must make it absolutely clear that any terms which differ from
@@ -279,7 +259,7 @@ COMMON DEVELOPMENT AND DISTRIBUTION LICENSE Version 1.0
 
 5. DISCLAIMER OF WARRANTY.
 
-    COVERED SOFTWARE IS PROVIDED UNDER THIS LICENSE ON AN &quot;AS IS&quot;
+    COVERED SOFTWARE IS PROVIDED UNDER THIS LICENSE ON AN "AS IS"
     BASIS, WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED,
     INCLUDING, WITHOUT LIMITATION, WARRANTIES THAT THE COVERED
     SOFTWARE IS FREE OF DEFECTS, MERCHANTABLE, FIT FOR A PARTICULAR
@@ -303,7 +283,7 @@ COMMON DEVELOPMENT AND DISTRIBUTION LICENSE Version 1.0
     6.2. If You assert a patent infringement claim (excluding
     declaratory judgment actions) against Initial Developer or a
     Contributor (the Initial Developer or Contributor against whom You
-    assert such claim is referred to as &quot;Participant&quot;) alleging that
+    assert such claim is referred to as "Participant") alleging that
     the Participant Software (meaning the Contributor Version where
     the Participant is a Contributor or the Original Software where
     the Participant is the Initial Developer) directly or indirectly
@@ -335,7 +315,7 @@ COMMON DEVELOPMENT AND DISTRIBUTION LICENSE Version 1.0
     COMMERCIAL DAMAGES OR LOSSES, EVEN IF SUCH PARTY SHALL HAVE BEEN
     INFORMED OF THE POSSIBILITY OF SUCH DAMAGES.  THIS LIMITATION OF
     LIABILITY SHALL NOT APPLY TO LIABILITY FOR DEATH OR PERSONAL
-    INJURY RESULTING FROM SUCH PARTY&apos;S NEGLIGENCE TO THE EXTENT
+    INJURY RESULTING FROM SUCH PARTY'S NEGLIGENCE TO THE EXTENT
     APPLICABLE LAW PROHIBITS SUCH LIMITATION.  SOME JURISDICTIONS DO
     NOT ALLOW THE EXCLUSION OR LIMITATION OF INCIDENTAL OR
     CONSEQUENTIAL DAMAGES, SO THIS EXCLUSION AND LIMITATION MAY NOT
@@ -343,11 +323,11 @@ COMMON DEVELOPMENT AND DISTRIBUTION LICENSE Version 1.0
 
 8. U.S. GOVERNMENT END USERS.
 
-    The Covered Software is a &quot;commercial item,&quot; as that term is
-    defined in 48 C.F.R. 2.101 (Oct. 1995), consisting of &quot;commercial
-    computer software&quot; (as that term is defined at 48
-    C.F.R. 252.227-7014(a)(1)) and &quot;commercial computer software
-    documentation&quot; as such terms are used in 48 C.F.R. 12.212
+    The Covered Software is a "commercial item," as that term is
+    defined in 48 C.F.R. 2.101 (Oct. 1995), consisting of "commercial
+    computer software" (as that term is defined at 48
+    C.F.R. 252.227-7014(a)(1)) and "commercial computer software
+    documentation" as such terms are used in 48 C.F.R. 12.212
     (Sept. 1995).  Consistent with 48 C.F.R. 12.212 and 48
     C.F.R. 227.7202-1 through 227.7202-4 (June 1995), all
     U.S. Government End Users acquire Covered Software with only those
@@ -364,13 +344,13 @@ COMMON DEVELOPMENT AND DISTRIBUTION LICENSE Version 1.0
     necessary to make it enforceable.  This License shall be governed
     by the law of the jurisdiction specified in a notice contained
     within the Original Software (except to the extent applicable law,
-    if any, provides otherwise), excluding such jurisdiction&apos;s
+    if any, provides otherwise), excluding such jurisdiction's
     conflict-of-law provisions.  Any litigation relating to this
     License shall be subject to the jurisdiction of the courts located
     in the jurisdiction and venue specified in a notice contained
     within the Original Software, with the losing party responsible
     for costs, including, without limitation, court costs and
-    reasonable attorneys&apos; fees and expenses.  The application of the
+    reasonable attorneys' fees and expenses.  The application of the
     United Nations Convention on Contracts for the International Sale
     of Goods is expressly excluded.  Any law or regulation which
     provides that the language of a contract shall be construed
@@ -401,81 +381,3 @@ provisions).
 
 Any litigation relating to this License shall be subject to the
 most relevant court of the jurisdiction of France.
-   </license>
-
-   <requires>
-      <import plugin="org.eclipse.ui"/>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.draw2d"/>
-      <import plugin="org.eclipse.gef"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.ui.views"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.help"/>
-      <import plugin="org.eclipse.jface.text"/>
-      <import plugin="org.eclipse.ui.editors"/>
-   </requires>
-
-   <plugin
-         id="fr.isima.ponge.wsprotocol"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.isima.ponge.wsprotocol.gefeditor"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.apache.commons.logging"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.dom4j"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.isima.ponge.wsprotocol.help"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="au.unsw.singh.wsoperation"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.isima.ponge.wsprotocol.wsoperations"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.isima.ponge.wsprotocol.validation"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.isima.ponge.wsprotocol.wsvalidation"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-</feature>
