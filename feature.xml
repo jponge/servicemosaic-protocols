@@ -5,14 +5,13 @@
       version="0.4.0"
       provider-name="Julien Ponge">
 
-   <description url="http://servicemosaic.isima.fr/projects/protocols">
+   <description>
       Web services protocols modeling and analysis plug-ins from the
 ServiceMosaic project.
    </description>
 
    <copyright>
       Copyright (C) 2005, 2006 Julien Ponge. All rights reserved.
-
 This product includes software developed by
 The Apache Software Foundation (http://www.apache.org/).
    </copyright>
@@ -402,6 +401,10 @@ provisions).
 Any litigation relating to this License shall be subject to the
 most relevant court of the jurisdiction of France.
    </license>
+
+   <url>
+      <discovery label="ServiceMosaic Protocols project update site." url="http://servicemosaic.isima.fr/pub/releases/protocols/update"/>
+   </url>
 
    <requires>
       <import plugin="org.eclipse.ui"/>
