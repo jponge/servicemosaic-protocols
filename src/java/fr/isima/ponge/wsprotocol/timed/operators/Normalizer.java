@@ -49,19 +49,37 @@ import fr.isima.ponge.wsprotocol.timed.constraints.VariableNode;
 
 // TODO: cleanup / refactor some portions of code
 
+/**
+ * Normalizes timed protocols.
+ * @author Julien Ponge (ponge@isima.fr)
+ *
+ */
 public class Normalizer extends AbstractOperator
 {
 
+    /**
+     * Instantiates a new operator.
+     * @param factory The factory to use when creating protocol elements.
+     */
     public Normalizer(BusinessProtocolFactory factory)
     {
         super(factory);
     }
 
+    /**
+     * Always returns <code>null</null>, this operator is unary.
+     * @see fr.isima.ponge.wsprotocol.timed.operators.IOperator#apply(fr.isima.ponge.wsprotocol.BusinessProtocol, fr.isima.ponge.wsprotocol.BusinessProtocol)
+     */
     public BusinessProtocol apply(BusinessProtocol p1, BusinessProtocol p2)
     {
         return null;
     }
     
+    /**
+     * Normalizes a protocol.
+     * @param p The protocol to normalize.
+     * @return The same protocol instance, but normalized.
+     */
     public BusinessProtocol normalizeProtocol(BusinessProtocol p)
     {
         /*

@@ -39,14 +39,26 @@ import fr.isima.ponge.wsprotocol.Polarity;
 import fr.isima.ponge.wsprotocol.StandardExtraProperties;
 import fr.isima.ponge.wsprotocol.State;
 
+/**
+ * The timed intersection operator.
+ * @author Julien Ponge (ponge@isima.fr)
+ *
+ */
 public class IntersectionOperator extends AbstractOperator
 {
 
+    /**
+     * Instantiates a new operator.
+     * @param factory The factory to create the protocol elements.
+     */
     public IntersectionOperator(BusinessProtocolFactory factory)
     {
         super(factory);
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.IOperator#apply(fr.isima.ponge.wsprotocol.BusinessProtocol, fr.isima.ponge.wsprotocol.BusinessProtocol)
+     */
     public BusinessProtocol apply(BusinessProtocol p1, BusinessProtocol p2)
     {
         // Result protocol
@@ -115,17 +127,35 @@ public class IntersectionOperator extends AbstractOperator
         return rewriteFinalConstraints(pruneIsolatedStates(result), tnameMap);
     }
 
+    /**
+     * Template method to create a message.
+     * @param name The message name.
+     * @param polarity The message polarity.
+     * @return The message.
+     */
     protected Message createMessage(String name, Polarity polarity)
     {
         return factory.createMessage(name, polarity);
     }
 
+    /**
+     * Template method for operations matching.
+     * @param op1 The first operation.
+     * @param op2 The second operation.
+     * @return Wether the 2 operations match according to this operator semantics or not.
+     */
     protected boolean match(Operation op1, Operation op2)
     {
         return op1.getMessage().getName().equals(op2.getMessage().getName())
                 && op1.getMessage().getPolarity().equals(op2.getMessage().getPolarity());
     }
 
+    /**
+     * Template method for generating protocol names.
+     * @param p1 The first protocol.
+     * @param p2 The second protocol.
+     * @return The name of the resulting protocol of applying this operator to the 2 protocols.
+     */
     protected String generateProtocolName(BusinessProtocol p1, BusinessProtocol p2)
     {
         return p1.getName() + " ||ti " + p2.getName();

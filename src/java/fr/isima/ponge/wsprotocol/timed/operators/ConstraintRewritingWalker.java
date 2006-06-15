@@ -34,18 +34,36 @@ import fr.isima.ponge.wsprotocol.timed.constraints.IRootConstraintNode;
 import fr.isima.ponge.wsprotocol.timed.constraints.MInvokeNode;
 import fr.isima.ponge.wsprotocol.timed.constraints.VariableNode;
 
+/**
+ * A constraints rewriting walker.
+ * @author Julien Ponge (ponge@isima.fr)
+ *
+ */
 public class ConstraintRewritingWalker
 {
+    /**
+     * Rewrite constraints to be marked from a left protocol.
+     * @param node The constraint node.
+     */
     public void rewriteTemporaryOnLeft(IConstraintNode node)
     {
         rewriteTemporary(node, true);
     }
     
+    /**
+     * Rewrite constraints to be marked from a right protocol.
+     * @param node The constraint node.
+     */
     public void rewriteTemporaryOnRight(IConstraintNode node)
     {
         rewriteTemporary(node, false);
     }
     
+    /**
+     * Rewrites constraints that had been marked either from left or right into the final form.
+     * @param node The constraint node.
+     * @param mappings The mappings.
+     */
     public void rewriteFromMapping(IConstraintNode node, Map mappings)
     {
         if (node instanceof CInvokeNode)

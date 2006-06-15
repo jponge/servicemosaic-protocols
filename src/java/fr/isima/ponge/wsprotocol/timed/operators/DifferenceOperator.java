@@ -42,14 +42,26 @@ import fr.isima.ponge.wsprotocol.State;
 import fr.isima.ponge.wsprotocol.impl.BusinessProtocolImpl;
 import fr.isima.ponge.wsprotocol.timed.constraints.IConstraintNode;
 
+/**
+ * The timed difference operator.
+ * @author Julien Ponge (ponge@isima.fr)
+ *
+ */
 public class DifferenceOperator extends AbstractOperator
 {
+    /**
+     * Instantiates a new operator.
+     * @param factory The factory to create protocol elements.
+     */
     public DifferenceOperator(BusinessProtocolFactory factory)
     {
         super(factory);
 
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.IOperator#apply(fr.isima.ponge.wsprotocol.BusinessProtocol, fr.isima.ponge.wsprotocol.BusinessProtocol)
+     */
     public BusinessProtocol apply(BusinessProtocol p1, BusinessProtocol p2)
     {
         IntersectionOperator interOp = new IntersectionOperator(factory);
@@ -64,6 +76,11 @@ public class DifferenceOperator extends AbstractOperator
         return diff;
     }
 
+    /**
+     * Compute the complement of a protocol.
+     * @param p The protocol .
+     * @return The completement of <code>p</code>
+     */
     protected BusinessProtocol computeComplement(BusinessProtocol p)
     {
         int opCounter = 0;
@@ -103,7 +120,7 @@ public class DifferenceOperator extends AbstractOperator
         State mu = factory.createState("mu", true);
         pc.addState(mu);
         iter = pc.getMessages().iterator();
-        while (iter.hasNext())  // FIXME: probably useless
+        while (iter.hasNext())
         {
             Message msg = (Message) iter.next();
             Message m = factory.createMessage(msg.getName(), msg.getPolarity());

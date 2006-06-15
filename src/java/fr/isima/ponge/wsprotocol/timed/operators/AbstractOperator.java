@@ -45,18 +45,39 @@ import fr.isima.ponge.wsprotocol.timed.constraints.parser.TemporalConstraintLexe
 import fr.isima.ponge.wsprotocol.timed.constraints.parser.TemporalConstraintParser;
 import fr.isima.ponge.wsprotocol.timed.constraints.parser.TemporalConstraintTreeWalker;
 
+/**
+ * The base class for timed operators.
+ * @author Julien Ponge (ponge@isima.fr)
+ *
+ */
 public abstract class AbstractOperator implements IOperator
 {
+    /**
+     * The factory used to build protocol elements.
+     */
     protected BusinessProtocolFactory factory;
 
+    /**
+     * Instanciates a new operator.
+     * @param factory The factory used to build protocol elements.
+     */
     public AbstractOperator(BusinessProtocolFactory factory)
     {
         super();
         this.factory = factory;
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.IOperator#apply(fr.isima.ponge.wsprotocol.BusinessProtocol, fr.isima.ponge.wsprotocol.BusinessProtocol)
+     */
     public abstract BusinessProtocol apply(BusinessProtocol p1, BusinessProtocol p2);
 
+    /**
+     * Removes isolated states (i.e., not reachable from the initial state) or the normal states without outgoing operations.
+     * This method is intended to perform protocols cleanups at the end of the processing job found in <code>apply()</code>.
+     * @param result The protocol to clean.
+     * @return The cleaned protocol.
+     */
     protected BusinessProtocol pruneIsolatedStates(BusinessProtocol result)
     {
         Set visited = new HashSet();
@@ -122,11 +143,24 @@ public abstract class AbstractOperator implements IOperator
         return result;
     }
 
+    /**
+     * Generate a name for merged states.
+     * @param s1 The first state.
+     * @param s2 The second state.
+     * @return The merged state name.
+     */
     protected String generateMergerStateName(State s1, State s2)
     {
         return s1.getName() + "," + s2.getName();
     }
 
+    /**
+     * Computes the conjunction of two temporal constraints. It also performs a variables rewriting to
+     * distinguish those from the first protocol, and those from the second protocol. 
+     * @param op1 The first operation.
+     * @param op2 The second operation.
+     * @return The conjunction of their constraints, in a canonical human-readable form.
+     */
     protected String temporalConstraintsConjunction(Operation op1, Operation op2)
     {
         String constraint1 = (String) op1
@@ -182,6 +216,12 @@ public abstract class AbstractOperator implements IOperator
         return conjunction;
     }
 
+    /**
+     * Constraints rewriting after the computation on the 2 protocols.
+     * @param protocol The protocol.
+     * @param nameMappings Mapping to rewrite the constraints. 
+     * @return
+     */
     protected BusinessProtocol rewriteFinalConstraints(BusinessProtocol protocol, Map nameMappings)
     {
         ConstraintRewritingWalker walker = new ConstraintRewritingWalker();
@@ -206,6 +246,11 @@ public abstract class AbstractOperator implements IOperator
         return protocol;
     }
 
+    /**
+     * Parse a temporal constraint and returns either its C-Invoke or M-Invoke node.
+     * @param constraint The human-readable representation of the constraint.
+     * @return The constraint node, or <code>null</code> if the constraint could not be successfully parsed.
+     */
     protected IConstraintNode parseConstraint(String constraint)
     {
         TemporalConstraintLexer lexer;
@@ -225,11 +270,22 @@ public abstract class AbstractOperator implements IOperator
         }
     }
 
+    /**
+     * Tests wether a constraint is empty: a <code>null</code> reference or an empty string.
+     * @param constraint The constraint in human-readable form.
+     * @return Wether it is empty or not.
+     */
     protected boolean isConstraintEmpty(String constraint)
     {
         return constraint == null || "".equals(constraint);
     }
 
+    /**
+     * Generates a name for 2 operations to be merged.
+     * @param op1 The first operation.
+     * @param op2 The second operation.
+     * @return The merged operation name.
+     */
     protected String generateMergerOperationName(Operation op1, Operation op2)
     {
         return op1.getName() + "_" + op2.getName();

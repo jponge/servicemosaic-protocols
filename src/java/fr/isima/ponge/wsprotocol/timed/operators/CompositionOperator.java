@@ -32,24 +32,42 @@ import fr.isima.ponge.wsprotocol.Message;
 import fr.isima.ponge.wsprotocol.Operation;
 import fr.isima.ponge.wsprotocol.Polarity;
 
+/**
+ * The timed composition operator.
+ * @author Julien Ponge (ponge@isima.fr)
+ *
+ */
 public class CompositionOperator extends IntersectionOperator
 {
 
+    /**
+     * Instantiates a new operator.
+     * @param factory The factory to create protocol elements.
+     */
     public CompositionOperator(BusinessProtocolFactory factory)
     {
         super(factory);
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.IntersectionOperator#createMessage(java.lang.String, fr.isima.ponge.wsprotocol.Polarity)
+     */
     protected Message createMessage(String name, Polarity polarity)
     {
         return factory.createMessage(name, Polarity.NULL);
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.IntersectionOperator#generateProtocolName(fr.isima.ponge.wsprotocol.BusinessProtocol, fr.isima.ponge.wsprotocol.BusinessProtocol)
+     */
     protected String generateProtocolName(BusinessProtocol p1, BusinessProtocol p2)
     {
         return p1.getName() + " ||tc " + p2.getName();
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.IntersectionOperator#match(fr.isima.ponge.wsprotocol.Operation, fr.isima.ponge.wsprotocol.Operation)
+     */
     protected boolean match(Operation op1, Operation op2)
     {
         return op1.getMessage().getName().equals(op2.getMessage().getName())
