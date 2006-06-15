@@ -32,24 +32,41 @@ import fr.isima.ponge.wsprotocol.impl.BusinessProtocolFactoryImpl;
 import fr.isima.ponge.wsprotocol.timed.operators.CompositionOperator;
 import fr.isima.ponge.wsprotocol.timed.operators.IOperator;
 
+/**
+ * The composition operation action.
+ * @author Julien Ponge (ponge@isima.fr)
+ *
+ */
 public class CompositionAction extends TimedOperatorAction
 {
     
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.ui.actions.TimedOperatorAction#getOperator()
+     */
     protected IOperator getOperator()
     {
         return new CompositionOperator(new BusinessProtocolFactoryImpl());
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.ui.actions.TimedOperatorAction#getResultingFilename(org.eclipse.core.resources.IFile, org.eclipse.core.resources.IFile)
+     */
     protected String getResultingFilename(IFile f1, IFile f2)
     {
         return f1.getName() + "-tc-" + f2.getName();
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.ui.actions.TimedOperatorAction#getFirstFileIndex()
+     */
     protected int getFirstFileIndex()
     {
         return 1;
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.ui.actions.TimedOperatorAction#getSecondFileIndex()
+     */
     protected int getSecondFileIndex()
     {
         return 0;

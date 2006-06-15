@@ -26,14 +26,25 @@
 
 package fr.isima.ponge.wsprotocol.timed.operators.ui.actions;
 
+/**
+ * The difference operation action, taking the selection in the other order.
+ * @author Julien Ponge (ponge@isima.fr)
+ *
+ */
 public class ReversedDifferenceAction extends DifferenceAction
 {
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.ui.actions.TimedOperatorAction#getFirstFileIndex()
+     */
     protected int getFirstFileIndex()
     {
         return 0;
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.ui.actions.TimedOperatorAction#getSecondFileIndex()
+     */
     protected int getSecondFileIndex()
     {
         return 1;

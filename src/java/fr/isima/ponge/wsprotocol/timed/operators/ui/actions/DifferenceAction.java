@@ -32,13 +32,24 @@ import fr.isima.ponge.wsprotocol.impl.BusinessProtocolFactoryImpl;
 import fr.isima.ponge.wsprotocol.timed.operators.DifferenceOperator;
 import fr.isima.ponge.wsprotocol.timed.operators.IOperator;
 
+/**
+ * The difference operation action.
+ * @author Julien Ponge (ponge@isima.fr)
+ *
+ */
 public class DifferenceAction extends TimedOperatorAction
 {
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.ui.actions.TimedOperatorAction#getOperator()
+     */
     protected IOperator getOperator()
     {
         return new DifferenceOperator(new BusinessProtocolFactoryImpl());
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.ui.actions.TimedOperatorAction#getResultingFilename(org.eclipse.core.resources.IFile, org.eclipse.core.resources.IFile)
+     */
     protected String getResultingFilename(IFile f1, IFile f2)
     {
         StringBuffer buffer = new StringBuffer();
@@ -47,11 +58,17 @@ public class DifferenceAction extends TimedOperatorAction
         return buffer.toString();
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.ui.actions.TimedOperatorAction#getFirstFileIndex()
+     */
     protected int getFirstFileIndex()
     {
         return 1;
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.operators.ui.actions.TimedOperatorAction#getSecondFileIndex()
+     */
     protected int getSecondFileIndex()
     {
         return 0;
