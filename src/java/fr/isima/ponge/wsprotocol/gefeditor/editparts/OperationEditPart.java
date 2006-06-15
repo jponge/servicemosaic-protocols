@@ -108,6 +108,7 @@ public class OperationEditPart extends AbstractConnectionEditPart implements Pro
     private String getMessageLabel()
     {
         StringBuffer buffer = new StringBuffer();
+        buffer.append(getCastedModel().getName()).append(": ");
         Message m = getCastedModel().getMessage();
         if (m.getPolarity() == Polarity.POSITIVE)
         {

@@ -76,7 +76,7 @@ public class EditingPerspectiveFactory implements IPerspectiveFactory
         bottomLeft.addView(ID_VALIDATION_VIEW);
 
         // Complementary views below the editor
-        IFolderLayout bottom = layout.createFolder("bottom", IPageLayout.BOTTOM, 0.75f,
+        IFolderLayout bottom = layout.createFolder("bottom", IPageLayout.BOTTOM, 0.725f,
                 editorAreaId);
         bottom.addView(IPageLayout.ID_PROP_SHEET);
         bottom.addView(IPageLayout.ID_TASK_LIST);

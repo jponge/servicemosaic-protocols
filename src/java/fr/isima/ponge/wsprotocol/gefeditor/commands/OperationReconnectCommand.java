@@ -114,6 +114,7 @@ public class OperationReconnectCommand extends Command
     public void execute()
     {
         // Make the new operation
+        String name = oldOperation.getName();
         Message m = oldOperation.getMessage();
         State src, target;
         if (source)
@@ -126,7 +127,7 @@ public class OperationReconnectCommand extends Command
             src = oldOperation.getSourceState();
             target = state;
         }
-        newOperation = new OperationImpl(src, target, m);
+        newOperation = new OperationImpl(name, src, target, m);
         Iterator keysIterator = oldOperation.getExtraPropertiesKeys().iterator();
         while (keysIterator.hasNext())
         {

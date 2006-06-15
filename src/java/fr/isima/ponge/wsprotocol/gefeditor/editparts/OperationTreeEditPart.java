@@ -155,7 +155,9 @@ public class OperationTreeEditPart extends AbstractTreeEditPart implements Prope
      */
     protected String getText()
     {
-        return getCastedModel().getMessage().getName();
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(getCastedModel().getName()).append(": ").append(getCastedModel().getMessage().getName());
+        return buffer.toString();
     }
 
     /*

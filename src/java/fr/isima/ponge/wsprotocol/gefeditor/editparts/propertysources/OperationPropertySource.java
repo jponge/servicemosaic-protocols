@@ -50,6 +50,7 @@ import org.eclipse.ui.views.properties.TextPropertyDescriptor;
 
 import fr.isima.ponge.wsprotocol.OperationKind;
 import fr.isima.ponge.wsprotocol.Polarity;
+import fr.isima.ponge.wsprotocol.StandardExtraProperties;
 import fr.isima.ponge.wsprotocol.gefeditor.Messages;
 import fr.isima.ponge.wsprotocol.impl.MessageImpl;
 import fr.isima.ponge.wsprotocol.impl.OperationImpl;
@@ -65,8 +66,13 @@ public class OperationPropertySource implements IPropertySource
     /**
      * Id for the WSDL problems resource marker.
      */
-    private static final String WSDL_PROBLEM_MARKER_ID = "gef.editor.wsdl.io.problem";
-
+    private static final String WSDL_PROBLEM_MARKER_ID = "gef.editor.wsdl.io.problem"; //$NON-NLS-1$
+    
+    /**
+     * The operation name property ... name :-)
+     */
+    protected static final String OPERATION_NAME_PROPERTY = "operation.name"; //$NON-NLS-1$
+    
     /**
      * The message polarity property name.
      */
@@ -81,6 +87,11 @@ public class OperationPropertySource implements IPropertySource
      * The operation kind property name.
      */
     protected static final String OPERATION_KIND_PROPERTY = "operation.kind"; //$NON-NLS-1$
+    
+    /**
+     * The operation temporal constraint property name.
+     */
+    protected static final String TEMPORAL_CONSTRAINT_PROPERTY = "temporal.constraint"; //$NON-NLS-1$
 
     /**
      * The operation
@@ -115,7 +126,7 @@ public class OperationPropertySource implements IPropertySource
     /**
      * The properties descriptors.
      */
-    protected IPropertyDescriptor[] propertyDescriptors = new IPropertyDescriptor[3];
+    protected IPropertyDescriptor[] propertyDescriptors = new IPropertyDescriptor[5];
 
     /**
      * Constructs a new operations properties source.
@@ -144,10 +155,13 @@ public class OperationPropertySource implements IPropertySource
      */
     protected void updatePropertyDescriptors()
     {
+        // TODO: i18n
+        propertyDescriptors[0] = new TextPropertyDescriptor(OPERATION_NAME_PROPERTY, "Name");   
+        
         List messages = getWSDLMessagesNames();
         if (messages.equals(Collections.EMPTY_LIST) || message.getPolarity().equals(Polarity.NULL))
         {
-            propertyDescriptors[0] = new TextPropertyDescriptor(MESSAGE_NAME_PROPERTY,
+            propertyDescriptors[1] = new TextPropertyDescriptor(MESSAGE_NAME_PROPERTY,
                     Messages.messageName);
         }
         else
@@ -159,16 +173,20 @@ public class OperationPropertySource implements IPropertySource
                 wsdlMessages[i] = (String) vals[i];
             }
             wsdlMessagesList = messages;
-            propertyDescriptors[0] = new ComboBoxPropertyDescriptor(MESSAGE_NAME_PROPERTY,
+            propertyDescriptors[1] = new ComboBoxPropertyDescriptor(MESSAGE_NAME_PROPERTY,
                     Messages.messageName, wsdlMessages);
         }
 
-        propertyDescriptors[1] = new ComboBoxPropertyDescriptor(MESSAGE_POLARITY_PROPERTY,
+        propertyDescriptors[2] = new ComboBoxPropertyDescriptor(MESSAGE_POLARITY_PROPERTY,
                 Messages.messagePolarity, new String[] { Messages.input, Messages.output,
                         Messages.none });
-        propertyDescriptors[2] = new ComboBoxPropertyDescriptor(OPERATION_KIND_PROPERTY, Messages.operationKind, new String[] {
+        
+        propertyDescriptors[3] = new ComboBoxPropertyDescriptor(OPERATION_KIND_PROPERTY, Messages.operationKind, new String[] {
            Messages.explicit, Messages.implicit   
         });
+        
+        // TODO: i18n
+        propertyDescriptors[4] = new TextPropertyDescriptor(TEMPORAL_CONSTRAINT_PROPERTY, "Temporal constraint");        
     }
 
     /*
@@ -196,7 +214,7 @@ public class OperationPropertySource implements IPropertySource
         }
 
         // Parse the WSDL
-        cleanWSDLProblemMarker();
+        cleanProblemMarkers(WSDL_PROBLEM_MARKER_ID);
         List names = new ArrayList();
         try
         {
@@ -223,16 +241,17 @@ public class OperationPropertySource implements IPropertySource
     }
 
     /**
-     * Removes the WSDL problem marker on the file resource (if any).
+     * Removes the problem markers on the file resource (if any).
+     * @param markerId The problem marker ID.
      */
-    private void cleanWSDLProblemMarker()
+    private void cleanProblemMarkers(String markerId)
     {
         try
         {
             IMarker[] problems = protocolFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_ONE);
             for (int i = 0; i < problems.length; ++i)
             {
-                if (problems[i].exists() && problems[i].getAttributes().containsKey(WSDL_PROBLEM_MARKER_ID))
+                if (problems[i].exists() && problems[i].getAttributes().containsKey(markerId))
                 {
                     problems[i].delete();
                 }
@@ -265,6 +284,8 @@ public class OperationPropertySource implements IPropertySource
             e.printStackTrace();
         }
     }
+    
+    
 
     /*
      * (non-Javadoc)
@@ -326,6 +347,10 @@ public class OperationPropertySource implements IPropertySource
                 return new Integer(2);
             }
         }
+        else if (id.equals(OPERATION_NAME_PROPERTY))
+        {
+            return operation.getName();
+        }
         else if (id.equals(OPERATION_KIND_PROPERTY))
         {
             OperationKind kind = operation.getOperationKind();
@@ -337,6 +362,15 @@ public class OperationPropertySource implements IPropertySource
             {
                 return new Integer(1);
             }
+        }
+        else if (id.equals(TEMPORAL_CONSTRAINT_PROPERTY))
+        {
+            String constraint = (String) operation.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT);
+            if (constraint == null)
+            {
+                return "";
+            }
+            return constraint;
         }
         return null;
     }
@@ -397,6 +431,10 @@ public class OperationPropertySource implements IPropertySource
             }
             //updatePropertyDescriptors();
         }
+        else if (id.equals(OPERATION_NAME_PROPERTY))
+        {
+            operation.setName((String) value);
+        }
         else if (id.equals(OPERATION_KIND_PROPERTY))
         {
             if (value.equals(Integer.valueOf("0"))) //$NON-NLS-1$
@@ -408,6 +446,11 @@ public class OperationPropertySource implements IPropertySource
                 operation.setOperationKind(OperationKind.IMPLICIT);
                 message.setPolarity(Polarity.NULL);
             }
+        }
+        else if (id.equals(TEMPORAL_CONSTRAINT_PROPERTY))
+        {
+            String constraint = (String) value;
+            operation.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, constraint);
         }
     }
 

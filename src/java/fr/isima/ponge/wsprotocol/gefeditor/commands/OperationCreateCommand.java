@@ -32,6 +32,7 @@ import fr.isima.ponge.wsprotocol.BusinessProtocol;
 import fr.isima.ponge.wsprotocol.BusinessProtocolFactory;
 import fr.isima.ponge.wsprotocol.Message;
 import fr.isima.ponge.wsprotocol.Operation;
+import fr.isima.ponge.wsprotocol.OperationKind;
 import fr.isima.ponge.wsprotocol.Polarity;
 import fr.isima.ponge.wsprotocol.State;
 import fr.isima.ponge.wsprotocol.gefeditor.Messages;
@@ -81,8 +82,10 @@ public class OperationCreateCommand extends Command
     public void execute()
     {
         BusinessProtocolFactory factory = new BusinessProtocolFactoryImpl();
-        Message m = factory.createMessage("m" + counter++, polarity); //$NON-NLS-1$
-        operation = factory.createOperation(source, target, m);
+        Message m = factory.createMessage("m" + counter, polarity); //$NON-NLS-1$
+        OperationKind kind = (polarity.equals(Polarity.NULL)) ? OperationKind.IMPLICIT : OperationKind.EXPLICIT;
+        operation = factory.createOperation("T" + counter, source, target, m, kind);
+        counter = counter + 1;
         redo();
     }
 

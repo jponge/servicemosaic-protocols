@@ -31,14 +31,19 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.StringReader;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.EventObject;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.dom4j.DocumentException;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
@@ -93,13 +98,25 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
+import antlr.CommonAST;
+import antlr.RecognitionException;
+import antlr.TokenStreamException;
 import fr.isima.ponge.wsprotocol.BusinessProtocol;
+import fr.isima.ponge.wsprotocol.Operation;
+import fr.isima.ponge.wsprotocol.OperationKind;
+import fr.isima.ponge.wsprotocol.StandardExtraProperties;
 import fr.isima.ponge.wsprotocol.gefeditor.EditorPlugin;
 import fr.isima.ponge.wsprotocol.gefeditor.Messages;
 import fr.isima.ponge.wsprotocol.gefeditor.editparts.BusinessProtocolEditPartFactory;
 import fr.isima.ponge.wsprotocol.gefeditor.editparts.BusinessProtocolTreeEditPartFactory;
 import fr.isima.ponge.wsprotocol.impl.BusinessProtocolFactoryImpl;
 import fr.isima.ponge.wsprotocol.impl.BusinessProtocolImpl;
+import fr.isima.ponge.wsprotocol.timed.constraints.CInvokeNode;
+import fr.isima.ponge.wsprotocol.timed.constraints.IConstraintNode;
+import fr.isima.ponge.wsprotocol.timed.constraints.MInvokeNode;
+import fr.isima.ponge.wsprotocol.timed.constraints.parser.TemporalConstraintLexer;
+import fr.isima.ponge.wsprotocol.timed.constraints.parser.TemporalConstraintParser;
+import fr.isima.ponge.wsprotocol.timed.constraints.parser.TemporalConstraintTreeWalker;
 import fr.isima.ponge.wsprotocol.xml.XmlIOManager;
 
 /**
@@ -310,6 +327,8 @@ public class ProtocolEditor extends GraphicalEditorWithFlyoutPalette implements
         if (getModel() == null)
         {
             loadModel(file);
+            cleanProblemMarkers(file, TEMPORAL_CONSTRAINTS_PROBLEM_MARKER_ID);
+            validateTemporalConstraints(file);
 
             /*
              * Ugly hook to be notified of file renames... Let me know if there is a better way!
@@ -322,7 +341,8 @@ public class ProtocolEditor extends GraphicalEditorWithFlyoutPalette implements
                     IResourceDelta delta = event.getDelta().findMember(currentPath);
                     if (delta != null && delta.getMovedToPath() != null)
                     {
-                        IPath pathInProject = delta.getMovedToPath().makeAbsolute().removeFirstSegments(1);
+                        IPath pathInProject = delta.getMovedToPath().makeAbsolute()
+                                .removeFirstSegments(1);
                         IFile newFile = (IFile) file.getProject().findMember(pathInProject);
                         setInput(new FileEditorInput(newFile));
                         currentPath = newFile.getFullPath();
@@ -433,7 +453,7 @@ public class ProtocolEditor extends GraphicalEditorWithFlyoutPalette implements
      */
     public void doSave(IProgressMonitor monitor)
     {
-        monitor.beginTask(Messages.savingTask, 2);
+        monitor.beginTask(Messages.savingTask, 3);
         XmlIOManager manager = new XmlIOManager(new BusinessProtocolFactoryImpl());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Writer writer = new OutputStreamWriter(out);
@@ -445,6 +465,9 @@ public class ProtocolEditor extends GraphicalEditorWithFlyoutPalette implements
             IFile file = ((IFileEditorInput) getEditorInput()).getFile();
             file.setContents(new ByteArrayInputStream(out.toByteArray()), true, false, monitor);
             getCommandStack().markSaveLocation();
+            monitor.worked(1);
+            cleanProblemMarkers(file, TEMPORAL_CONSTRAINTS_PROBLEM_MARKER_ID);
+            validateTemporalConstraints(file);
             monitor.worked(1);
         }
         catch (IOException e)
@@ -614,6 +637,133 @@ public class ProtocolEditor extends GraphicalEditorWithFlyoutPalette implements
             bars.setGlobalActionHandler(id, registry.getAction(id));
             id = ActionFactory.DELETE.getId();
             bars.setGlobalActionHandler(id, registry.getAction(id));
+        }
+    }
+
+    /**
+     * Id for the temporal constraints problems resource marker.
+     */
+    protected static final String TEMPORAL_CONSTRAINTS_PROBLEM_MARKER_ID = "gef.editor.temporal.constraints.problem"; //$NON-NLS-1$
+
+    /**
+     * Report a temporal constraint probelem.
+     * 
+     * @param message
+     *            The message.
+     * @param location
+     *            The location of the problem.
+     */
+    protected void reportTemporalConstraintProblem(IFile protocolFile, String message,
+            String location)
+    {
+        try
+        {
+            IMarker marker = protocolFile.createMarker(IMarker.PROBLEM);
+            if (marker.exists())
+            {
+                marker.setAttribute(IMarker.TRANSIENT, true);
+                marker.setAttribute(IMarker.MESSAGE, message);
+                marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
+                marker.setAttribute(IMarker.LOCATION, location);
+                marker.setAttribute(TEMPORAL_CONSTRAINTS_PROBLEM_MARKER_ID,
+                        TEMPORAL_CONSTRAINTS_PROBLEM_MARKER_ID);
+            }
+        }
+        catch (CoreException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Removes the problem markers on the file resource (if any).
+     * 
+     * @param markerId
+     *            The problem marker ID.
+     */
+    protected void cleanProblemMarkers(IFile protocolFile, String markerId)
+    {
+        try
+        {
+            IMarker[] problems = protocolFile.findMarkers(IMarker.PROBLEM, true,
+                    IResource.DEPTH_ONE);
+            for (int i = 0; i < problems.length; ++i)
+            {
+                if (problems[i].exists() && problems[i].getAttributes().containsKey(markerId))
+                {
+                    problems[i].delete();
+                }
+            }
+        }
+        catch (CoreException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Checks if the temporal constraints are valid or not. Reports problems else.
+     */
+    private void validateTemporalConstraints(IFile file)
+    {
+        Set operations = getModel().getOperations();
+        Iterator it = operations.iterator();
+        while (it.hasNext())
+        {
+            Operation operation = (Operation) it.next();
+            String constraint = (String) operation
+                    .getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT);
+            if (constraint == null || "".equals(constraint))
+            {
+                continue;
+            }
+
+            TemporalConstraintLexer lexer = new TemporalConstraintLexer(
+                    new StringReader(constraint));
+            TemporalConstraintParser parser = new TemporalConstraintParser(lexer);
+            TemporalConstraintTreeWalker walker = new TemporalConstraintTreeWalker();
+
+            try
+            {
+                parser.constraint();
+                CommonAST tree = (CommonAST) parser.getAST();
+                IConstraintNode constraintNode = walker.constraint(tree);
+
+                if (operation.getOperationKind().equals(OperationKind.EXPLICIT))
+                {
+                    if (!(constraintNode instanceof CInvokeNode))
+                    {
+                        reportTemporalConstraintProblem(
+                                file,
+                                operation.getName()
+                                        + ": "
+                                        + "Explicit operations only support C-Invoke temporal constraints.",
+                                operation.getName());
+                    }
+                }
+                else
+                {
+                    if (!(constraintNode instanceof MInvokeNode))
+                    {
+                        reportTemporalConstraintProblem(
+                                file,
+                                operation.getName()
+                                        + ": "
+                                        + "Implicit operations only support M-Invoke temporal constraints.",
+                                operation.getName());
+                    }
+                }
+            }
+            catch (RecognitionException e)
+            {
+                reportTemporalConstraintProblem(file, operation.getName() + ": " + e.getMessage(),
+                        operation.getName());
+            }
+            catch (TokenStreamException e)
+            {
+                reportTemporalConstraintProblem(file, operation.getName() + ": " + e.getMessage(),
+                        operation.getName());
+            }
         }
     }
 
