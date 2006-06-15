@@ -17,36 +17,36 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
  * Copyright 2006 Julien Ponge. All rights reserved. 
  * Use is subject to license terms. 
- */ 
+ */
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
+/**
+ * A boolean node between two comparison nodes.
+ * 
+ * @author Julien Ponge (ponge@isima.fr)
+ * 
+ */
 public class BooleanNode implements IRootConstraintNode
 {
+    /** Representation of the AND symbol. */
     public static final String AND = "&&";
 
+    /** Representation of the OR symbol. */
     public static final String OR = "||";
-
-    private static final Set SYMBOLS;
 
     private static final Map NEGATIONS;
 
     static
     {
-        SYMBOLS = new TreeSet();
-        SYMBOLS.add("&&");
-        SYMBOLS.add("||");
-
         NEGATIONS = new TreeMap();
         NEGATIONS.put("&&", "||");
         NEGATIONS.put("||", "&&");
@@ -58,6 +58,16 @@ public class BooleanNode implements IRootConstraintNode
 
     private String symbol;
 
+    /**
+     * Instantiates a new boolean node.
+     * 
+     * @param symbol
+     *            The symbol (AND, OR).
+     * @param leftChild
+     *            The left child.
+     * @param rightChild
+     *            The right child.
+     */
     public BooleanNode(String symbol, IRootConstraintNode leftChild, IRootConstraintNode rightChild)
     {
         super();
@@ -66,22 +76,42 @@ public class BooleanNode implements IRootConstraintNode
         this.symbol = symbol;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.isima.ponge.wsprotocol.timed.constraints.IRootConstraintNode#getLeftChild()
+     */
     public IConstraintNode getLeftChild()
     {
         return leftChild;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.isima.ponge.wsprotocol.timed.constraints.IRootConstraintNode#getRightChild()
+     */
     public IConstraintNode getRightChild()
     {
         return rightChild;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.isima.ponge.wsprotocol.timed.constraints.IConstraintNode#negate()
+     */
     public IConstraintNode negate()
     {
         return new BooleanNode((String) NEGATIONS.get(symbol), (IRootConstraintNode) leftChild
                 .negate(), (IRootConstraintNode) rightChild.negate());
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     public boolean equals(Object arg0)
     {
         if (arg0 instanceof BooleanNode)
@@ -93,11 +123,21 @@ public class BooleanNode implements IRootConstraintNode
         return false;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#hashCode()
+     */
     public int hashCode()
     {
         return symbol.hashCode() + leftChild.hashCode() + rightChild.hashCode();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
     public String toString()
     {
         StringBuffer buffer = new StringBuffer();
@@ -106,21 +146,44 @@ public class BooleanNode implements IRootConstraintNode
         return buffer.toString();
     }
 
+    /**
+     * Gets the symbol.
+     * 
+     * @return The symbol.
+     */
     public String getSymbol()
     {
         return symbol;
     }
 
+    /**
+     * Changes the symbol.
+     * 
+     * @param symbol
+     *            The new symbol.
+     */
     public void setSymbol(String symbol)
     {
         this.symbol = symbol;
     }
 
+    /**
+     * Sets the left child.
+     * 
+     * @param leftChild
+     *            The new left child.
+     */
     public void setLeftChild(IRootConstraintNode leftChild)
     {
         this.leftChild = leftChild;
     }
 
+    /**
+     * Sets the right child.
+     * 
+     * @param rightChild
+     *            The new right child.
+     */
     public void setRightChild(IRootConstraintNode rightChild)
     {
         this.rightChild = rightChild;

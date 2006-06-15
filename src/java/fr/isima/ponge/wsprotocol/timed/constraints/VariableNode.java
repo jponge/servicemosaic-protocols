@@ -26,21 +26,36 @@
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
+/**
+ * A variable node.
+ * @author Julien Ponge (ponge@isima.fr)
+ *
+ */
 public class VariableNode implements IConstraintNode
 {
     private String variableName;
 
+    /**
+     * Instantiates a new variable node.
+     * @param variableName The variable name.
+     */
     public VariableNode(String variableName)
     {
         super();
         this.variableName = variableName;
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.constraints.IConstraintNode#negate()
+     */
     public IConstraintNode negate()
     {
         return this;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     public boolean equals(Object arg0)
     {
         if (arg0 instanceof VariableNode)
@@ -51,21 +66,35 @@ public class VariableNode implements IConstraintNode
         return false;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
     public int hashCode()
     {
         return variableName.hashCode();
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     public String toString()
     {
         return variableName;
     }
 
+    /**
+     * Gets the variable name.
+     * @return The variable name.
+     */
     public String getVariableName()
     {
         return variableName;
     }
 
+    /**
+     * Sets the variable name.
+     * @param variableName The new variable name.
+     */
     public void setVariableName(String variableName)
     {
         this.variableName = variableName;

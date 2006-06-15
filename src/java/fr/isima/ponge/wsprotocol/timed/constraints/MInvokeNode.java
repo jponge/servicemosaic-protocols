@@ -26,16 +26,28 @@
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
+/**
+ * A M-Invoke constraint node.
+ * @author Julien Ponge (ponge@isima.fr)
+ *
+ */
 public class MInvokeNode implements IConstraintNode
 {
-    IRootConstraintNode node;
+    private IRootConstraintNode node;
 
+    /**
+     * Instanciates a new M-Invoke constraint node.
+     * @param node The expression constraint node.
+     */
     public MInvokeNode(IRootConstraintNode node)
     {
         super();
         this.node = node;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     public boolean equals(Object arg0)
     {
         if (arg0 instanceof MInvokeNode)
@@ -46,26 +58,43 @@ public class MInvokeNode implements IConstraintNode
         return false;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
     public int hashCode()
     {
         return "M-Invoke".hashCode() + node.hashCode();
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     public String toString()
     {
         return "M-Invoke" + node.toString();
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.timed.constraints.IConstraintNode#negate()
+     */
     public IConstraintNode negate()
     {
         return new MInvokeNode((IRootConstraintNode) node.negate());
     }
 
+    /**
+     * Gets the expression constraint node.
+     * @return The expression.
+     */
     public IRootConstraintNode getNode()
     {
         return node;
     }
 
+    /**
+     * Sets the expression node.
+     * @param node The new expression.
+     */
     public void setNode(IRootConstraintNode node)
     {
         this.node = node;

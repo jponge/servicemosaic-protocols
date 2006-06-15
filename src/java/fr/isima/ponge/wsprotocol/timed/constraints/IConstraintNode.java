@@ -26,7 +26,16 @@
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
+/**
+ * A temporal constraint node.
+ * @author Julien Ponge (ponge@isima.fr)
+ *
+ */
 public interface IConstraintNode
 {
+    /**
+     * Gets the negation of this node.
+     * @return The negation.
+     */
     public IConstraintNode negate();
 }

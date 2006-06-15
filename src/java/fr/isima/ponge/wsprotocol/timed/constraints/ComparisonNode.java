@@ -17,48 +17,49 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
  * Copyright 2006 Julien Ponge. All rights reserved. 
  * Use is subject to license terms. 
- */ 
+ */
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
+/**
+ * A comparision node between a variable and a constant. They can either be placed on the left or
+ * the right of the expression.
+ * 
+ * @author Julien Ponge (ponge@isima.fr)
+ * 
+ */
 public class ComparisonNode implements IRootConstraintNode
 {
+    /** The LESS symbol. */
     public static final String LESS = "<";
 
+    /** The LESS_EQ symbol. */
     public static final String LESS_EQ = "<=";
 
+    /** The EQ symbol. */
     public static final String EQ = "=";
 
+    /** The NEQ symbol. */
     public static final String NEQ = "!=";
 
+    /** The GREATER symbol. */
     public static final String GREATER = ">";
 
+    /** The GREATER_EQ symbol. */
     public static final String GREATER_EQ = ">=";
-
-    private static final Set SYMBOLS;
 
     private static final Map NEGATIONS;
 
     static
     {
-        SYMBOLS = new TreeSet();
-        SYMBOLS.add(LESS);
-        SYMBOLS.add(LESS_EQ);
-        SYMBOLS.add(EQ);
-        SYMBOLS.add(NEQ);
-        SYMBOLS.add(GREATER);
-        SYMBOLS.add(GREATER_EQ);
-
         NEGATIONS = new TreeMap();
         NEGATIONS.put(LESS, GREATER_EQ);
         NEGATIONS.put(LESS_EQ, GREATER);
@@ -74,16 +75,46 @@ public class ComparisonNode implements IRootConstraintNode
 
     private String symbol;
 
+    /**
+     * Instantiates a new comparison node.
+     * 
+     * @param symbol
+     *            The symbol.
+     * @param var
+     *            The variable.
+     * @param cst
+     *            The constant.
+     */
     public ComparisonNode(String symbol, VariableNode var, ConstantNode cst)
     {
         this(var, cst, symbol);
     }
 
+    /**
+     * Instantiates a new comparision node.
+     * 
+     * @param symbol
+     *            The symbol.
+     * @param cst
+     *            The constant.
+     * @param var
+     *            The variable.
+     */
     public ComparisonNode(String symbol, ConstantNode cst, VariableNode var)
     {
         this(cst, var, symbol);
     }
 
+    /**
+     * Instantiates a new comparision node.
+     * 
+     * @param leftChild
+     *            The left child.
+     * @param rightChild
+     *            The right child.
+     * @param symbol
+     *            The symbol.
+     */
     protected ComparisonNode(IConstraintNode leftChild, IConstraintNode rightChild, String symbol)
     {
         super();
@@ -93,22 +124,42 @@ public class ComparisonNode implements IRootConstraintNode
         this.rightChild = rightChild;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.isima.ponge.wsprotocol.timed.constraints.IRootConstraintNode#getLeftChild()
+     */
     public IConstraintNode getLeftChild()
     {
         return leftChild;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.isima.ponge.wsprotocol.timed.constraints.IRootConstraintNode#getRightChild()
+     */
     public IConstraintNode getRightChild()
     {
         return rightChild;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.isima.ponge.wsprotocol.timed.constraints.IConstraintNode#negate()
+     */
     public IConstraintNode negate()
     {
 
         return new ComparisonNode(leftChild, rightChild, (String) NEGATIONS.get(symbol));
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     public boolean equals(Object arg0)
     {
         if (arg0 instanceof ComparisonNode)
@@ -120,11 +171,21 @@ public class ComparisonNode implements IRootConstraintNode
         return false;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#hashCode()
+     */
     public int hashCode()
     {
         return symbol.hashCode() + leftChild.hashCode() + rightChild.hashCode();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
     public String toString()
     {
         StringBuffer buffer = new StringBuffer();
@@ -133,21 +194,44 @@ public class ComparisonNode implements IRootConstraintNode
         return buffer.toString();
     }
 
+    /**
+     * Gets the symbol.
+     * 
+     * @return The symbol.
+     */
     public String getSymbol()
     {
         return symbol;
     }
 
+    /**
+     * Sets the symbol.
+     * 
+     * @param symbol
+     *            The new symbol.
+     */
     public void setSymbol(String symbol)
     {
         this.symbol = symbol;
     }
 
+    /**
+     * Sets the left child.
+     * 
+     * @param leftChild
+     *            The new left child.
+     */
     public void setLeftChild(IConstraintNode leftChild)
     {
         this.leftChild = leftChild;
     }
 
+    /**
+     * Sets the new right child.
+     * 
+     * @param rightChild
+     *            The new right child.
+     */
     public void setRightChild(IConstraintNode rightChild)
     {
         this.rightChild = rightChild;

@@ -26,9 +26,22 @@
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
+/**
+ * A constraint node that has left and right children constraint nodes.
+ * @author Julien Ponge (ponge@isima.fr)
+ *
+ */
 public interface IRootConstraintNode extends IConstraintNode
 {
+    /**
+     * Gets the left children. 
+     * @return The left children.
+     */
     public abstract IConstraintNode getLeftChild();
 
+    /**
+     * Gets the right children.
+     * @return The right children.
+     */
     public abstract IConstraintNode getRightChild();
 }
