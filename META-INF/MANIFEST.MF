@@ -9,6 +9,9 @@ Bundle-Localization: plugin
 Export-Package: .,
  fr.isima.ponge.wsprotocol,
  fr.isima.ponge.wsprotocol.impl,
- fr.isima.ponge.wsprotocol.xml
+ fr.isima.ponge.wsprotocol.xml,
+ fr.isima.ponge.wsprotocol.timed.constraints,
+ fr.isima.ponge.wsprotocol.timed.constraints.parser
 Require-Bundle: org.apache.commons.logging,
- org.dom4j
+ org.dom4j,
+ org.antlr
