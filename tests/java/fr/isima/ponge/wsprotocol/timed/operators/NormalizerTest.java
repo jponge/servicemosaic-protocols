@@ -65,5 +65,21 @@ public class NormalizerTest extends TestCase
         o = TestUtils.getOperationNamed(result, "T1");
         TestCase.assertEquals("C-Invoke(T0 < 10)", o.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT));
     }
+    
+    public void testNormalizeAndIntersectProtocols() throws DocumentException
+    {
+        BusinessProtocolFactoryImpl factory = new BusinessProtocolFactoryImpl();
+        Normalizer normaliser = new Normalizer(factory);
+        IntersectionOperator inter = new IntersectionOperator(factory);
+        BusinessProtocol p2 = TestUtils.loadProtocol("normalization/p2.wsprotocol");
+        BusinessProtocol p3 = TestUtils.loadProtocol("normalization/p3.wsprotocol");
+        BusinessProtocol expected = TestUtils.loadProtocol("normalization/p2-inter-norm-p3.wsprotocol");
+        BusinessProtocol result = inter.apply(normaliser.normalizeProtocol(p2), p3);
+        
+        TestCase.assertEquals(expected, result);
+        
+        Operation o = TestUtils.getOperationNamed(result, "T1_T1");
+        TestCase.assertEquals("C-Invoke(T0_T0 < 10)", o.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT));
+    }
 
 }

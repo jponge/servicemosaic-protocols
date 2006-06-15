@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<business-protocol>
+  <name>p3</name>
+  <state>
+    <name>s2</name>
+    <final>false</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>204</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>75</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>s1</name>
+    <final>false</final>
+    <initial-state/>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>36</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>75</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>s3</name>
+    <final>true</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>386</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>75</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <operation>
+    <message>
+      <name>m0</name>
+      <polarity>positive</polarity>
+    </message>
+    <name>T0</name>
+    <source>s1</source>
+    <target>s2</target>
+    <kind>explicit</kind>
+  </operation>
+  <operation>
+    <message>
+      <name>m1</name>
+      <polarity>positive</polarity>
+    </message>
+    <name>T1</name>
+    <source>s2</source>
+    <target>s3</target>
+    <kind>explicit</kind>
+  </operation>
+</business-protocol>
