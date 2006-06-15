@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension
+         id="fr.isima.ponge.wsprotocol.timed.operators.ui.popupMenus"
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="fr.isima.ponge.wsprotocol.timed.operators.ui.objectContribution1"
+            nameFilter="*.wsprotocol"
+            objectClass="org.eclipse.core.resources.IFile">
+         <menu
+               id="fr.isima.ponge.wsprotocol.timed.operators.ui.menu"
+               label="%menu.protocol.operation">
+            <separator name="fr.isima.ponge.wsprotocol.timed.operators.ui.separator1"/>
+         </menu>
+         <action
+               class="fr.isima.ponge.wsprotocol.timed.operators.ui.actions.CompositionAction"
+               enablesFor="2"
+               id="fr.isima.ponge.wsprotocol.timed.operators.ui.actions.composition"
+               label="%action.composition"
+               menubarPath="fr.isima.ponge.wsprotocol.timed.operators.ui.menu/fr.isima.ponge.wsprotocol.timed.operators.ui.separator1"/>
+         <action
+               class="fr.isima.ponge.wsprotocol.timed.operators.ui.actions.IntersectionAction"
+               enablesFor="2"
+               id="fr.isima.ponge.wsprotocol.timed.operators.ui.actions.intersection"
+               label="%action.intersection"
+               menubarPath="fr.isima.ponge.wsprotocol.timed.operators.ui.menu/fr.isima.ponge.wsprotocol.timed.operators.ui.separator1"/>
+         <action
+               class="fr.isima.ponge.wsprotocol.timed.operators.ui.actions.DifferenceAction"
+               enablesFor="2"
+               id="fr.isima.ponge.wsprotocol.timed.operators.ui.actions.difference"
+               label="%action.difference"
+               menubarPath="fr.isima.ponge.wsprotocol.timed.operators.ui.menu/fr.isima.ponge.wsprotocol.timed.operators.ui.separator1"/>
+         <action
+               class="fr.isima.ponge.wsprotocol.timed.operators.ui.actions.ReversedDifferenceAction"
+               enablesFor="2"
+               id="fr.isima.ponge.wsprotocol.timed.operators.ui.actions.difference.reversed"
+               label="%action.difference.reversed"
+               menubarPath="fr.isima.ponge.wsprotocol.timed.operators.ui.menu/fr.isima.ponge.wsprotocol.timed.operators.ui.separator1"/>
+      </objectContribution>
+   </extension>
+
+</plugin>
