@@ -17,7 +17,6 @@
 
    <windowImages small="eclipse.gif" large="eclipse32.gif"/>
 
-
    <launcher name="protocols-demo">
       <solaris/>
       <win useIco="false">
@@ -30,9 +29,12 @@
       <plugin id="fr.isima.ponge.wsprotocol"/>
       <plugin id="fr.isima.ponge.wsprotocol.gefeditor"/>
       <plugin id="fr.isima.ponge.wsprotocol.help"/>
+      <plugin id="fr.isima.ponge.wsprotocol.timed.operators"/>
+      <plugin id="fr.isima.ponge.wsprotocol.timed.operators.ui"/>
       <plugin id="fr.isima.ponge.wsprotocol.validation"/>
       <plugin id="fr.isima.ponge.wsprotocol.wsoperations"/>
       <plugin id="fr.isima.ponge.wsprotocol.wsvalidation"/>
+      <plugin id="org.antlr"/>
       <plugin id="org.apache.ant"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.lucene"/>
