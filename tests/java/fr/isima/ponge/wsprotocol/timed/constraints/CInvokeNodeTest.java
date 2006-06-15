@@ -20,28 +20,28 @@
  */ 
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
+ * Copyright 2006 Julien Ponge. All rights reserved. 
  * Use is subject to license terms. 
  */ 
 
-package fr.isima.ponge.wsprotocol;
+package fr.isima.ponge.wsprotocol.timed.constraints;
 
-/**
- * Defines the set of <em>standard</em> extra properties.
- * 
- * @author Julien Ponge <ponge@isima.fr>
- */
-public interface StandardExtraProperties
+import junit.framework.TestCase;
+
+public class CInvokeNodeTest extends TestCase
 {
 
-    /**
-     * The URL of the protocol WSDL.
+    /*
+     * Test method for 'fr.isima.ponge.wsprotocol.timed.constraints.CInvokeNode.toString()'
      */
-    public static final String PROTOCOL_WSDL_URL = "wsprotocol.wsdl.url";
-    
-    /**
-     * A temporal constraint.
-     */
-    public static final String TEMPORAL_CONSTRAINT = "wsprotocol.temporal.constraint";
+    public void testToString()
+    {
+        VariableNode var = new VariableNode("T1");
+        ConstantNode cst = new ConstantNode(5);
+        ComparisonNode node = new ComparisonNode(ComparisonNode.LESS, var, cst);
+        CInvokeNode ciNode = new CInvokeNode(node);
+        
+        TestCase.assertEquals("C-Invoke(T1 < 5)", ciNode.toString());
+    }
 
 }

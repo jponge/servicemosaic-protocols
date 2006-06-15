@@ -48,8 +48,8 @@ public class OperationImplTest extends TestCase
         Message m1 = new MessageImpl("a", Polarity.POSITIVE); //$NON-NLS-1$
         Message m2 = new MessageImpl("a", Polarity.NEGATIVE); //$NON-NLS-1$
 
-        OperationImpl o1 = new OperationImpl(s1, s2, m1);
-        OperationImpl o2 = new OperationImpl(s3, s4, m2);
+        OperationImpl o1 = new OperationImpl("T1", s1, s2, m1);
+        OperationImpl o2 = new OperationImpl("T2", s3, s4, m2);
 
         TestCase.assertEquals(o1, o1);
         TestCase.assertNotSame(o1, o2);
@@ -60,9 +60,9 @@ public class OperationImplTest extends TestCase
         State s1 = new StateImpl("s1", false); //$NON-NLS-1$
         State s2 = new StateImpl("s2", false); //$NON-NLS-1$
         Message m1 = new MessageImpl("a", Polarity.POSITIVE); //$NON-NLS-1$
-        OperationImpl o1 = new OperationImpl(s1, s2, m1);
+        OperationImpl o1 = new OperationImpl("T1", s1, s2, m1);
 
-        TestCase.assertEquals("((s1),[a](+),(s2),explicit)", o1.toString()); //$NON-NLS-1$
+        TestCase.assertEquals("T1: ((s1),[a](+),(s2),explicit)", o1.toString()); //$NON-NLS-1$
     }
 
 }

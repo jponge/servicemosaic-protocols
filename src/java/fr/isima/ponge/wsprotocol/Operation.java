@@ -35,6 +35,11 @@ import java.io.Serializable;
  */
 public interface Operation extends ExtraPropertiesKeeper, Serializable
 {
+    /**
+     * Gets the operation name;
+     * @return The operation name;
+     */
+    public String getName();
 
     /**
      * Gets the operation message.

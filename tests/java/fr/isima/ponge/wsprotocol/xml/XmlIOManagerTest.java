@@ -75,9 +75,9 @@ public class XmlIOManagerTest extends TestCase
         bp.addState(s1);
         m = factory.createMessage("a", Polarity.POSITIVE); //$NON-NLS-1$
         m.putExtraProperty("some.thing", "is.here"); //$NON-NLS-1$ //$NON-NLS-2$
-        bp.addOperation(factory.createOperation(s0, s1, m));
+        bp.addOperation(factory.createOperation("T1", s0, s1, m));
         m = factory.createMessage("b", Polarity.NEGATIVE); //$NON-NLS-1$
-        bp.addOperation(factory.createOperation(s0, s0, m));
+        bp.addOperation(factory.createOperation("T2", s0, s0, m));
 
         // Make an XML representation of it
         StringWriter writer = new StringWriter();

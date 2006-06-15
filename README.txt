@@ -18,7 +18,8 @@ This library contains the following elements:
 The library has the following dependencies (jars included in lib/):
 - Apache Commons Logging
 - Apache Log4J
-- Dom4J + Jaxen.
+- Dom4J + Jaxen
+- AntLR.
 
 The unit tests have the following dependencies (jar included in lib/):
 - Apache Commons JXPath.

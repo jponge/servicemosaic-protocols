@@ -70,7 +70,7 @@ public class BusinessProtocolImplTest extends TestCase
         s1 = factory.createState("s1", true); //$NON-NLS-1$
         bp1.addState(s1);
         m = factory.createMessage("a", Polarity.POSITIVE); //$NON-NLS-1$
-        bp1.addOperation(factory.createOperation(s0, s1, m));
+        bp1.addOperation(factory.createOperation("T1", s0, s1, m));
 
         bp2 = (BusinessProtocolImpl) factory.createBusinessProtocol("BP2"); //$NON-NLS-1$
         s0 = factory.createState("s0", false); //$NON-NLS-1$
@@ -79,9 +79,9 @@ public class BusinessProtocolImplTest extends TestCase
         s1 = factory.createState("s1", true); //$NON-NLS-1$
         bp2.addState(s1);
         m = factory.createMessage("a", Polarity.POSITIVE); //$NON-NLS-1$
-        bp2.addOperation(factory.createOperation(s0, s1, m));
+        bp2.addOperation(factory.createOperation("T1", s0, s1, m));
         m = factory.createMessage("b", Polarity.NEGATIVE); //$NON-NLS-1$
-        bp2.addOperation(factory.createOperation(s0, s0, m));
+        bp2.addOperation(factory.createOperation("T2", s0, s0, m));
 
         bp3 = (BusinessProtocolImpl) factory.createBusinessProtocol("BP1"); //$NON-NLS-1$
         s0 = factory.createState("s0", false); //$NON-NLS-1$
@@ -90,7 +90,7 @@ public class BusinessProtocolImplTest extends TestCase
         s1 = factory.createState("s1", true); //$NON-NLS-1$
         bp3.addState(s1);
         m = factory.createMessage("a", Polarity.POSITIVE); //$NON-NLS-1$
-        bp3.addOperation(factory.createOperation(s0, s1, m));
+        bp3.addOperation(factory.createOperation("T1", s0, s1, m));
     }
 
     public void testAddRemoveOperationLogic()

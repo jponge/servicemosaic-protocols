@@ -64,8 +64,38 @@ public interface BusinessProtocolFactory
      * @param message
      *            The operation message.
      * @return A new operation instance.
+     * @deprecated Operations should be explicitely created with a name.
+     * @see BusinessProtocolFactory#createOperation(String, State, State, Message)
      */
     public Operation createOperation(State sourceState, State targetState, Message message);
+    
+    /**
+     * Instanciates an operation.
+     * 
+     * @param name The operation name.
+     * @param sourceState
+     *            The source state.
+     * @param targetState
+     *            The target state.
+     * @param message
+     *            The operation message.
+     * @return A new operation instance.
+     */
+    public Operation createOperation(String name, State sourceState, State targetState, Message message, OperationKind kind);
+    
+    /**
+     * Instanciates an explicit operation.
+     * 
+     * @param name The operation name.
+     * @param sourceState
+     *            The source state.
+     * @param targetState
+     *            The target state.
+     * @param message
+     *            The operation message.
+     * @return A new operation instance.
+     */
+    public Operation createOperation(String name, State sourceState, State targetState, Message message);
     
     /**
      * Instanciates an operation.
@@ -77,6 +107,8 @@ public interface BusinessProtocolFactory
      * @param message
      *            The operation message.
      * @return A new operation instance.
+     * @deprecated Operations should be explicitely created with a name.
+     * @see BusinessProtocolFactory#createOperation(String, State, State, Message, OperationKind)
      */
     public Operation createOperation(State sourceState, State targetState, Message message, OperationKind kind);
 

@@ -1,5 +1,24 @@
 -------------------------------------------------------------------------------
 
+2006.06.14 (Julien Ponge):
+
+    - BusinessProtocolImpl: recompute the final states in getFinalStates().
+
+2006.06.13 (Julien Ponge):
+
+    - BusinessProtocolImpl: fixed a bug where messages were systematically
+      removed from the protocol. This is now done only if no other operation
+      carries the same message. Closes bug #18.
+
+2006.06.09 (Julien Ponge):
+
+    - First round of temporal constraints extensions, using AntLR to generate
+      the constraints language parser.
+    - Operations now need to have a name (ex: T1). The XML persistence has been
+      adapted to automatically generate names to support legacy protocols.
+      Also, OperationImpl will generate unique identifiers when calling the
+      previous (now deprecated) constructors.
+
 2006.03.29 (Julien Ponge):
 
     - Applied the CDDL License.

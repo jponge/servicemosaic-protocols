@@ -17,12 +17,12 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
  * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
  * Use is subject to license terms. 
- */ 
+ */
 
 package fr.isima.ponge.wsprotocol.impl;
 
@@ -62,7 +62,7 @@ public class OperationImpl implements Operation
 
     /** Operation kind property change. */
     public static final String KIND_PROPERTY_CHANGE = "kind"; //$NON-NLS-1$
-    
+
     /** Extra property change. */
     public static final String EXTRA_PROPERTY_CHANGE = "extraProperty"; //$NON-NLS-1$
 
@@ -72,6 +72,9 @@ public class OperationImpl implements Operation
     /** Model events support. */
     protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
 
+    /** The operation name. */
+    protected String name;
+
     /** The operation message. */
     protected Message message;
 
@@ -80,12 +83,15 @@ public class OperationImpl implements Operation
 
     /** The operation target state. */
     protected State targetState;
-    
+
     /** The operation kind. */
     protected OperationKind operationKind;
 
     /** The extra properties. */
     protected Map extraProperties = new HashMap();
+
+    /** Name generator counter for temporary backward compatibility. */
+    private static int nameGeneratorCounter = 0;
 
     /**
      * Creates a new instance.
@@ -96,26 +102,84 @@ public class OperationImpl implements Operation
      *            The target state.
      * @param message
      *            The message.
+     * @param operationKind
+     *            The operation kind.
+     * @deprecated Use a constructor that takes a name for the operation as a parameter. This
+     *             constructor will provide an identifier for backward compatibility.
+     * @see OperationImpl#OperationImpl(String, State, State, Message, OperationKind)
      */
-    public OperationImpl(State sourceState, State targetState, Message message, OperationKind operationKind)
+    public OperationImpl(State sourceState, State targetState, Message message,
+            OperationKind operationKind)
+    {
+        this(generateOperationName(), sourceState, targetState, message, operationKind);
+    }
+
+    /**
+     * Generate an operation name.
+     * 
+     * @return The operation name;
+     */
+    private static String generateOperationName()
+    {
+        return "T" + nameGeneratorCounter++;
+    }
+
+    /**
+     * Creates a new instance.
+     * 
+     * @param name
+     *            The operation name.
+     * @param sourceState
+     *            The source state.
+     * @param targetState
+     *            The target state.
+     * @param message
+     *            The message.
+     * @param operationKind
+     *            The operation kind.
+     */
+    public OperationImpl(String name, State sourceState, State targetState, Message message,
+            OperationKind operationKind)
     {
         super();
+        setName(name);
         setSourceState(sourceState);
         setTargetState(targetState);
         setMessage(message);
         setOperationKind(operationKind);
     }
-    
+
     /**
      * Convenience constructor to instanciate an explicit operation.
-     *  
-     * @param sourceState The source state.
-     * @param targetState The target state.
-     * @param message The message.
+     * 
+     * @param sourceState
+     *            The source state.
+     * @param targetState
+     *            The target state.
+     * @param message
+     *            The message.
+     * @deprecated Use a constructor that takes a name for the operation as a parameter. This
+     *             constructor will provide an identifier for backward compatibility.
+     * @see OperationImpl#OperationImpl(String, State, State, Message)
      */
     public OperationImpl(State sourceState, State targetState, Message message)
     {
-        this(sourceState, targetState, message, OperationKind.EXPLICIT);
+        this(generateOperationName(), sourceState, targetState, message, OperationKind.EXPLICIT);
+    }
+
+    /**
+     * Convenience constructor to instanciate an explicit operation.
+     * 
+     * @param sourceState
+     *            The source state.
+     * @param targetState
+     *            The target state.
+     * @param message
+     *            The message.
+     */
+    public OperationImpl(String name, State sourceState, State targetState, Message message)
+    {
+        this(name, sourceState, targetState, message, OperationKind.EXPLICIT);
     }
 
     /**
@@ -313,10 +377,14 @@ public class OperationImpl implements Operation
 
         if (arg0 != null && arg0 instanceof OperationImpl)
         {
+            // Note: the operation name doesn't matter
             OperationImpl op = (OperationImpl) arg0;
-            boolean eval; // We have to take care of tricky null references (seen with WS-Operations)
-            eval = (sourceState != null) ? (sourceState.equals(op.sourceState)) : (op.sourceState == null);
-            eval = eval && (targetState != null) ? (targetState.equals(op.targetState)) : (op.targetState == null);
+            boolean eval; // We have to take care of tricky null references (seen with
+            // WS-Operations)
+            eval = (sourceState != null) ? (sourceState.equals(op.sourceState))
+                    : (op.sourceState == null);
+            eval = eval && (targetState != null) ? (targetState.equals(op.targetState))
+                    : (op.targetState == null);
             eval = eval && (message != null) ? (message.equals(op.message)) : (op.message == null);
             eval = eval && (operationKind.equals(op.operationKind));
             return eval;
@@ -352,13 +420,15 @@ public class OperationImpl implements Operation
     public String toString()
     {
         StringBuffer buffer = new StringBuffer();
-        buffer.append("(").append(sourceState).append(",").append(message) //$NON-NLS-1$ //$NON-NLS-2$
+        buffer.append(getName()).append(": (").append(sourceState).append(",").append(message) //$NON-NLS-1$ //$NON-NLS-2$
                 .append(",").append(targetState).append(",").append(operationKind).append(")"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 
         return buffer.toString();
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see fr.isima.ponge.wsprotocol.Operation#getOperationKind()
      */
     public OperationKind getOperationKind()
@@ -369,13 +439,37 @@ public class OperationImpl implements Operation
     /**
      * Sets the operation kind.
      * 
-     * @param operationKind The new operation kind.
+     * @param operationKind
+     *            The new operation kind.
      */
     public void setOperationKind(OperationKind operationKind)
     {
         OperationKind oldKind = this.operationKind;
         this.operationKind = operationKind;
         listeners.firePropertyChange(KIND_PROPERTY_CHANGE, oldKind, operationKind);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.isima.ponge.wsprotocol.Operation#getName()
+     */
+    public String getName()
+    {
+        return name;
+    }
+
+    /**
+     * Changes the operation name.
+     * 
+     * @param name
+     *            The new operation name.
+     */
+    public void setName(String name)
+    {
+        String oldName = this.name;
+        this.name = name;
+        listeners.firePropertyChange(NAME_PROPERTY_CHANGE, oldName, name);
     }
 
 }

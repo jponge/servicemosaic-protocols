@@ -99,8 +99,8 @@ public class StateImplTest extends TestCase
         BusinessProtocolFactory factory = new BusinessProtocolFactoryImpl();
         Message ma = factory.createMessage("a", Polarity.POSITIVE); //$NON-NLS-1$
         Message mb = factory.createMessage("b", Polarity.POSITIVE); //$NON-NLS-1$
-        Operation a = factory.createOperation(s1, s2, ma);
-        Operation b = factory.createOperation(s2, s3, mb);
+        Operation a = factory.createOperation("T1", s1, s2, ma);
+        Operation b = factory.createOperation("T2", s2, s3, mb);
 
         s2.addIncomingOperation(a);
         s2.addOutgoingOperation(b);

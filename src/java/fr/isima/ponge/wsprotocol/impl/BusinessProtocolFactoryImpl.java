@@ -92,4 +92,20 @@ public class BusinessProtocolFactoryImpl implements BusinessProtocolFactory
         return new OperationImpl(sourceState, targetState, message, kind);
     }
 
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.BusinessProtocolFactory#createOperation(java.lang.String, fr.isima.ponge.wsprotocol.State, fr.isima.ponge.wsprotocol.State, fr.isima.ponge.wsprotocol.Message, fr.isima.ponge.wsprotocol.OperationKind)
+     */
+    public Operation createOperation(String name, State sourceState, State targetState, Message message, OperationKind kind)
+    {
+        return new OperationImpl(name, sourceState, targetState, message, kind);
+    }
+
+    /* (non-Javadoc)
+     * @see fr.isima.ponge.wsprotocol.BusinessProtocolFactory#createOperation(java.lang.String, fr.isima.ponge.wsprotocol.State, fr.isima.ponge.wsprotocol.State, fr.isima.ponge.wsprotocol.Message)
+     */
+    public Operation createOperation(String name, State sourceState, State targetState, Message message)
+    {
+        return new OperationImpl(name, sourceState, targetState, message);
+    }
+
 }

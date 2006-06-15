@@ -156,10 +156,16 @@ public class XmlIOManager
         }
 
         // Operations & messages
+        int legacyOperationNameCounter = 0;
         it = document.selectNodes("/business-protocol/operation").iterator(); //$NON-NLS-1$
         while (it.hasNext())
         {
             node = (Node) it.next();
+            String opName = node.valueOf("name"); //$NON-NLS-1$
+            if ("".equals(opName))
+            {
+                opName = "T" + legacyOperationNameCounter++;
+            }
             String msgName = node.valueOf("message/name"); //$NON-NLS-1$
             String msgPol = node.valueOf("message/polarity"); //$NON-NLS-1$
             State s1 = (State) states.get(node.valueOf("source")); //$NON-NLS-1$
@@ -189,7 +195,7 @@ public class XmlIOManager
             }
             Message msg = factory.createMessage(msgName, pol);
             readExtraProperties(msg, node.selectSingleNode("message")); //$NON-NLS-1$
-            Operation op = factory.createOperation(s1, s2, msg, kind);
+            Operation op = factory.createOperation(opName, s1, s2, msg, kind);
             readExtraProperties(op, node);
             protocol.addOperation(op);
         }
@@ -306,6 +312,7 @@ public class XmlIOManager
             Element mel = oel.addElement("message"); //$NON-NLS-1$
             mel.addElement("name").setText(m.getName()); //$NON-NLS-1$
             mel.addElement("polarity").setText(pol); //$NON-NLS-1$
+            oel.addElement("name").setText(o.getName()); //$NON-NLS-1$
             oel.addElement("source").setText(o.getSourceState().getName()); //$NON-NLS-1$
             oel.addElement("target").setText(o.getTargetState().getName()); //$NON-NLS-1$
             oel.addElement("kind").setText(o.getOperationKind().toString()); //$NON-NLS-1$

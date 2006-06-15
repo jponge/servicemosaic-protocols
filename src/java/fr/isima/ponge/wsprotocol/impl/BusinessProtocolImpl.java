@@ -31,6 +31,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -280,6 +281,16 @@ public class BusinessProtocolImpl implements BusinessProtocol
      */
     public Set getFinalStates()
     {
+        finalStates.clear();
+        Iterator it = states.iterator();
+        while (it.hasNext())
+        {
+            State s = (State) it.next();
+            if (s.isFinalState())
+            {
+                finalStates.add(s);
+            }
+        }
         return Collections.unmodifiableSet(finalStates);
     }
 
@@ -395,7 +406,21 @@ public class BusinessProtocolImpl implements BusinessProtocol
         }
 
         operations.remove(operation);
-        messages.remove(operation.getMessage());
+        
+        int counter = 0;
+        Iterator it = operations.iterator();
+        while (it.hasNext())
+        {
+            Operation op = (Operation) it.next();
+            if (op.getMessage().equals(operation.getMessage()))
+            {
+                counter = counter + 1;
+            }
+        }
+        if (counter == 0)
+        {
+            messages.remove(operation.getMessage());
+        }
 
         // Ensures the model integrity unless you make hazardous instanciations
         if (operation.getSourceState() instanceof StateImpl
@@ -436,7 +461,7 @@ public class BusinessProtocolImpl implements BusinessProtocol
             return name.equals(b.name)
                     && ((initialState != null) ? (initialState.equals(b.initialState))
                             : (b.initialState == null)) && states.equals(b.states)
-                    && finalStates.equals(b.finalStates) && messages.equals(b.messages)
+                    && getFinalStates().equals(b.getFinalStates()) && messages.equals(b.messages)
                     && operations.equals(b.operations);
         }
         else

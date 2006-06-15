@@ -9,121 +9,126 @@
 -->
 <project basedir="." name="WS-Protocol" default="dist">
 
-    <!--
+	<!--
         Preambule.
     -->
-    <property file="ant.properties" />
+	<property file="ant.properties" />
 
-    <!-- classpath for compiling the sources -->
-    <path id="classpath.src">
-        <pathelement path="${classpath}" />
-        <fileset dir="${basedir}">
-            <include name="${lib.logging}" />
-            <include name="${lib.logging.api}" />
-            <include name="${lib.log4j}" />
-            <include name="${lib.dom4j}" />
-            <include name="${lib.jaxen}" />
-        </fileset>
-    </path>
+	<!-- classpath for compiling the sources -->
+	<path id="classpath.src">
+		<pathelement path="${classpath}" />
+		<fileset dir="${basedir}">
+			<include name="${lib.logging}" />
+			<include name="${lib.logging.api}" />
+			<include name="${lib.log4j}" />
+			<include name="${lib.dom4j}" />
+			<include name="${lib.jaxen}" />
+			<include name="${lib.antlr}" />
+		</fileset>
+	</path>
 
-    <!--
+	<!--
         Creates the required folders for the building process.
     -->
-    <target name="init">
-        <tstamp />
-        <mkdir dir="${build.dir}" />
-        <mkdir dir="${build.java.dir}" />
-        <mkdir dir="${build.jars.dir}" />
-        <mkdir dir="${build.dist.dir}" />
-        <mkdir dir="${build.javadoc}" />
-    </target>
+	<target name="init">
+		<tstamp />
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.java.dir}" />
+		<mkdir dir="${build.jars.dir}" />
+		<mkdir dir="${build.dist.dir}" />
+		<mkdir dir="${build.javadoc}" />
+	</target>
 
-    <!--
+	<!--
+        AntLR 
+    -->
+	<target name="antlr" depends="init">
+		<antlr target="${src.dir}/${antlr.temporal.constraint.package}/${antlr.temporal.constraint.grammar}" />
+	</target>
+
+	<!--
         Compiles the classes.
     -->
-    <target name="compile" depends="init">
-        <javac srcdir="${src.dir}"
-               destdir="${build.java.dir}"
-               debug="${debug}"
-               debuglevel="${debug.level}"
-               target="${target.java.version}"
-               source="${source.java.version}"
-               classpathref="classpath.src">
-            <include name="**/*.java" />
-        </javac>
-        <copy todir="${build.java.dir}">
-            <fileset dir="${src.dir}">
-                <include name="**/*.properties" />
-            </fileset>
-        </copy>
-    </target>
+	<target name="compile" depends="init,antlr">
+		<javac srcdir="${src.dir}" destdir="${build.java.dir}" debug="${debug}" debuglevel="${debug.level}" target="${target.java.version}" source="${source.java.version}" classpathref="classpath.src">
+			<include name="**/*.java" />
+		</javac>
+		<copy todir="${build.java.dir}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.properties" />
+			</fileset>
+		</copy>
+	</target>
 
-    <!--
+	<!--
         Creates the javadocs.
     -->
-    <target name="javadoc" depends="init">
-        <javadoc author="true"
-                 charset="UTF-8"
-                 destdir="${build.javadoc}"
-                 access="protected"
-                 classpathref="classpath.src">
-            <fileset dir="${src.dir}">
-                <include name="**/*.java" />
-            </fileset>
-        </javadoc>
-    </target>
+	<target name="javadoc" depends="init">
+		<javadoc author="true" charset="UTF-8" destdir="${build.javadoc}" access="protected" classpathref="classpath.src">
+			<fileset dir="${src.dir}">
+				<include name="**/*.java" />
+			</fileset>
+		</javadoc>
+	</target>
 
-    <!--
+	<!--
         Creates the archives.
     -->
-    <target name="dist" depends="compile,javadoc">
-        <!-- jar -->
-        <jar destfile="${build.jars.dir}/${product.jar}">
-            <fileset dir="${build.java.dir}">
-                <include name="**/*" />
-                <exclude name="**/*Test*" />
-            </fileset>
-        </jar>
-        <!-- binary archive -->
-        <zip destfile="${build.dist.dir}/${product.bin}.zip">
-            <zipfileset dir="${build.jars.dir}" prefix="${product.archprefix}">
-                <include name="${product.jar}" />
-            </zipfileset>
-            <zipfileset dir="${basedir}" prefix="${product.archprefix}">
-                <include name="${lib.log4j}" />
-                <include name="${lib.logging}" />
-                <include name="${lib.logging.api}" />
-                <include name="${lib.dom4j}" />
-                <include name="${lib.jaxen}" />
-                <include name="*.txt" />
-            </zipfileset>
-            <zipfileset dir="doc" prefix="${product.archprefix}/doc">
-                <include name="**/*" />
-            </zipfileset>
-            <zipfileset dir="${build.javadoc}" prefix="${product.archprefix}/doc/javadoc">
-                <include name="**/*" />
-            </zipfileset>
-        </zip>
-        <!-- source archive -->
-        <zip destfile="${build.dist.dir}/${product.src}.zip">
-            <zipfileset dir="${basedir}" prefix="${product.archprefix}">
-                <include name="*/**" />
-                <include name=".classpath" />
-                <include name=".project" />
-                <exclude name="bin/**" />
-                <exclude name="${build.dir}/**" />
-            </zipfileset>
-        </zip>
-        <!-- md5 checksums -->
-        <checksum file="${build.dist.dir}/${product.bin}.zip" forceoverwrite="yes" />
-        <checksum file="${build.dist.dir}/${product.src}.zip" forceoverwrite="yes" />
-    </target>
+	<target name="dist" depends="compile,javadoc">
+		<!-- jar -->
+		<jar destfile="${build.jars.dir}/${product.jar}">
+			<fileset dir="${build.java.dir}">
+				<include name="**/*" />
+				<exclude name="**/*Test*" />
+			</fileset>
+		</jar>
+		<!-- binary archive -->
+		<zip destfile="${build.dist.dir}/${product.bin}.zip">
+			<zipfileset dir="${build.jars.dir}" prefix="${product.archprefix}">
+				<include name="${product.jar}" />
+			</zipfileset>
+			<zipfileset dir="${basedir}" prefix="${product.archprefix}">
+				<include name="${lib.log4j}" />
+				<include name="${lib.logging}" />
+				<include name="${lib.logging.api}" />
+				<include name="${lib.dom4j}" />
+				<include name="${lib.jaxen}" />
+				<include name="${lib.antlr}" />
+				<include name="*.txt" />
+			</zipfileset>
+			<zipfileset dir="doc" prefix="${product.archprefix}/doc">
+				<include name="**/*" />
+			</zipfileset>
+			<zipfileset dir="${build.javadoc}" prefix="${product.archprefix}/doc/javadoc">
+				<include name="**/*" />
+			</zipfileset>
+		</zip>
+		<!-- source archive -->
+		<zip destfile="${build.dist.dir}/${product.src}.zip">
+			<zipfileset dir="${basedir}" prefix="${product.archprefix}">
+				<include name="*/**" />
+				<include name=".classpath" />
+				<include name=".project" />
+				<exclude name="bin/**" />
+				<exclude name="${build.dir}/**" />
+			</zipfileset>
+		</zip>
+		<!-- md5 checksums -->
+		<checksum file="${build.dist.dir}/${product.bin}.zip" forceoverwrite="yes" />
+		<checksum file="${build.dist.dir}/${product.src}.zip" forceoverwrite="yes" />
+	</target>
 
-    <!--
+	<!--
         Cleans up everything.
     -->
-    <target name="clean" depends="init">
-        <delete dir="${build.dir}" />
-    </target>
+	<target name="clean" depends="init">
+		<delete dir="${build.dir}" />
+		<delete>
+			<fileset dir="${src.dir}/${antlr.temporal.constraint.package}">
+				<exclude name="*" />
+				<include name="${antlr.temporal.constraint.prefix}*" />
+			</fileset>
+		</delete>
+	</target>
 
 </project>
