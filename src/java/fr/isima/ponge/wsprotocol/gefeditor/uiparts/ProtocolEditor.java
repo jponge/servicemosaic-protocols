@@ -109,6 +109,7 @@ import fr.isima.ponge.wsprotocol.gefeditor.EditorPlugin;
 import fr.isima.ponge.wsprotocol.gefeditor.Messages;
 import fr.isima.ponge.wsprotocol.gefeditor.editparts.BusinessProtocolEditPartFactory;
 import fr.isima.ponge.wsprotocol.gefeditor.editparts.BusinessProtocolTreeEditPartFactory;
+import fr.isima.ponge.wsprotocol.gefeditor.figures.layout.DepthLayout;
 import fr.isima.ponge.wsprotocol.impl.BusinessProtocolFactoryImpl;
 import fr.isima.ponge.wsprotocol.impl.BusinessProtocolImpl;
 import fr.isima.ponge.wsprotocol.timed.constraints.CInvokeNode;
@@ -168,6 +169,14 @@ public class ProtocolEditor extends GraphicalEditorWithFlyoutPalette implements
     public void setModel(BusinessProtocol protocol)
     {
         this.protocol = protocol;
+        if ((protocol.getInitialState() != null)
+                && (protocol.getInitialState().getExtraProperty(
+                        ModelExtraPropertiesConstants.STATE_X_PROP) == null))
+        {
+            DepthLayout layout = new DepthLayout();
+            layout.layout(protocol);
+            doSave(null);
+        }
     }
 
     /*
@@ -453,7 +462,10 @@ public class ProtocolEditor extends GraphicalEditorWithFlyoutPalette implements
      */
     public void doSave(IProgressMonitor monitor)
     {
-        monitor.beginTask(Messages.savingTask, 3);
+        if (monitor != null)
+        {
+            monitor.beginTask(Messages.savingTask, 3);
+        }
         XmlIOManager manager = new XmlIOManager(new BusinessProtocolFactoryImpl());
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Writer writer = new OutputStreamWriter(out);
@@ -461,14 +473,23 @@ public class ProtocolEditor extends GraphicalEditorWithFlyoutPalette implements
         {
             manager.writeBusinessProtocol(getModel(), writer);
             writer.close();
-            monitor.worked(1);
+            if (monitor != null)
+            {
+                monitor.worked(1);
+            }
             IFile file = ((IFileEditorInput) getEditorInput()).getFile();
             file.setContents(new ByteArrayInputStream(out.toByteArray()), true, false, monitor);
             getCommandStack().markSaveLocation();
-            monitor.worked(1);
+            if (monitor != null)
+            {
+                monitor.worked(1);
+            }
             cleanProblemMarkers(file, TEMPORAL_CONSTRAINTS_PROBLEM_MARKER_ID);
             validateTemporalConstraints(file);
-            monitor.worked(1);
+            if (monitor != null)
+            {
+                monitor.worked(1);
+            }
         }
         catch (IOException e)
         {
@@ -478,7 +499,10 @@ public class ProtocolEditor extends GraphicalEditorWithFlyoutPalette implements
         {
             handleSaveTimeException(e);
         }
-        monitor.done();
+        if (monitor != null)
+        {
+            monitor.done();
+        }
     }
 
     /*
