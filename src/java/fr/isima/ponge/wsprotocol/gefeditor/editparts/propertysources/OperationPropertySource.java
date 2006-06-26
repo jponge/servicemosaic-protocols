@@ -155,8 +155,7 @@ public class OperationPropertySource implements IPropertySource
      */
     protected void updatePropertyDescriptors()
     {
-        // TODO: i18n
-        propertyDescriptors[0] = new TextPropertyDescriptor(OPERATION_NAME_PROPERTY, "Name");   
+        propertyDescriptors[0] = new TextPropertyDescriptor(OPERATION_NAME_PROPERTY, Messages.operationName);   
         
         List messages = getWSDLMessagesNames();
         if (messages.equals(Collections.EMPTY_LIST) || message.getPolarity().equals(Polarity.NULL))
@@ -185,8 +184,7 @@ public class OperationPropertySource implements IPropertySource
            Messages.explicit, Messages.implicit   
         });
         
-        // TODO: i18n
-        propertyDescriptors[4] = new TextPropertyDescriptor(TEMPORAL_CONSTRAINT_PROPERTY, "Temporal constraint");        
+        propertyDescriptors[4] = new TextPropertyDescriptor(TEMPORAL_CONSTRAINT_PROPERTY, Messages.temporalConstraint);        
     }
 
     /*
@@ -202,7 +200,7 @@ public class OperationPropertySource implements IPropertySource
     protected List getWSDLMessagesNames()
     {
         // No WSDL
-        if (wsdlLocation == null || "".equals(wsdlLocation))
+        if (wsdlLocation == null || "".equals(wsdlLocation)) //$NON-NLS-1$
         {
             return Collections.EMPTY_LIST;
         }
@@ -274,7 +272,7 @@ public class OperationPropertySource implements IPropertySource
             if (marker.exists())
             {
                 marker.setAttribute(IMarker.TRANSIENT, true);
-                marker.setAttribute(IMarker.MESSAGE, "The specified WSDL URL is invalid or unreachable.");
+                marker.setAttribute(IMarker.MESSAGE, Messages.invalidWSDL);
                 marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
                 marker.setAttribute(WSDL_PROBLEM_MARKER_ID, WSDL_PROBLEM_MARKER_ID);
             }
@@ -368,7 +366,7 @@ public class OperationPropertySource implements IPropertySource
             String constraint = (String) operation.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT);
             if (constraint == null)
             {
-                return "";
+                return ""; //$NON-NLS-1$
             }
             return constraint;
         }

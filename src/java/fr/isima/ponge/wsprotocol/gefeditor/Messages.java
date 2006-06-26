@@ -169,4 +169,10 @@ public class Messages extends NLS
     public static String finalStateProperty;
 
     public static String alignMenuEntry;
+
+    public static String operationName;
+
+    public static String temporalConstraint;
+
+    public static String invalidWSDL;
 }
