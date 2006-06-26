@@ -38,11 +38,12 @@ public class GrammarTestCase extends TestCase
 {
     public void testGrammar()
     {
-        // TODO: add failure cases, and M-Invoke non-valid input such as M-Invoke(T1 < 3)
         String[] input = { "C-Invoke((((T1 < 5) && (T2 >= 10)) || (T3 = 7)))",
-                "C-Invoke((T1< 3) && (T2 >=5))", "M-Invoke(T1 = 3)", "C-Invoke(T1 < 3)" };
+                "C-Invoke((T1< 3) && (T2 >=5))", "M-Invoke(T1 = 3)", "C-Invoke(T1 < 3)",
+                "M-Invoke(T1 = 3)", "M-Invoke(T1 < 3)"};
         String[] output = { "C-Invoke(((T1 < 5) && (T2 >= 10)) || (T3 = 7))",
-                "C-Invoke((T1 < 3) && (T2 >= 5))", "M-Invoke(T1 = 3)", "C-Invoke(T1 < 3)" };
+                "C-Invoke((T1 < 3) && (T2 >= 5))", "M-Invoke(T1 = 3)", "C-Invoke(T1 < 3)",
+                "M-Invoke(T1 = 3)", null};
         TemporalConstraintTreeWalker walker = new TemporalConstraintTreeWalker();
 
         for (int i = 0; i < input.length; ++i)
@@ -60,7 +61,10 @@ public class GrammarTestCase extends TestCase
             }
             catch (Exception e)
             {
-                TestCase.fail();
+                if (output[i] != null)
+                {
+                    TestCase.fail();
+                }
             }
         }
 

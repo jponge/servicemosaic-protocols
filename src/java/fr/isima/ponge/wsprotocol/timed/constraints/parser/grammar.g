@@ -81,20 +81,60 @@ options
 	defaultErrorHandler = false;
 }
 
-CINVOKE : "C-Invoke";
-MINVOKE : "M-Invoke";
+CINVOKE
+options
+{
+	paraphrase = "a C-Invoke";
+} : "C-Invoke";
 
-LPAREN     : "(";
-RPAREN     : ")";
+MINVOKE
+options
+{
+	paraphrase = "a M-Invoke";
+} : "M-Invoke";
 
-CONST : ('0'..'9')+;
-VAR : ('a'..'z' | 'A'..'Z' | '_')
-      ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+LPAREN
+options
+{
+	paraphrase = "a left parenthesis";
+} : "(";
 
-COMPOP : ("=" | "!=" | "<=" | "<" | ">=" | ">");
-BOOLOP : ("&&" | "||");
+RPAREN
+options
+{
+	paraphrase = "a right parenthesis";
+} : ")";
 
-WS : (' ' | '\n' | '\r' | '\t')
+CONST
+options
+{
+	paraphrase = "a constant";
+} : ('0'..'9')+;
+
+VAR
+options
+{
+	paraphrase = "a variable";
+} : ('a'..'z' | 'A'..'Z' | '_')
+    ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
+
+COMPOP
+options
+{
+	paraphrase = "a comparison operator";
+} : ("=" | "!=" | "<=" | "<" | ">=" | ">");
+
+BOOLOP
+options
+{
+	paraphrase = "a boolean operator";
+} : ("&&" | "||");
+
+WS 
+options
+{
+	paraphrase = "a white space";
+} : (' ' | '\n' | '\r' | '\t')
 {
 	$setType(Token.SKIP);
 };
@@ -151,6 +191,19 @@ constraint returns [IConstraintNode constraint]
 	|
 	  #(MINVOKE root=rootNode)
 	  {
+	  	if (root instanceof BooleanNode)
+	  	{
+	  		throw new RecognitionException("Boolean expressions are not allowed in M-Invoke constraints.");
+	  	}
+	  	if (root instanceof ComparisonNode)
+	  	{
+	  		ComparisonNode comp = (ComparisonNode) root;
+	  		if (!comp.getSymbol().equals(ComparisonNode.EQ))
+	  		{
+	  			throw new RecognitionException("Bad comparison operator.");
+	  		}
+	  	}
+	  	
 	  	constraint = new MInvokeNode(root);
 	  }
 	;

@@ -1,5 +1,12 @@
 -------------------------------------------------------------------------------
 
+2006.06.26 (Julien Ponge):
+
+    - Ensure that M-Invoke constraints have a single ComparisonNode with "="
+      as the symbol. Closes #16.
+    - Temporal constraints lexer: elements have been paraphrased to provide
+      comprehensive error reports.
+
 2006.06.14 (Julien Ponge):
 
     - BusinessProtocolImpl: recompute the final states in getFinalStates().
