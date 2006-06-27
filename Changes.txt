@@ -1,5 +1,7 @@
 -------------------------------------------------------------------------------
 
+Release 0.4.0 (release-0.4.0) (2006.06.27)
+
 2006.06.26 (Julien Ponge):
 
     - Ensure that M-Invoke constraints have a single ComparisonNode with "="
