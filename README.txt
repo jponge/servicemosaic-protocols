@@ -1,6 +1,6 @@
-   =====================
-    WS-Protocol library
-   =====================
+   ===================
+    Protocols library
+   ===================
 
 
 
@@ -21,6 +21,9 @@ The library has the following dependencies (jars included in lib/):
 - Dom4J + Jaxen
 - AntLR.
 
+When developping with Eclipse, the AntLR Eclipse Plug-in is required.
+Get it from http://antlreclipse.sourceforge.net/
+
 The unit tests have the following dependencies (jar included in lib/):
 - Apache Commons JXPath.
 
@@ -28,7 +31,7 @@ The unit tests have the following dependencies (jar included in lib/):
 
    3. Licenses
 
-The WS-Protocol library is covered by the CDDL license (see LICENSE.txt).
+The Protocols library is covered by the CDDL license (see LICENSE.txt).
 
 The libraries developped by the Apache Software Foundation are covered by the
 Apache Software License (see LICENSE.apache-libraries.txt).
