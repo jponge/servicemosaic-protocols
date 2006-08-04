@@ -47,9 +47,6 @@ import org.eclipse.ui.IPerspectiveFactory;
  */
 public class EditingPerspectiveFactory implements IPerspectiveFactory
 {
-    /** The protocol validation view identifier. */
-    public static final String ID_VALIDATION_VIEW = "fr.isima.ponge.wsprotocol.validation.views.MainValidationView";
-
     /*
      * (non-Javadoc)
      * 
@@ -69,11 +66,6 @@ public class EditingPerspectiveFactory implements IPerspectiveFactory
         IFolderLayout middleLeft = layout.createFolder("middleLeft", IPageLayout.BOTTOM, 0.50f,
                 IPageLayout.ID_RES_NAV);
         middleLeft.addView(IPageLayout.ID_OUTLINE);
-
-        // Validation, below the outline
-        IFolderLayout bottomLeft = layout.createFolder("bottomLeft", IPageLayout.BOTTOM, 0.60f,
-                IPageLayout.ID_OUTLINE);
-        bottomLeft.addView(ID_VALIDATION_VIEW);
 
         // Complementary views below the editor
         IFolderLayout bottom = layout.createFolder("bottom", IPageLayout.BOTTOM, 0.725f,
