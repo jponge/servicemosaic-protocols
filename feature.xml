@@ -415,8 +415,6 @@ most relevant court of the jurisdiction of France.
       <import plugin="org.eclipse.ui.views"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.help"/>
-      <import plugin="org.eclipse.jface.text"/>
-      <import plugin="org.eclipse.ui.editors"/>
    </requires>
 
    <plugin
@@ -462,20 +460,6 @@ most relevant court of the jurisdiction of France.
 
    <plugin
          id="fr.isima.ponge.wsprotocol.wsoperations"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.isima.ponge.wsprotocol.validation"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="fr.isima.ponge.wsprotocol.wsvalidation"
          download-size="0"
          install-size="0"
          version="0.0.0"
