@@ -15,7 +15,7 @@
    <launcherArgs>
    </launcherArgs>
 
-   <windowImages small="eclipse.gif" large="eclipse32.gif"/>
+   <windowImages i16="eclipse.gif" i32="eclipse32.gif"/>
 
    <launcher name="protocols-demo">
       <solaris/>
@@ -26,33 +26,42 @@
 
    <plugins>
       <plugin id="au.unsw.singh.wsoperation"/>
+      <plugin id="com.ibm.icu"/>
       <plugin id="fr.isima.ponge.wsprotocol"/>
       <plugin id="fr.isima.ponge.wsprotocol.gefeditor"/>
       <plugin id="fr.isima.ponge.wsprotocol.help"/>
       <plugin id="fr.isima.ponge.wsprotocol.timed.operators"/>
       <plugin id="fr.isima.ponge.wsprotocol.timed.operators.ui"/>
-      <plugin id="fr.isima.ponge.wsprotocol.validation"/>
       <plugin id="fr.isima.ponge.wsprotocol.wsoperations"/>
-      <plugin id="fr.isima.ponge.wsprotocol.wsvalidation"/>
       <plugin id="org.antlr"/>
       <plugin id="org.apache.ant"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.lucene"/>
+      <plugin id="org.apache.xerces"/>
       <plugin id="org.dom4j"/>
       <plugin id="org.eclipse.ant.core"/>
       <plugin id="org.eclipse.core.commands"/>
+      <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.filebuffers"/>
+      <plugin id="org.eclipse.core.filesystem"/>
+      <plugin id="org.eclipse.core.filesystem.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.resources"/>
-      <plugin id="org.eclipse.core.resources.compatibility"/>
+      <plugin id="org.eclipse.core.resources.compatibility" fragment="true"/>
       <plugin id="org.eclipse.core.resources.hpux"/>
       <plugin id="org.eclipse.core.resources.linux"/>
       <plugin id="org.eclipse.core.resources.macosx"/>
-      <plugin id="org.eclipse.core.resources.win32"/>
+      <plugin id="org.eclipse.core.resources.win32" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
       <plugin id="org.eclipse.core.runtime.compatibility"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.draw2d"/>
+      <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.preferences"/>
+      <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.gef"/>
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.help.appserver"/>
@@ -73,7 +82,7 @@
       <plugin id="org.eclipse.swt.motif.hpux.PA_RISC"/>
       <plugin id="org.eclipse.swt.motif.linux.x86"/>
       <plugin id="org.eclipse.swt.motif.solaris.sparc"/>
-      <plugin id="org.eclipse.swt.win32.win32.x86"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.text"/>
       <plugin id="org.eclipse.tomcat"/>
       <plugin id="org.eclipse.ui"/>
@@ -83,13 +92,13 @@
       <plugin id="org.eclipse.ui.forms"/>
       <plugin id="org.eclipse.ui.ide"/>
       <plugin id="org.eclipse.ui.views"/>
-      <plugin id="org.eclipse.ui.win32"/>
+      <plugin id="org.eclipse.ui.win32" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.eclipse.ui.workbench.texteditor"/>
       <plugin id="org.eclipse.update.configurator"/>
       <plugin id="org.eclipse.update.core"/>
       <plugin id="org.eclipse.update.core.linux"/>
-      <plugin id="org.eclipse.update.core.win32"/>
+      <plugin id="org.eclipse.update.core.win32" fragment="true"/>
       <plugin id="org.eclipse.update.ui"/>
    </plugins>
 
