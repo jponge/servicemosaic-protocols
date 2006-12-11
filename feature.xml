@@ -402,6 +402,10 @@ Any litigation relating to this License shall be subject to the
 most relevant court of the jurisdiction of France.
    </license>
 
+   <includes
+         id="org.eclipse.gef"
+         version="0.0.0"/>
+
    <requires>
       <import plugin="org.eclipse.ui"/>
       <import plugin="org.eclipse.core.runtime"/>
