@@ -415,6 +415,7 @@ most relevant court of the jurisdiction of France.
       <import plugin="org.eclipse.ui.views"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.help"/>
+      <import plugin="org.apache.xerces"/>
    </requires>
 
    <plugin
@@ -484,5 +485,26 @@ most relevant court of the jurisdiction of France.
          download-size="0"
          install-size="0"
          version="0.0.0"/>
+
+   <plugin
+         id="fr.isima.lebeausempe.wsprotocol.emptiness"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="fr.isima.lebeausempe.wsprotocol.emptiness.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="fr.isima.rivetgarcia.bpel2protocol"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>
