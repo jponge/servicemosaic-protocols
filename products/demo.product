@@ -27,12 +27,15 @@
    <plugins>
       <plugin id="au.unsw.singh.wsoperation"/>
       <plugin id="com.ibm.icu"/>
+      <plugin id="fr.isima.lebeausempe.wsprotocol.emptiness"/>
+      <plugin id="fr.isima.lebeausempe.wsprotocol.emptiness.ui"/>
       <plugin id="fr.isima.ponge.wsprotocol"/>
       <plugin id="fr.isima.ponge.wsprotocol.gefeditor"/>
       <plugin id="fr.isima.ponge.wsprotocol.help"/>
       <plugin id="fr.isima.ponge.wsprotocol.timed.operators"/>
       <plugin id="fr.isima.ponge.wsprotocol.timed.operators.ui"/>
       <plugin id="fr.isima.ponge.wsprotocol.wsoperations"/>
+      <plugin id="fr.isima.rivetgarcia.bpel2protocol"/>
       <plugin id="org.antlr"/>
       <plugin id="org.apache.ant"/>
       <plugin id="org.apache.commons.logging"/>
@@ -40,6 +43,10 @@
       <plugin id="org.apache.xerces"/>
       <plugin id="org.dom4j"/>
       <plugin id="org.eclipse.ant.core"/>
+      <plugin id="org.eclipse.bpel.common.model"/>
+      <plugin id="org.eclipse.bpel.common.ui"/>
+      <plugin id="org.eclipse.bpel.model"/>
+      <plugin id="org.eclipse.bpel.ui"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
       <plugin id="org.eclipse.core.expressions"/>
@@ -59,6 +66,12 @@
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.draw2d"/>
+      <plugin id="org.eclipse.emf.common"/>
+      <plugin id="org.eclipse.emf.ecore"/>
+      <plugin id="org.eclipse.emf.ecore.change"/>
+      <plugin id="org.eclipse.emf.ecore.edit"/>
+      <plugin id="org.eclipse.emf.ecore.xmi"/>
+      <plugin id="org.eclipse.emf.edit"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
@@ -68,9 +81,11 @@
       <plugin id="org.eclipse.help.base"/>
       <plugin id="org.eclipse.help.ui"/>
       <plugin id="org.eclipse.help.webapp"/>
+      <plugin id="org.eclipse.jem.util"/>
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.text"/>
       <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.util"/>
       <plugin id="org.eclipse.sdk"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.carbon.macosx.ppc"/>
@@ -92,6 +107,7 @@
       <plugin id="org.eclipse.ui.forms"/>
       <plugin id="org.eclipse.ui.ide"/>
       <plugin id="org.eclipse.ui.views"/>
+      <plugin id="org.eclipse.ui.views.properties.tabbed"/>
       <plugin id="org.eclipse.ui.win32" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.eclipse.ui.workbench.texteditor"/>
@@ -100,6 +116,19 @@
       <plugin id="org.eclipse.update.core.linux"/>
       <plugin id="org.eclipse.update.core.win32" fragment="true"/>
       <plugin id="org.eclipse.update.ui"/>
+      <plugin id="org.eclipse.wst.common.core"/>
+      <plugin id="org.eclipse.wst.common.emf"/>
+      <plugin id="org.eclipse.wst.common.emfworkbench.integration"/>
+      <plugin id="org.eclipse.wst.common.environment"/>
+      <plugin id="org.eclipse.wst.common.frameworks"/>
+      <plugin id="org.eclipse.wst.common.project.facet.core"/>
+      <plugin id="org.eclipse.wst.common.uriresolver"/>
+      <plugin id="org.eclipse.wst.sse.core"/>
+      <plugin id="org.eclipse.wst.validation"/>
+      <plugin id="org.eclipse.wst.wsdl"/>
+      <plugin id="org.eclipse.wst.xml.core"/>
+      <plugin id="org.eclipse.xsd"/>
+      <plugin id="org.wsdl4j"/>
    </plugins>
 
 </product>
