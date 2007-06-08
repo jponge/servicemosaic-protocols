@@ -26,13 +26,17 @@
 
 package fr.isima.ponge.wsprotocol.timed.operators;
 
+import java.util.Map;
+
 import junit.framework.TestCase;
 
 import org.dom4j.DocumentException;
 
 import fr.isima.ponge.wsprotocol.BusinessProtocol;
 import fr.isima.ponge.wsprotocol.Operation;
+import fr.isima.ponge.wsprotocol.Polarity;
 import fr.isima.ponge.wsprotocol.StandardExtraProperties;
+import fr.isima.ponge.wsprotocol.State;
 import fr.isima.ponge.wsprotocol.impl.BusinessProtocolFactoryImpl;
 
 public class NormalizerTest extends TestCase
@@ -80,6 +84,37 @@ public class NormalizerTest extends TestCase
         
         Operation o = TestUtils.getOperationNamed(result, "T1_T1");
         TestCase.assertEquals("C-Invoke(T0_T0 < 10)", o.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT));
+    }
+    
+    public void testComputeStatesDepth()
+    {
+        BusinessProtocolFactoryImpl factory = new BusinessProtocolFactoryImpl();
+        BusinessProtocol p = factory.createBusinessProtocol("P");
+        
+        State s1 = factory.createState("s1", false);
+        State s2 = factory.createState("s2", false);
+        State s3 = factory.createState("s3", false);
+        State s4 = factory.createState("s4", false);
+
+        p.addState(s1);
+        p.setInitialState(s1);
+        p.addState(s2);
+        p.addState(s3);
+        p.addState(s4);
+        
+        p.addOperation(factory.createOperation(s1, s2, factory.createMessage("m", Polarity.POSITIVE)));
+        p.addOperation(factory.createOperation(s1, s3, factory.createMessage("m", Polarity.POSITIVE)));
+        p.addOperation(factory.createOperation(s3, s1, factory.createMessage("m", Polarity.POSITIVE)));
+        p.addOperation(factory.createOperation(s3, s2, factory.createMessage("m", Polarity.POSITIVE)));
+        p.addOperation(factory.createOperation(s2, s4, factory.createMessage("m", Polarity.POSITIVE)));
+        
+        Normalizer normalizer = new Normalizer(factory);
+        Map depths = normalizer.computeStatesDepth(p);
+        
+        TestCase.assertEquals(0, ((Integer)depths.get(s1)).intValue());
+        TestCase.assertEquals(1, ((Integer)depths.get(s2)).intValue());
+        TestCase.assertEquals(1, ((Integer)depths.get(s3)).intValue());
+        TestCase.assertEquals(2, ((Integer)depths.get(s4)).intValue());
     }
 
 }

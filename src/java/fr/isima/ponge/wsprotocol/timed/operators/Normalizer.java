@@ -28,8 +28,11 @@ package fr.isima.ponge.wsprotocol.timed.operators;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
 
 import fr.isima.ponge.wsprotocol.BusinessProtocol;
 import fr.isima.ponge.wsprotocol.BusinessProtocolFactory;
@@ -76,12 +79,48 @@ public class Normalizer extends AbstractOperator
     }
     
     /**
+     * Computes the depths of the states of a protocol.
+     * @param p The protocol.
+     * @return The states depth <code>(state -> depth)</code>.
+     */
+    protected Map computeStatesDepth(BusinessProtocol p)
+    {
+        Map statesDepth = new HashMap();
+        
+        Set visitedStates = new HashSet();
+        Stack visitStack = new Stack();
+        visitStack.add(p.getInitialState());
+        visitedStates.add(p.getInitialState());
+        statesDepth.put(p.getInitialState(), Integer.valueOf(0));
+        while (!visitStack.isEmpty())
+        {
+            State current = (State) visitStack.pop();
+            Iterator it = current.getSuccessors().iterator();
+            while (it.hasNext())
+            {
+                State next = (State) it.next();
+                if (!visitedStates.contains(next))
+                {
+                    visitedStates.add(next);
+                    statesDepth.put(next, Integer.valueOf(((Integer)statesDepth.get(current)).intValue() + 1));
+                    visitStack.push(next);
+                }
+            }
+        }
+        
+        return statesDepth;
+    }
+    
+    /**
      * Normalizes a protocol.
      * @param p The protocol to normalize.
      * @return The same protocol instance, but normalized.
      */
     public BusinessProtocol normalizeProtocol(BusinessProtocol p)
     {
+        // Get the states depth
+        Map statesDepth = computeStatesDepth(p);
+        
         /*
          * 1. Find all implicit operations
          * 2. Infer temporal constraints
@@ -96,6 +135,14 @@ public class Normalizer extends AbstractOperator
             State source = op.getSourceState();
             State target = op.getTargetState();
             if (op.getOperationKind().equals(OperationKind.EXPLICIT))
+            {
+                continue;
+            }
+            
+            // Ensure that it is a forward implicit transition
+            int sourceDepth = ((Integer)statesDepth.get(source)).intValue();
+            int targetDepth = ((Integer)statesDepth.get(target)).intValue();
+            if (sourceDepth > targetDepth)
             {
                 continue;
             }
