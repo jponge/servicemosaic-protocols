@@ -13,10 +13,9 @@
         Preambule.
     -->
 	<property file="ant.properties" />
-
-	<!-- classpath for compiling the sources -->
-	<path id="classpath.src">
-		<pathelement path="${classpath}" />
+    
+    <!-- classpath for compiling the sources -->
+    <path id="classpath.src">
 		<fileset dir="${basedir}">
 			<include name="${lib.logging}" />
 			<include name="${lib.logging.api}" />
@@ -43,7 +42,7 @@
         AntLR 
     -->
 	<target name="antlr" depends="init">
-		<antlr target="${src.dir}/${antlr.temporal.constraint.package}/${antlr.temporal.constraint.grammar}" />
+        <antlr target="${src.dir}/${antlr.temporal.constraint.package}/${antlr.temporal.constraint.grammar}" />
 	</target>
 
 	<!--
