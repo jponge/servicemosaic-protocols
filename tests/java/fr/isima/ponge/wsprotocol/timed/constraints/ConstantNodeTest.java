@@ -17,12 +17,12 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
@@ -47,7 +47,7 @@ public class ConstantNodeTest extends TestCase
     {
         ConstantNode otherNode = new ConstantNode(666);
         assertEquals(node, otherNode);
-        
+
         otherNode = new ConstantNode(555);
         assertNotSame(node, otherNode);
     }

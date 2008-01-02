@@ -1,5 +1,17 @@
 -------------------------------------------------------------------------------
 
+2007.12.30 (Julien Ponge):
+
+    - Java 5 migration (generics). Addresses #21.
+    - Ant JUnit task.
+
+2007.12.29 (Julien Ponge):
+
+    - Relaxed M-Invoke constraints definition to reflect the new model.
+      (it still requires the introduction of diagonal constraints)
+
+-------------------------------------------------------------------------------
+
 Release 0.4.0 (release-0.4.0) (2006.06.27)
 
 2006.06.26 (Julien Ponge):

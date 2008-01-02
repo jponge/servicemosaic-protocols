@@ -17,12 +17,12 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol;
 
@@ -30,38 +30,51 @@ import java.io.Serializable;
 
 /**
  * Defines a message polarity.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
  */
 public class Polarity implements Serializable
 {
 
-    /** The positive message polarity value. */
+    /**
+     * The positive message polarity value.
+     */
     protected static final int VAL_POSITIVE = 0;
 
-    /** The negative message polarity value. */
+    /**
+     * The negative message polarity value.
+     */
     protected static final int VAL_NEGATIVE = 1;
 
-    /** The null message polarity value. */
+    /**
+     * The null message polarity value.
+     */
     protected static final int VAL_NULL = 2;
 
-    /** The instance polarity value. */
+    /**
+     * The instance polarity value.
+     */
     protected int polarity;
 
-    /** The positive polarity. */
+    /**
+     * The positive polarity.
+     */
     public static final Polarity POSITIVE = new Polarity(VAL_POSITIVE);
 
-    /** The negative polarity. */
+    /**
+     * The negative polarity.
+     */
     public static final Polarity NEGATIVE = new Polarity(VAL_NEGATIVE);
 
-    /** The null polarity. */
+    /**
+     * The null polarity.
+     */
     public static final Polarity NULL = new Polarity(VAL_NULL);
 
     /**
      * Constructs a new <code>Polarity</code> instance.
-     * 
-     * @param value
-     *            The polarity value.
+     *
+     * @param value The polarity value.
      */
     protected Polarity(int value)
     {
@@ -105,12 +118,12 @@ public class Polarity implements Serializable
     {
         switch (polarity)
         {
-        case VAL_POSITIVE:
-            return "(+)"; //$NON-NLS-1$
-        case VAL_NEGATIVE:
-            return "(-)"; //$NON-NLS-1$
-        default:
-            return "( )"; //$NON-NLS-1$
+            case VAL_POSITIVE:
+                return "(+)"; //$NON-NLS-1$
+            case VAL_NEGATIVE:
+                return "(-)"; //$NON-NLS-1$
+            default:
+                return "( )"; //$NON-NLS-1$
         }
     }
 }

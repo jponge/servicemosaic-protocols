@@ -17,18 +17,18 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol;
 
 /**
  * Defines the set of <em>standard</em> extra properties.
- * 
+ *
  * @author Julien Ponge <ponge@isima.fr>
  */
 public interface StandardExtraProperties
@@ -38,7 +38,7 @@ public interface StandardExtraProperties
      * The URL of the protocol WSDL.
      */
     public static final String PROTOCOL_WSDL_URL = "wsprotocol.wsdl.url";
-    
+
     /**
      * A temporal constraint.
      */

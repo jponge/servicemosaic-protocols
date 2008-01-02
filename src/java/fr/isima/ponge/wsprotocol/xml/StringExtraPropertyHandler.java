@@ -17,23 +17,22 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.xml;
 
+import fr.isima.ponge.wsprotocol.ExtraPropertiesKeeper;
 import org.dom4j.Branch;
 import org.dom4j.Element;
 
-import fr.isima.ponge.wsprotocol.ExtraPropertiesKeeper;
-
 /**
  * Extra properties handler for <code>java.lang.String</code>.
- * 
+ *
  * @author Julien Ponge <ponge@isima.fr>
  */
 public class StringExtraPropertyHandler implements ExtraPropertyHandler

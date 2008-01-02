@@ -17,12 +17,12 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
@@ -40,7 +40,7 @@ public class CInvokeNodeTest extends TestCase
         ConstantNode cst = new ConstantNode(5);
         ComparisonNode node = new ComparisonNode(ComparisonNode.LESS, var, cst);
         CInvokeNode ciNode = new CInvokeNode(node);
-        
+
         TestCase.assertEquals("C-Invoke(T1 < 5)", ciNode.toString());
     }
 

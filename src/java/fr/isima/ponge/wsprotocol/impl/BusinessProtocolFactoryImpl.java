@@ -17,26 +17,20 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.impl;
 
-import fr.isima.ponge.wsprotocol.BusinessProtocol;
-import fr.isima.ponge.wsprotocol.BusinessProtocolFactory;
-import fr.isima.ponge.wsprotocol.Message;
-import fr.isima.ponge.wsprotocol.Operation;
-import fr.isima.ponge.wsprotocol.OperationKind;
-import fr.isima.ponge.wsprotocol.Polarity;
-import fr.isima.ponge.wsprotocol.State;
+import fr.isima.ponge.wsprotocol.*;
 
 /**
  * An implementation for the <code>BusinessProtocolFactory</code> interface.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
  */
 public class BusinessProtocolFactoryImpl implements BusinessProtocolFactory

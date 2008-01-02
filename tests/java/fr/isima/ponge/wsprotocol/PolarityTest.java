@@ -17,12 +17,12 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol;
 
@@ -30,7 +30,7 @@ import junit.framework.TestCase;
 
 /**
  * Test case for the <code>Polarity</code> class.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
  */
 public class PolarityTest extends TestCase

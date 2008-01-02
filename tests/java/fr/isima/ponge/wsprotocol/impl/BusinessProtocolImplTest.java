@@ -17,31 +17,25 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.impl;
+
+import fr.isima.ponge.wsprotocol.*;
+import junit.framework.TestCase;
+import org.apache.commons.jxpath.JXPathContext;
 
 import java.util.Iterator;
 import java.util.List;
 
-import junit.framework.TestCase;
-
-import org.apache.commons.jxpath.JXPathContext;
-
-import fr.isima.ponge.wsprotocol.BusinessProtocolFactory;
-import fr.isima.ponge.wsprotocol.Message;
-import fr.isima.ponge.wsprotocol.Operation;
-import fr.isima.ponge.wsprotocol.Polarity;
-import fr.isima.ponge.wsprotocol.State;
-
 /**
  * Test case for the <code>BusinessProtocolImpl</code> class.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
  */
 public class BusinessProtocolImplTest extends TestCase

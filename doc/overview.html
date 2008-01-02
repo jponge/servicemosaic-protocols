@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 
 <head>
-  <title>WS-Protocol library overview</title>
-  <meta name="AUTHOR" content="Julien Ponge" />
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>WS-Protocol library overview</title>
+    <meta name="AUTHOR" content="Julien Ponge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
 </head>
 
 <body>
@@ -19,24 +19,24 @@
 <h2>Purpose</h2>
 
 <p>This library offers a model of web services protocols for the Java&#8482; platform. It contains the
-model interface and classes as well as persistance-related classes. Other functionnalities such as protocol
-operators will instead be part of another library project.</p>
+    model interface and classes as well as persistance-related classes. Other functionnalities such as protocol
+    operators will instead be part of another library project.</p>
 
 <h2>Organisation</h2>
 
 <p>The model is split into a set of interfaces contained in the <code>fr.isima.ponge.wsprotocol</code>
-package. Implementation classes are provided by the <code>fr.isima.ponge.wsprotocol.impl</code> package, but
-a user is expected to avoid using them directly as much as possible (the interfaces are preferred). Finally,
-the <code>fr.isima.ponge.wsprotocol.xml</code> package provides an XML persistance input/output manager. The
-writing is performed by a utility class while the reading is performed efficiently with SAX.</p>
+    package. Implementation classes are provided by the <code>fr.isima.ponge.wsprotocol.impl</code> package, but
+    a user is expected to avoid using them directly as much as possible (the interfaces are preferred). Finally,
+    the <code>fr.isima.ponge.wsprotocol.xml</code> package provides an XML persistance input/output manager. The
+    writing is performed by a utility class while the reading is performed efficiently with SAX.</p>
 
 <p>The instanciation of the model classes are expected to be made by using the well-known
-<em>abstract factory</em> design-pattern. To do that, an interface to such a factory is provided in the
-<code>fr.isima.ponge.wsprotocol</code> package. The class implementing the <code>BusinessProtocol</code>
-interface is responsible for protocol integrity.</p>
+    <em>abstract factory</em> design-pattern. To do that, an interface to such a factory is provided in the
+    <code>fr.isima.ponge.wsprotocol</code> package. The class implementing the <code>BusinessProtocol</code>
+    interface is responsible for protocol integrity.</p>
 
 <p>The following UML diagram gives an overview of the classes and interfaces relationships: <br/>
-<img src="uml-wsprotocol-package.png" alt="UML classes relationships" /></p>
+    <img src="uml-wsprotocol-package.png" alt="UML classes relationships"/></p>
 
 <!-- ................................................................................................... -->
 
@@ -48,24 +48,25 @@ interface is responsible for protocol integrity.</p>
     <li><code>src</code>: contains the source code of the library</li>
     <li><code>tests</code>: contains the JUnit-based test suite</li>
     <li><code>lib</code>: contains the 3rd-party libraries required at runtime and/or for the tests
-    suite</li>
+        suite
+    </li>
     <li><code>doc</code>: contains documentation files such as this one.</li>
 </ul>
 
 <p>The source code project can be used inside Eclipse as the <code>.project</code> and
-<code>.classpath</code> files are provided. Any change <strong>must be documented</strong> in
-<code>Changes.txt</code> and the <strong>test suite must be extended</strong> whenever it is possible.</p>
+    <code>.classpath</code> files are provided. Any change <strong>must be documented</strong> in
+    <code>Changes.txt</code> and the <strong>test suite must be extended</strong> whenever it is possible.</p>
 
 <!-- ................................................................................................... -->
 
 <h2>Using it</h2>
 
 <p>The binaries archive simply contains the documentation (including Javadocs), the required runtime
-3rd-party libraries as well as the library Jar file. This Jar can be reused in any project needing the
-WS-Protocol library. Please make sure that the library dependencies are met.</p>
+    3rd-party libraries as well as the library Jar file. This Jar can be reused in any project needing the
+    WS-Protocol library. Please make sure that the library dependencies are met.</p>
 
 <p>The library code uses a logging API and thus it is possible to gather some informations from it. To do that,
-just enable the <code>DEBUG</code> logging level.</p>
+    just enable the <code>DEBUG</code> logging level.</p>
 
 <!-- ................................................................................................... -->
 
@@ -94,7 +95,7 @@ just enable the <code>DEBUG</code> logging level.</p>
 <h2>Ant build</h2>
 
 <p>There is a Ant build file (<code>build.xml</code>) that will by default package the application into
-both source and binary packages. It also builds the Javadocs.</p>
+    both source and binary packages. It also builds the Javadocs.</p>
 
 <!-- ................................................................................................... -->
 

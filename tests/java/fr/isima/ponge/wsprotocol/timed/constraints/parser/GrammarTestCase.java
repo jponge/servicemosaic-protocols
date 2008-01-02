@@ -17,33 +17,31 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+ * Copyright 2006 Julien Ponge. All rights reserved.
+ * Use is subject to license terms.
+ */
 
 package fr.isima.ponge.wsprotocol.timed.constraints.parser;
 
-import java.io.StringReader;
-
-import fr.isima.ponge.wsprotocol.timed.constraints.IConstraintNode;
-
 import antlr.CommonAST;
-
+import fr.isima.ponge.wsprotocol.timed.constraints.IConstraintNode;
 import junit.framework.TestCase;
+
+import java.io.StringReader;
 
 public class GrammarTestCase extends TestCase
 {
     public void testGrammar()
     {
-        String[] input = { "C-Invoke((((T1 < 5) && (T2 >= 10)) || (T3 = 7)))",
+        String[] input = {"C-Invoke((((T1 < 5) && (T2 >= 10)) || (T3 = 7)))",
                 "C-Invoke((T1< 3) && (T2 >=5))", "M-Invoke(T1 = 3)", "C-Invoke(T1 < 3)",
-                "M-Invoke(T1 = 3)", "M-Invoke(T1 < 3)"};
-        String[] output = { "C-Invoke(((T1 < 5) && (T2 >= 10)) || (T3 = 7))",
+                "M-Invoke(T1 = 3)", "M-Invoke((T1 = 3) || (T2 = 2))"};
+        String[] output = {"C-Invoke(((T1 < 5) && (T2 >= 10)) || (T3 = 7))",
                 "C-Invoke((T1 < 3) && (T2 >= 5))", "M-Invoke(T1 = 3)", "C-Invoke(T1 < 3)",
-                "M-Invoke(T1 = 3)", null};
+                "M-Invoke(T1 = 3)", "M-Invoke((T1 = 3) || (T2 = 2))"};
         TemporalConstraintTreeWalker walker = new TemporalConstraintTreeWalker();
 
         for (int i = 0; i < input.length; ++i)
@@ -63,6 +61,8 @@ public class GrammarTestCase extends TestCase
             {
                 if (output[i] != null)
                 {
+                    System.out.println(new StringBuilder().append(input[i]).append(" (").append(i).append(")").toString());
+                    e.printStackTrace();
                     TestCase.fail();
                 }
             }

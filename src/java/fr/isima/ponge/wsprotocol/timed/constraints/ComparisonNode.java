@@ -32,35 +32,46 @@ import java.util.TreeMap;
 /**
  * A comparision node between a variable and a constant. They can either be placed on the left or
  * the right of the expression.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
- * 
  */
 public class ComparisonNode implements IRootConstraintNode
 {
-    /** The LESS symbol. */
+    /**
+     * The LESS symbol.
+     */
     public static final String LESS = "<";
 
-    /** The LESS_EQ symbol. */
+    /**
+     * The LESS_EQ symbol.
+     */
     public static final String LESS_EQ = "<=";
 
-    /** The EQ symbol. */
+    /**
+     * The EQ symbol.
+     */
     public static final String EQ = "=";
 
-    /** The NEQ symbol. */
+    /**
+     * The NEQ symbol.
+     */
     public static final String NEQ = "!=";
 
-    /** The GREATER symbol. */
+    /**
+     * The GREATER symbol.
+     */
     public static final String GREATER = ">";
 
-    /** The GREATER_EQ symbol. */
+    /**
+     * The GREATER_EQ symbol.
+     */
     public static final String GREATER_EQ = ">=";
 
-    private static final Map NEGATIONS;
+    private static final Map<String, String> NEGATIONS;
 
     static
     {
-        NEGATIONS = new TreeMap();
+        NEGATIONS = new TreeMap<String, String>();
         NEGATIONS.put(LESS, GREATER_EQ);
         NEGATIONS.put(LESS_EQ, GREATER);
         NEGATIONS.put(EQ, NEQ);
@@ -77,13 +88,10 @@ public class ComparisonNode implements IRootConstraintNode
 
     /**
      * Instantiates a new comparison node.
-     * 
-     * @param symbol
-     *            The symbol.
-     * @param var
-     *            The variable.
-     * @param cst
-     *            The constant.
+     *
+     * @param symbol The symbol.
+     * @param var    The variable.
+     * @param cst    The constant.
      */
     public ComparisonNode(String symbol, VariableNode var, ConstantNode cst)
     {
@@ -92,13 +100,10 @@ public class ComparisonNode implements IRootConstraintNode
 
     /**
      * Instantiates a new comparision node.
-     * 
-     * @param symbol
-     *            The symbol.
-     * @param cst
-     *            The constant.
-     * @param var
-     *            The variable.
+     *
+     * @param symbol The symbol.
+     * @param cst    The constant.
+     * @param var    The variable.
      */
     public ComparisonNode(String symbol, ConstantNode cst, VariableNode var)
     {
@@ -107,13 +112,10 @@ public class ComparisonNode implements IRootConstraintNode
 
     /**
      * Instantiates a new comparision node.
-     * 
-     * @param leftChild
-     *            The left child.
-     * @param rightChild
-     *            The right child.
-     * @param symbol
-     *            The symbol.
+     *
+     * @param leftChild  The left child.
+     * @param rightChild The right child.
+     * @param symbol     The symbol.
      */
     protected ComparisonNode(IConstraintNode leftChild, IConstraintNode rightChild, String symbol)
     {
@@ -152,7 +154,7 @@ public class ComparisonNode implements IRootConstraintNode
     public IConstraintNode negate()
     {
 
-        return new ComparisonNode(leftChild, rightChild, (String) NEGATIONS.get(symbol));
+        return new ComparisonNode(leftChild, rightChild, NEGATIONS.get(symbol));
     }
 
     /*
@@ -196,7 +198,7 @@ public class ComparisonNode implements IRootConstraintNode
 
     /**
      * Gets the symbol.
-     * 
+     *
      * @return The symbol.
      */
     public String getSymbol()
@@ -206,9 +208,8 @@ public class ComparisonNode implements IRootConstraintNode
 
     /**
      * Sets the symbol.
-     * 
-     * @param symbol
-     *            The new symbol.
+     *
+     * @param symbol The new symbol.
      */
     public void setSymbol(String symbol)
     {
@@ -217,9 +218,8 @@ public class ComparisonNode implements IRootConstraintNode
 
     /**
      * Sets the left child.
-     * 
-     * @param leftChild
-     *            The new left child.
+     *
+     * @param leftChild The new left child.
      */
     public void setLeftChild(IConstraintNode leftChild)
     {
@@ -228,12 +228,11 @@ public class ComparisonNode implements IRootConstraintNode
 
     /**
      * Sets the new right child.
-     * 
-     * @param rightChild
-     *            The new right child.
+     *
+     * @param rightChild The new right child.
      */
     public void setRightChild(IConstraintNode rightChild)
     {
         this.rightChild = rightChild;
     }
-};
+}

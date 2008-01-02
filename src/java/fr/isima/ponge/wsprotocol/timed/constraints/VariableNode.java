@@ -17,19 +17,19 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
 /**
  * A variable node.
- * @author Julien Ponge (ponge@isima.fr)
  *
+ * @author Julien Ponge (ponge@isima.fr)
  */
 public class VariableNode implements IConstraintNode
 {
@@ -37,6 +37,7 @@ public class VariableNode implements IConstraintNode
 
     /**
      * Instantiates a new variable node.
+     *
      * @param variableName The variable name.
      */
     public VariableNode(String variableName)
@@ -84,6 +85,7 @@ public class VariableNode implements IConstraintNode
 
     /**
      * Gets the variable name.
+     *
      * @return The variable name.
      */
     public String getVariableName()
@@ -93,6 +95,7 @@ public class VariableNode implements IConstraintNode
 
     /**
      * Sets the variable name.
+     *
      * @param variableName The new variable name.
      */
     public void setVariableName(String variableName)

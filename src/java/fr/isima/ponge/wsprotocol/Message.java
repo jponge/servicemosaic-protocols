@@ -17,12 +17,12 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol;
 
@@ -30,7 +30,7 @@ import java.io.Serializable;
 
 /**
  * Defines an operation message interface.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
  */
 public interface Message extends ExtraPropertiesKeeper, Serializable
@@ -38,14 +38,14 @@ public interface Message extends ExtraPropertiesKeeper, Serializable
 
     /**
      * Gets the message name.
-     * 
+     *
      * @return The message name.
      */
     public String getName();
 
     /**
      * Gets the message polarity.
-     * 
+     *
      * @return The message polarity.
      */
     public Polarity getPolarity();

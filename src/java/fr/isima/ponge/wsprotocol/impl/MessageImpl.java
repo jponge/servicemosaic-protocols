@@ -17,14 +17,19 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.impl;
+
+import fr.isima.ponge.wsprotocol.Message;
+import fr.isima.ponge.wsprotocol.Polarity;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -32,51 +37,59 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import fr.isima.ponge.wsprotocol.Message;
-import fr.isima.ponge.wsprotocol.Polarity;
-
 /**
  * Implementation of the <code>Message</code> interface.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
  */
 public class MessageImpl implements Message
 {
 
-    /** Name property change. */
+    /**
+     * Name property change.
+     */
     public static final String NAME_PROPERTY_CHANGE = "name"; //$NON-NLS-1$
 
-    /** Polarity property change. */
+    /**
+     * Polarity property change.
+     */
     public static final String POLARITY_PROPERTY_CHANGE = "polarity"; //$NON-NLS-1$
 
-    /** Extra property change. */
+    /**
+     * Extra property change.
+     */
     public static final String EXTRA_PROPERTY_CHANGE = "extraProperty"; //$NON-NLS-1$
 
-    /** Logger. */
+    /**
+     * Logger.
+     */
     private static Log log = LogFactory.getLog(MessageImpl.class);
 
-    /** Model events support. */
+    /**
+     * Model events support.
+     */
     protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
 
-    /** The message name. */
+    /**
+     * The message name.
+     */
     protected String name;
 
-    /** The message polarity. */
+    /**
+     * The message polarity.
+     */
     protected Polarity polarity;
 
-    /** The extra properties. */
+    /**
+     * The extra properties.
+     */
     protected Map extraProperties = new HashMap();
 
     /**
      * Constructs a new instance.
-     * 
-     * @param name
-     *            The message name.
-     * @param polarity
-     *            The message polarity.
+     *
+     * @param name     The message name.
+     * @param polarity The message polarity.
      */
     public MessageImpl(String name, Polarity polarity)
     {
@@ -87,9 +100,8 @@ public class MessageImpl implements Message
 
     /**
      * Changes the message name.
-     * 
-     * @param name
-     *            The new message name.
+     *
+     * @param name The new message name.
      */
     public void setName(String name)
     {
@@ -105,9 +117,8 @@ public class MessageImpl implements Message
 
     /**
      * Changes the message polarity.
-     * 
-     * @param polarity
-     *            The new message polarity.
+     *
+     * @param polarity The new message polarity.
      */
     public void setPolarity(Polarity polarity)
     {
@@ -123,9 +134,8 @@ public class MessageImpl implements Message
 
     /**
      * Gets an extra property.
-     * 
-     * @param key
-     *            The key.
+     *
+     * @param key The key.
      * @return The value or <code>null</code>.
      */
     public Object getExtraProperty(Object key)
@@ -135,11 +145,9 @@ public class MessageImpl implements Message
 
     /**
      * Puts an extra property.
-     * 
-     * @param key
-     *            The key.
-     * @param value
-     *            The value.
+     *
+     * @param key   The key.
+     * @param value The value.
      */
     public void putExtraProperty(Object key, Object value)
     {
@@ -149,9 +157,8 @@ public class MessageImpl implements Message
 
     /**
      * Removes an extra property.
-     * 
-     * @param key
-     *            The property key.
+     *
+     * @param key The property key.
      */
     public void removeExtraProperty(Object key)
     {
@@ -161,7 +168,7 @@ public class MessageImpl implements Message
 
     /**
      * Gets the keys of all the extra properties.
-     * 
+     *
      * @return The set of keys.
      */
     public Set getExtraPropertiesKeys()
@@ -171,9 +178,8 @@ public class MessageImpl implements Message
 
     /**
      * Adds a property change listener.
-     * 
-     * @param listener
-     *            The listener.
+     *
+     * @param listener The listener.
      */
     public void addPropertyChangeListener(PropertyChangeListener listener)
     {
@@ -182,11 +188,9 @@ public class MessageImpl implements Message
 
     /**
      * Adds a property change listener.
-     * 
-     * @param propertyName
-     *            The property.
-     * @param listener
-     *            The listener.
+     *
+     * @param propertyName The property.
+     * @param listener     The listener.
      */
     public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener)
     {
@@ -195,9 +199,8 @@ public class MessageImpl implements Message
 
     /**
      * Removes a property change listener.
-     * 
-     * @param listener
-     *            The listener.
+     *
+     * @param listener The listener.
      */
     public void removePropertyChangeListener(PropertyChangeListener listener)
     {
@@ -206,11 +209,9 @@ public class MessageImpl implements Message
 
     /**
      * Removes a property change listener.
-     * 
-     * @param propertyName
-     *            The property.
-     * @param listener
-     *            The listener.
+     *
+     * @param propertyName The property.
+     * @param listener     The listener.
      */
     public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener)
     {

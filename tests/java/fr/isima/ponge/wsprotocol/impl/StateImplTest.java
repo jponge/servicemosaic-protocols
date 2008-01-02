@@ -17,24 +17,24 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.impl;
 
-import junit.framework.TestCase;
 import fr.isima.ponge.wsprotocol.BusinessProtocolFactory;
 import fr.isima.ponge.wsprotocol.Message;
 import fr.isima.ponge.wsprotocol.Operation;
 import fr.isima.ponge.wsprotocol.Polarity;
+import junit.framework.TestCase;
 
 /**
  * Test case for the <code>StateImpl</code> class.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
  */
 public class StateImplTest extends TestCase

@@ -17,19 +17,19 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
 /**
  * A M-Invoke constraint node.
- * @author Julien Ponge (ponge@isima.fr)
  *
+ * @author Julien Ponge (ponge@isima.fr)
  */
 public class MInvokeNode implements IConstraintNode
 {
@@ -37,6 +37,7 @@ public class MInvokeNode implements IConstraintNode
 
     /**
      * Instanciates a new M-Invoke constraint node.
+     *
      * @param node The expression constraint node.
      */
     public MInvokeNode(IRootConstraintNode node)
@@ -84,6 +85,7 @@ public class MInvokeNode implements IConstraintNode
 
     /**
      * Gets the expression constraint node.
+     *
      * @return The expression.
      */
     public IRootConstraintNode getNode()
@@ -93,6 +95,7 @@ public class MInvokeNode implements IConstraintNode
 
     /**
      * Sets the expression node.
+     *
      * @param node The new expression.
      */
     public void setNode(IRootConstraintNode node)

@@ -17,12 +17,12 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
@@ -31,10 +31,10 @@ import junit.framework.TestCase;
 public class VariableNodeTest extends TestCase
 {
     private VariableNode node = new VariableNode("CoinCoin");
-    
+
     /*
-     * Test method for 'fr.isima.ponge.wsprotocol.timed.constraints.VariableNode.negate()'
-     */
+    * Test method for 'fr.isima.ponge.wsprotocol.timed.constraints.VariableNode.negate()'
+    */
     public void testNegate()
     {
         assertEquals(node, node.negate());
@@ -47,7 +47,7 @@ public class VariableNodeTest extends TestCase
     {
         VariableNode otherNode = new VariableNode("CoinCoin");
         assertEquals(node, otherNode);
-        
+
         otherNode = new VariableNode("CoinCoinCoin");
         assertNotSame(node, otherNode);
     }

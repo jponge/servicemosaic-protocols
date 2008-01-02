@@ -17,19 +17,19 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
 /**
  * A constant node.
- * @author Julien Ponge (ponge@isima.fr)
  *
+ * @author Julien Ponge (ponge@isima.fr)
  */
 public class ConstantNode implements IConstraintNode
 {
@@ -37,6 +37,7 @@ public class ConstantNode implements IConstraintNode
 
     /**
      * Instantiates a new constant node.
+     *
      * @param constant The constant value.
      */
     public ConstantNode(int constant)
@@ -84,6 +85,7 @@ public class ConstantNode implements IConstraintNode
 
     /**
      * Gets the constant value.
+     *
      * @return The constant value.
      */
     public int getConstant()
@@ -93,6 +95,7 @@ public class ConstantNode implements IConstraintNode
 
     /**
      * Sets the constant value.
+     *
      * @param constant The new constant value.
      */
     public void setConstant(int constant)

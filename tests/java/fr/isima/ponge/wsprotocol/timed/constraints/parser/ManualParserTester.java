@@ -17,17 +17,17 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.timed.constraints.parser;
 
-import fr.isima.ponge.wsprotocol.timed.constraints.IConstraintNode;
 import antlr.CommonAST;
+import fr.isima.ponge.wsprotocol.timed.constraints.IConstraintNode;
 
 public class ManualParserTester
 {
@@ -45,11 +45,11 @@ public class ManualParserTester
         {
             TemporalConstraintLexer lexer = new TemporalConstraintLexer(System.in);
             TemporalConstraintParser parser = new TemporalConstraintParser(lexer);
-            
+
             parser.constraint();
             CommonAST tree = (CommonAST) parser.getAST();
             System.out.println(tree.toStringList());
-                        
+
             TemporalConstraintTreeWalker walker = new TemporalConstraintTreeWalker();
             IConstraintNode constraint = walker.constraint(tree);
             System.out.println(constraint);

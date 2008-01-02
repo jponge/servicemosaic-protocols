@@ -26,97 +26,122 @@
 
 package fr.isima.ponge.wsprotocol.impl;
 
+import fr.isima.ponge.wsprotocol.Message;
+import fr.isima.ponge.wsprotocol.Operation;
+import fr.isima.ponge.wsprotocol.OperationKind;
+import fr.isima.ponge.wsprotocol.State;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import fr.isima.ponge.wsprotocol.Message;
-import fr.isima.ponge.wsprotocol.Operation;
-import fr.isima.ponge.wsprotocol.OperationKind;
-import fr.isima.ponge.wsprotocol.State;
-
 /**
  * Implementation for the <code>Operation</code> class.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
  */
 public class OperationImpl implements Operation
 {
 
-    /** Name property change. */
+    /**
+     * Name property change.
+     */
     public static final String NAME_PROPERTY_CHANGE = "name"; //$NON-NLS-1$
 
-    /** Message property change. */
+    /**
+     * Message property change.
+     */
     public static final String MESSAGE_PROPERTY_CHANGE = "message"; //$NON-NLS-1$
 
-    /** Source state property change. */
+    /**
+     * Source state property change.
+     */
     public static final String SOURCE_PROPERTY_CHANGE = "source"; //$NON-NLS-1$
 
-    /** Target state property change. */
+    /**
+     * Target state property change.
+     */
     public static final String TARGET_PROPERTY_CHANGE = "target"; //$NON-NLS-1$
 
-    /** Operation kind property change. */
+    /**
+     * Operation kind property change.
+     */
     public static final String KIND_PROPERTY_CHANGE = "kind"; //$NON-NLS-1$
 
-    /** Extra property change. */
+    /**
+     * Extra property change.
+     */
     public static final String EXTRA_PROPERTY_CHANGE = "extraProperty"; //$NON-NLS-1$
 
-    /** Logger. */
+    /**
+     * Logger.
+     */
     private static Log log = LogFactory.getLog(OperationImpl.class);
 
-    /** Model events support. */
+    /**
+     * Model events support.
+     */
     protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
 
-    /** The operation name. */
+    /**
+     * The operation name.
+     */
     protected String name;
 
-    /** The operation message. */
+    /**
+     * The operation message.
+     */
     protected Message message;
 
-    /** The operation source state. */
+    /**
+     * The operation source state.
+     */
     protected State sourceState;
 
-    /** The operation target state. */
+    /**
+     * The operation target state.
+     */
     protected State targetState;
 
-    /** The operation kind. */
+    /**
+     * The operation kind.
+     */
     protected OperationKind operationKind;
 
-    /** The extra properties. */
+    /**
+     * The extra properties.
+     */
     protected Map extraProperties = new HashMap();
 
-    /** Name generator counter for temporary backward compatibility. */
+    /**
+     * Name generator counter for temporary backward compatibility.
+     */
     private static int nameGeneratorCounter = 0;
 
     /**
      * Creates a new instance.
-     * 
-     * @param sourceState
-     *            The source state.
-     * @param targetState
-     *            The target state.
-     * @param message
-     *            The message.
-     * @param operationKind
-     *            The operation kind.
+     *
+     * @param sourceState   The source state.
+     * @param targetState   The target state.
+     * @param message       The message.
+     * @param operationKind The operation kind.
+     * @see OperationImpl#OperationImpl(String, State, State, Message, OperationKind)
      * @deprecated Use a constructor that takes a name for the operation as a parameter. This
      *             constructor will provide an identifier for backward compatibility.
-     * @see OperationImpl#OperationImpl(String, State, State, Message, OperationKind)
      */
     public OperationImpl(State sourceState, State targetState, Message message,
-            OperationKind operationKind)
+                         OperationKind operationKind)
     {
         this(generateOperationName(), sourceState, targetState, message, operationKind);
     }
 
     /**
      * Generate an operation name.
-     * 
+     *
      * @return The operation name;
      */
     private static String generateOperationName()
@@ -126,20 +151,15 @@ public class OperationImpl implements Operation
 
     /**
      * Creates a new instance.
-     * 
-     * @param name
-     *            The operation name.
-     * @param sourceState
-     *            The source state.
-     * @param targetState
-     *            The target state.
-     * @param message
-     *            The message.
-     * @param operationKind
-     *            The operation kind.
+     *
+     * @param name          The operation name.
+     * @param sourceState   The source state.
+     * @param targetState   The target state.
+     * @param message       The message.
+     * @param operationKind The operation kind.
      */
     public OperationImpl(String name, State sourceState, State targetState, Message message,
-            OperationKind operationKind)
+                         OperationKind operationKind)
     {
         super();
         setName(name);
@@ -151,16 +171,13 @@ public class OperationImpl implements Operation
 
     /**
      * Convenience constructor to instanciate an explicit operation.
-     * 
-     * @param sourceState
-     *            The source state.
-     * @param targetState
-     *            The target state.
-     * @param message
-     *            The message.
+     *
+     * @param sourceState The source state.
+     * @param targetState The target state.
+     * @param message     The message.
+     * @see OperationImpl#OperationImpl(String, State, State, Message)
      * @deprecated Use a constructor that takes a name for the operation as a parameter. This
      *             constructor will provide an identifier for backward compatibility.
-     * @see OperationImpl#OperationImpl(String, State, State, Message)
      */
     public OperationImpl(State sourceState, State targetState, Message message)
     {
@@ -169,13 +186,11 @@ public class OperationImpl implements Operation
 
     /**
      * Convenience constructor to instanciate an explicit operation.
-     * 
-     * @param sourceState
-     *            The source state.
-     * @param targetState
-     *            The target state.
-     * @param message
-     *            The message.
+     *
+     * @param name
+     * @param sourceState The source state.
+     * @param targetState The target state.
+     * @param message     The message.
      */
     public OperationImpl(String name, State sourceState, State targetState, Message message)
     {
@@ -184,9 +199,8 @@ public class OperationImpl implements Operation
 
     /**
      * Changes the message.
-     * 
-     * @param message
-     *            The new message.
+     *
+     * @param message The new message.
      */
     public void setMessage(Message message)
     {
@@ -203,9 +217,8 @@ public class OperationImpl implements Operation
 
     /**
      * Changes the source state.
-     * 
-     * @param sourceState
-     *            The new source state.
+     *
+     * @param sourceState The new source state.
      */
     public void setSourceState(State sourceState)
     {
@@ -221,9 +234,8 @@ public class OperationImpl implements Operation
 
     /**
      * Changes the target state.
-     * 
-     * @param targetState
-     *            The new target state.
+     *
+     * @param targetState The new target state.
      */
     public void setTargetState(State targetState)
     {
@@ -239,9 +251,8 @@ public class OperationImpl implements Operation
 
     /**
      * Gets an extra property.
-     * 
-     * @param key
-     *            The key.
+     *
+     * @param key The key.
      * @return The value or <code>null</code>.
      */
     public Object getExtraProperty(Object key)
@@ -251,11 +262,9 @@ public class OperationImpl implements Operation
 
     /**
      * Puts an extra property.
-     * 
-     * @param key
-     *            The key.
-     * @param value
-     *            The value.
+     *
+     * @param key   The key.
+     * @param value The value.
      */
     public void putExtraProperty(Object key, Object value)
     {
@@ -265,9 +274,8 @@ public class OperationImpl implements Operation
 
     /**
      * Removes an extra property.
-     * 
-     * @param key
-     *            The property key.
+     *
+     * @param key The property key.
      */
     public void removeExtraProperty(Object key)
     {
@@ -277,7 +285,7 @@ public class OperationImpl implements Operation
 
     /**
      * Gets the keys of all the extra properties.
-     * 
+     *
      * @return The set of keys.
      */
     public Set getExtraPropertiesKeys()
@@ -287,9 +295,8 @@ public class OperationImpl implements Operation
 
     /**
      * Adds a property change listener.
-     * 
-     * @param listener
-     *            The listener.
+     *
+     * @param listener The listener.
      */
     public void addPropertyChangeListener(PropertyChangeListener listener)
     {
@@ -298,11 +305,9 @@ public class OperationImpl implements Operation
 
     /**
      * Adds a property change listener.
-     * 
-     * @param propertyName
-     *            The property.
-     * @param listener
-     *            The listener.
+     *
+     * @param propertyName The property.
+     * @param listener     The listener.
      */
     public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener)
     {
@@ -311,9 +316,8 @@ public class OperationImpl implements Operation
 
     /**
      * Removes a property change listener.
-     * 
-     * @param listener
-     *            The listener.
+     *
+     * @param listener The listener.
      */
     public void removePropertyChangeListener(PropertyChangeListener listener)
     {
@@ -322,11 +326,9 @@ public class OperationImpl implements Operation
 
     /**
      * Removes a property change listener.
-     * 
-     * @param propertyName
-     *            The property.
-     * @param listener
-     *            The listener.
+     *
+     * @param propertyName The property.
+     * @param listener     The listener.
      */
     public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener)
     {
@@ -438,9 +440,8 @@ public class OperationImpl implements Operation
 
     /**
      * Sets the operation kind.
-     * 
-     * @param operationKind
-     *            The new operation kind.
+     *
+     * @param operationKind The new operation kind.
      */
     public void setOperationKind(OperationKind operationKind)
     {
@@ -461,9 +462,8 @@ public class OperationImpl implements Operation
 
     /**
      * Changes the operation name.
-     * 
-     * @param name
-     *            The new operation name.
+     *
+     * @param name The new operation name.
      */
     public void setName(String name)
     {

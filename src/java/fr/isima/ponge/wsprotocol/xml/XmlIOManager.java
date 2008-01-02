@@ -17,14 +17,20 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.xml;
+
+import fr.isima.ponge.wsprotocol.*;
+import org.dom4j.*;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.SAXReader;
+import org.dom4j.io.XMLWriter;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -33,47 +39,29 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.dom4j.Branch;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.Node;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.SAXReader;
-import org.dom4j.io.XMLWriter;
-
-import fr.isima.ponge.wsprotocol.BusinessProtocol;
-import fr.isima.ponge.wsprotocol.BusinessProtocolFactory;
-import fr.isima.ponge.wsprotocol.ExtraPropertiesKeeper;
-import fr.isima.ponge.wsprotocol.Message;
-import fr.isima.ponge.wsprotocol.Operation;
-import fr.isima.ponge.wsprotocol.OperationKind;
-import fr.isima.ponge.wsprotocol.Polarity;
-import fr.isima.ponge.wsprotocol.State;
-
 /**
  * This class can manage I/O operations of a business protocol from/to an XML representation. By
  * default, extra properties of type <code>java.lang.String</code> have their handler loaded.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
  */
 public class XmlIOManager
 {
 
-    /** The factory needed to build the model elements. */
+    /**
+     * The factory needed to build the model elements.
+     */
     protected BusinessProtocolFactory factory;
 
     /**
      * The extra properties handlers.
      */
-    protected Map extraPropertiesHandlers = new HashMap();
+    protected Map<String, ExtraPropertyHandler> extraPropertiesHandlers = new HashMap<String, ExtraPropertyHandler>();
 
     /**
      * Instanciates a new XML I/O manager.
-     * 
-     * @param factory
-     *            The factory required to build the model elements.
+     *
+     * @param factory The factory required to build the model elements.
      */
     public XmlIOManager(BusinessProtocolFactory factory)
     {
@@ -85,11 +73,9 @@ public class XmlIOManager
 
     /**
      * Sets the extra properties handler for a given type.
-     * 
-     * @param className
-     *            The type qualified class name.
-     * @param handler
-     *            The handler.
+     *
+     * @param className The type qualified class name.
+     * @param handler   The handler.
      */
     public void setExtraPropertyHandler(String className, ExtraPropertyHandler handler)
     {
@@ -98,30 +84,21 @@ public class XmlIOManager
 
     /**
      * Retrieves the extra properties handler for a given type.
-     * 
-     * @param className
-     *            The type qualified class name.
+     *
+     * @param className The type qualified class name.
      * @return The handler.
      */
     protected ExtraPropertyHandler getExtraPropertyHandler(String className)
     {
-        ExtraPropertyHandler handler = (ExtraPropertyHandler) extraPropertiesHandlers
-                .get(className);
-        /*
-         * if (handler == null) { handler = (ExtraPropertyHandler)
-         * extraPropertiesHandlers.get(String.class.getName()); }
-         */
-        return handler;
+        return extraPropertiesHandlers.get(className);
     }
 
     /**
      * Reads a business protocol.
-     * 
-     * @param reader
-     *            The reader object for the XML source.
+     *
+     * @param reader The reader object for the XML source.
      * @return The protocol.
-     * @throws DocumentException
-     *             Thrown if an error occurs.
+     * @throws DocumentException Thrown if an error occurs.
      */
     public BusinessProtocol readBusinessProtocol(Reader reader) throws DocumentException
     {
@@ -139,7 +116,7 @@ public class XmlIOManager
         readExtraProperties(protocol, document.selectSingleNode("/business-protocol")); //$NON-NLS-1$
 
         // States
-        Map states = new HashMap();
+        Map<String, State> states = new HashMap<String, State>();
         it = document.selectNodes("/business-protocol/state").iterator(); //$NON-NLS-1$
         while (it.hasNext())
         {
@@ -168,8 +145,8 @@ public class XmlIOManager
             }
             String msgName = node.valueOf("message/name"); //$NON-NLS-1$
             String msgPol = node.valueOf("message/polarity"); //$NON-NLS-1$
-            State s1 = (State) states.get(node.valueOf("source")); //$NON-NLS-1$
-            State s2 = (State) states.get(node.valueOf("target")); //$NON-NLS-1$
+            State s1 = states.get(node.valueOf("source")); //$NON-NLS-1$
+            State s2 = states.get(node.valueOf("target")); //$NON-NLS-1$
             Polarity pol;
             if (msgPol.equals("positive")) //$NON-NLS-1$
             {
@@ -205,18 +182,15 @@ public class XmlIOManager
 
     /**
      * Reads extra properties.
-     * 
-     * @param keeper
-     *            The object having extra properties.
-     * @param rootNode
-     *            The XML node to gather the properties from.
+     *
+     * @param keeper   The object having extra properties.
+     * @param rootNode The XML node to gather the properties from.
      */
     protected void readExtraProperties(ExtraPropertiesKeeper keeper, Node rootNode)
     {
-        Iterator it = rootNode.selectNodes("extra-property").iterator(); //$NON-NLS-1$
-        while (it.hasNext())
+        for (Object o : rootNode.selectNodes("extra-property"))
         {
-            Node node = (Node) it.next();
+            Node node = (Node) o;
             String className = node.valueOf("@type");
             if (className == null)
             {
@@ -232,18 +206,15 @@ public class XmlIOManager
 
     /**
      * Writes extra properties.
-     * 
-     * @param branch
-     *            The XML node to write the properties to.
-     * @param keeper
-     *            The object having extra properties.
+     *
+     * @param branch The XML node to write the properties to.
+     * @param keeper The object having extra properties.
      */
     protected void writeExtraProperties(Branch branch, ExtraPropertiesKeeper keeper)
     {
-        Iterator keysIt = keeper.getExtraPropertiesKeys().iterator();
-        while (keysIt.hasNext())
+        for (Object o : keeper.getExtraPropertiesKeys())
         {
-            String key = (String) keysIt.next();
+            String key = (String) o;
             Object value = keeper.getExtraProperty(key);
             ExtraPropertyHandler handler = getExtraPropertyHandler(value.getClass().getName());
             if (handler != null)
@@ -255,13 +226,10 @@ public class XmlIOManager
 
     /**
      * Writes a business protocol as an XML representation to a writer.
-     * 
-     * @param protocol
-     *            The protocol.
-     * @param writer
-     *            The writer to use.
-     * @throws IOException
-     *             Thrown in case an I/O error occurs.
+     *
+     * @param protocol The protocol.
+     * @param writer   The writer to use.
+     * @throws IOException Thrown in case an I/O error occurs.
      */
     public void writeBusinessProtocol(BusinessProtocol protocol, Writer writer) throws IOException
     {

@@ -17,86 +17,108 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.impl;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
+import fr.isima.ponge.wsprotocol.BusinessProtocol;
+import fr.isima.ponge.wsprotocol.Message;
+import fr.isima.ponge.wsprotocol.Operation;
+import fr.isima.ponge.wsprotocol.State;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import fr.isima.ponge.wsprotocol.BusinessProtocol;
-import fr.isima.ponge.wsprotocol.Operation;
-import fr.isima.ponge.wsprotocol.State;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.util.*;
 
 /**
  * Implementation for <code>BusinessProtocol</code> interface.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
  */
 public class BusinessProtocolImpl implements BusinessProtocol
 {
 
-    /** Name property change. */
+    /**
+     * Name property change.
+     */
     public static final String NAME_PROPERTY_CHANGE = "name"; //$NON-NLS-1$
 
-    /** Initial state property change. */
+    /**
+     * Initial state property change.
+     */
     public static final String INITIAL_STATE_PROPERTY_CHANGE = "initialState"; //$NON-NLS-1$
 
-    /** States property change. */
+    /**
+     * States property change.
+     */
     public static final String STATES_PROPERTY_CHANGE = "states"; //$NON-NLS-1$
 
-    /** Operations property change. */
+    /**
+     * Operations property change.
+     */
     public static final String OPERATIONS_PROPERTY_CHANGE = "operations"; //$NON-NLS-1$
 
-    /** Extra property change. */
+    /**
+     * Extra property change.
+     */
     public static final String EXTRA_PROPERTY_CHANGE = "extraProperty"; //$NON-NLS-1$
 
-    /** Logger. */
+    /**
+     * Logger.
+     */
     private static Log log = LogFactory.getLog(BusinessProtocolImpl.class);
 
-    /** Model events support. */
+    /**
+     * Model events support.
+     */
     protected PropertyChangeSupport listeners = new PropertyChangeSupport(this);
 
-    /** The protocol name. */
+    /**
+     * The protocol name.
+     */
     protected String name;
 
-    /** The states. */
+    /**
+     * The states.
+     */
     protected Set states = new HashSet();
 
-    /** The initial state. */
+    /**
+     * The initial state.
+     */
     protected State initialState;
 
-    /** The final states. */
-    protected Set finalStates = new HashSet();
+    /**
+     * The final states.
+     */
+    protected Set<State> finalStates = new HashSet<State>();
 
-    /** The messages. */
-    protected Set messages = new HashSet();
+    /**
+     * The messages.
+     */
+    protected Set<Message> messages = new HashSet<Message>();
 
-    /** The operations. */
+    /**
+     * The operations.
+     */
     protected Set operations = new HashSet();
 
-    /** The extra properties. */
+    /**
+     * The extra properties.
+     */
     protected Map extraProperties = new HashMap();
 
     /**
      * Instanciates a new empty business protocol (i.e. with no states and no operations).
-     * 
-     * @param name
-     *            The protocol name.
+     *
+     * @param name The protocol name.
      */
     public BusinessProtocolImpl(String name)
     {
@@ -106,9 +128,8 @@ public class BusinessProtocolImpl implements BusinessProtocol
 
     /**
      * Changes the protocol name.
-     * 
-     * @param name
-     *            The new name.
+     *
+     * @param name The new name.
      */
     public void setName(String name)
     {
@@ -124,9 +145,8 @@ public class BusinessProtocolImpl implements BusinessProtocol
 
     /**
      * Adds a property change listener.
-     * 
-     * @param listener
-     *            The listener.
+     *
+     * @param listener The listener.
      */
     public void addPropertyChangeListener(PropertyChangeListener listener)
     {
@@ -135,11 +155,9 @@ public class BusinessProtocolImpl implements BusinessProtocol
 
     /**
      * Adds a property change listener.
-     * 
-     * @param propertyName
-     *            The property.
-     * @param listener
-     *            The listener.
+     *
+     * @param propertyName The property.
+     * @param listener     The listener.
      */
     public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener)
     {
@@ -148,9 +166,8 @@ public class BusinessProtocolImpl implements BusinessProtocol
 
     /**
      * Removes a property change listener.
-     * 
-     * @param listener
-     *            The listener.
+     *
+     * @param listener The listener.
      */
     public void removePropertyChangeListener(PropertyChangeListener listener)
     {
@@ -159,11 +176,9 @@ public class BusinessProtocolImpl implements BusinessProtocol
 
     /**
      * Removes a property change listener.
-     * 
-     * @param propertyName
-     *            The property.
-     * @param listener
-     *            The listener.
+     *
+     * @param propertyName The property.
+     * @param listener     The listener.
      */
     public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener)
     {
@@ -172,9 +187,8 @@ public class BusinessProtocolImpl implements BusinessProtocol
 
     /**
      * Gets an extra property.
-     * 
-     * @param key
-     *            The key.
+     *
+     * @param key The key.
      * @return The value or <code>null</code>.
      */
     public Object getExtraProperty(Object key)
@@ -184,11 +198,9 @@ public class BusinessProtocolImpl implements BusinessProtocol
 
     /**
      * Puts an extra property.
-     * 
-     * @param key
-     *            The key.
-     * @param value
-     *            The value.
+     *
+     * @param key   The key.
+     * @param value The value.
      */
     public void putExtraProperty(Object key, Object value)
     {
@@ -198,9 +210,8 @@ public class BusinessProtocolImpl implements BusinessProtocol
 
     /**
      * Removes an extra property.
-     * 
-     * @param key
-     *            The property key.
+     *
+     * @param key The property key.
      */
     public void removeExtraProperty(Object key)
     {
@@ -210,7 +221,7 @@ public class BusinessProtocolImpl implements BusinessProtocol
 
     /**
      * Gets the keys of all the extra properties.
-     * 
+     *
      * @return The set of keys.
      */
     public Set getExtraPropertiesKeys()
@@ -279,13 +290,12 @@ public class BusinessProtocolImpl implements BusinessProtocol
      * 
      * @see fr.isima.ponge.wsprotocol.BusinessProtocol#getFinalStates()
      */
-    public Set getFinalStates()
+    public Set<State> getFinalStates()
     {
         finalStates.clear();
-        Iterator it = states.iterator();
-        while (it.hasNext())
+        for (Object state : states)
         {
-            State s = (State) it.next();
+            State s = (State) state;
             if (s.isFinalState())
             {
                 finalStates.add(s);
@@ -299,7 +309,7 @@ public class BusinessProtocolImpl implements BusinessProtocol
      * 
      * @see fr.isima.ponge.wsprotocol.BusinessProtocol#getMessages()
      */
-    public Set getMessages()
+    public Set<Message> getMessages()
     {
         return Collections.unmodifiableSet(messages);
     }
@@ -406,12 +416,11 @@ public class BusinessProtocolImpl implements BusinessProtocol
         }
 
         operations.remove(operation);
-        
+
         int counter = 0;
-        Iterator it = operations.iterator();
-        while (it.hasNext())
+        for (Object operation1 : operations)
         {
-            Operation op = (Operation) it.next();
+            Operation op = (Operation) operation1;
             if (op.getMessage().equals(operation.getMessage()))
             {
                 counter = counter + 1;
@@ -460,7 +469,7 @@ public class BusinessProtocolImpl implements BusinessProtocol
             BusinessProtocolImpl b = (BusinessProtocolImpl) obj;
             return name.equals(b.name)
                     && ((initialState != null) ? (initialState.equals(b.initialState))
-                            : (b.initialState == null)) && states.equals(b.states)
+                    : (b.initialState == null)) && states.equals(b.states)
                     && getFinalStates().equals(b.getFinalStates()) && messages.equals(b.messages)
                     && operations.equals(b.operations);
         }

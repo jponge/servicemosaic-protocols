@@ -17,39 +17,35 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.xml;
+
+import fr.isima.ponge.wsprotocol.*;
+import fr.isima.ponge.wsprotocol.impl.BusinessProtocolFactoryImpl;
+import junit.framework.TestCase;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.StringReader;
 import java.io.StringWriter;
 
-import junit.framework.TestCase;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import fr.isima.ponge.wsprotocol.BusinessProtocol;
-import fr.isima.ponge.wsprotocol.BusinessProtocolFactory;
-import fr.isima.ponge.wsprotocol.Message;
-import fr.isima.ponge.wsprotocol.Polarity;
-import fr.isima.ponge.wsprotocol.State;
-import fr.isima.ponge.wsprotocol.impl.BusinessProtocolFactoryImpl;
-
 /**
  * Test case for the <code>XmlIOManage</code> class.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
  */
 public class XmlIOManagerTest extends TestCase
 {
 
-    /** Logger. */
+    /**
+     * Logger.
+     */
     private static Log log = LogFactory.getLog(XmlIOManagerTest.class);
 
     /*

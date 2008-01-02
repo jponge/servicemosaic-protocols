@@ -17,12 +17,12 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol;
 
@@ -32,38 +32,37 @@ import java.util.List;
 /**
  * Defines an interface for a protocol state. The operations that return collections are expected to
  * return unmodifiable ones.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
  */
-public interface State extends ExtraPropertiesKeeper , Serializable
+public interface State extends ExtraPropertiesKeeper, Serializable
 {
 
     /**
      * Gets the state name.
-     * 
+     *
      * @return The state name.
      */
     public String getName();
 
     /**
      * Tells wether the state is an initial state or not.
-     * 
+     *
      * @return <code>true</code> if it is an initial state, <code>false</code> otherwise.
      */
     public boolean isInitialState();
 
     /**
      * Changes the initial state status.
-     * 
-     * @param initialState
-     *            <code>true</code> is the state has to be initial, <code>false</code>
-     *            otherwise.
+     *
+     * @param initialState <code>true</code> is the state has to be initial, <code>false</code>
+     *                     otherwise.
      */
     public void setInitialState(boolean initialState);
 
     /**
      * Tells wether the state is a final state or not.
-     * 
+     *
      * @return <code>true</code> if it is a final state, <code>false</code> otherwise.
      */
     public boolean isFinalState();
@@ -71,31 +70,31 @@ public interface State extends ExtraPropertiesKeeper , Serializable
     /**
      * Gets the list of <code>State</code> references that are before the state (there exists an
      * operation where the state is the target state).
-     * 
+     *
      * @return The predecessors list.
      */
-    public List getPredecessors();
+    public List<State> getPredecessors();
 
     /**
      * Gets the list of the <code>State</code> references that are after the state (there exists
      * an operation where the state is the source state).
-     * 
+     *
      * @return The successors list.
      */
-    public List getSuccessors();
+    public List<State> getSuccessors();
 
     /**
      * Gets the list of the <code>Operation</code> references where the state is the target state.
-     * 
+     *
      * @return The incoming operations list.
      */
-    public List getIncomingOperations();
+    public List<Operation> getIncomingOperations();
 
     /**
      * Gets the list of the <code>Operation</code> references where the state is the source state.
-     * 
+     *
      * @return The outgoing operations list.
      */
-    public List getOutgoingOperations();
+    public List<Operation> getOutgoingOperations();
 
 }

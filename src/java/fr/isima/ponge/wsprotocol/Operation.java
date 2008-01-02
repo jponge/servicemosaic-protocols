@@ -17,12 +17,12 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2005, 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol;
 
@@ -30,41 +30,42 @@ import java.io.Serializable;
 
 /**
  * Defines an interface for a protocol operation.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
  */
 public interface Operation extends ExtraPropertiesKeeper, Serializable
 {
     /**
      * Gets the operation name;
+     *
      * @return The operation name;
      */
     public String getName();
 
     /**
      * Gets the operation message.
-     * 
+     *
      * @return The operation message.
      */
     public Message getMessage();
 
     /**
      * Gets the operation source state.
-     * 
+     *
      * @return The source state.
      */
     public State getSourceState();
 
     /**
      * Gets the operation target state.
-     * 
+     *
      * @return The target state.
      */
     public State getTargetState();
-    
+
     /**
      * Gets the operation kind.
-     * 
+     *
      * @return The operation kind.
      */
     public OperationKind getOperationKind();

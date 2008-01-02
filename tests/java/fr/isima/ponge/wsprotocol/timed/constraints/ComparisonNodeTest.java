@@ -17,12 +17,12 @@
  * information: Portions Copyright [yyyy] [name of copyright owner] 
  * 
  * CDDL HEADER END 
- */ 
+ */
 
 /* 
- * Copyright 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
+* Copyright 2006 Julien Ponge. All rights reserved.
+* Use is subject to license terms.
+*/
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
@@ -47,7 +47,7 @@ public class ComparisonNodeTest extends TestCase
         VariableNode var = new VariableNode("T1");
         ConstantNode cst = new ConstantNode(5);
         ComparisonNode otherNode = new ComparisonNode(ComparisonNode.GREATER_EQ, var, cst);
-        
+
         assertEquals(otherNode, node.negate());
     }
 
@@ -59,7 +59,7 @@ public class ComparisonNodeTest extends TestCase
         VariableNode var = new VariableNode("T1");
         ConstantNode cst = new ConstantNode(5);
         ComparisonNode otherNode = new ComparisonNode(ComparisonNode.LESS, var, cst);
-        
+
         assertEquals(otherNode, node);
     }
 

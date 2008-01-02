@@ -31,23 +31,26 @@ import java.util.TreeMap;
 
 /**
  * A boolean node between two comparison nodes.
- * 
+ *
  * @author Julien Ponge (ponge@isima.fr)
- * 
  */
 public class BooleanNode implements IRootConstraintNode
 {
-    /** Representation of the AND symbol. */
+    /**
+     * Representation of the AND symbol.
+     */
     public static final String AND = "&&";
 
-    /** Representation of the OR symbol. */
+    /**
+     * Representation of the OR symbol.
+     */
     public static final String OR = "||";
 
-    private static final Map NEGATIONS;
+    private static final Map<String, String> NEGATIONS;
 
     static
     {
-        NEGATIONS = new TreeMap();
+        NEGATIONS = new TreeMap<String, String>();
         NEGATIONS.put("&&", "||");
         NEGATIONS.put("||", "&&");
     }
@@ -60,13 +63,10 @@ public class BooleanNode implements IRootConstraintNode
 
     /**
      * Instantiates a new boolean node.
-     * 
-     * @param symbol
-     *            The symbol (AND, OR).
-     * @param leftChild
-     *            The left child.
-     * @param rightChild
-     *            The right child.
+     *
+     * @param symbol     The symbol (AND, OR).
+     * @param leftChild  The left child.
+     * @param rightChild The right child.
      */
     public BooleanNode(String symbol, IRootConstraintNode leftChild, IRootConstraintNode rightChild)
     {
@@ -103,7 +103,7 @@ public class BooleanNode implements IRootConstraintNode
      */
     public IConstraintNode negate()
     {
-        return new BooleanNode((String) NEGATIONS.get(symbol), (IRootConstraintNode) leftChild
+        return new BooleanNode(NEGATIONS.get(symbol), (IRootConstraintNode) leftChild
                 .negate(), (IRootConstraintNode) rightChild.negate());
     }
 
@@ -148,7 +148,7 @@ public class BooleanNode implements IRootConstraintNode
 
     /**
      * Gets the symbol.
-     * 
+     *
      * @return The symbol.
      */
     public String getSymbol()
@@ -158,9 +158,8 @@ public class BooleanNode implements IRootConstraintNode
 
     /**
      * Changes the symbol.
-     * 
-     * @param symbol
-     *            The new symbol.
+     *
+     * @param symbol The new symbol.
      */
     public void setSymbol(String symbol)
     {
@@ -169,9 +168,8 @@ public class BooleanNode implements IRootConstraintNode
 
     /**
      * Sets the left child.
-     * 
-     * @param leftChild
-     *            The new left child.
+     *
+     * @param leftChild The new left child.
      */
     public void setLeftChild(IRootConstraintNode leftChild)
     {
@@ -180,9 +178,8 @@ public class BooleanNode implements IRootConstraintNode
 
     /**
      * Sets the right child.
-     * 
-     * @param rightChild
-     *            The new right child.
+     *
+     * @param rightChild The new right child.
      */
     public void setRightChild(IRootConstraintNode rightChild)
     {

@@ -52,7 +52,7 @@ miConstraint!
 		#miConstraint = #(func, #param);
 	}
 	;
-miConstraintParam : LPAREN! miExpr RPAREN!;
+miConstraintParam : LPAREN! miExpr (BOOLOP^ miExpr)* RPAREN!;
 
 ciConstraint!
 	:
@@ -65,7 +65,8 @@ ciConstraintParam : LPAREN! ciExpr (BOOLOP^ ciExpr)* RPAREN!;
 
 miExpr : VAR COMPOP^ CONST
        | CONST COMPOP^ VAR
-       | LPAREN! miExpr RPAREN!;
+       | LPAREN! miExpr (BOOLOP^ miExpr)* RPAREN!
+       ;
 
 ciExpr : VAR COMPOP^ CONST
         | CONST COMPOP^ VAR
@@ -191,7 +192,7 @@ constraint returns [IConstraintNode constraint]
 	|
 	  #(MINVOKE root=rootNode)
 	  {
-	  	if (root instanceof BooleanNode)
+	  	/*if (root instanceof BooleanNode)
 	  	{
 	  		throw new RecognitionException("Boolean expressions are not allowed in M-Invoke constraints.");
 	  	}
@@ -202,7 +203,7 @@ constraint returns [IConstraintNode constraint]
 	  		{
 	  			throw new RecognitionException("Bad comparison operator.");
 	  		}
-	  	}
+	  	}*/
 	  	
 	  	constraint = new MInvokeNode(root);
 	  }
