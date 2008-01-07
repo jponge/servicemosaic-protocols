@@ -121,7 +121,7 @@ public class StateImpl implements State
     /**
      * The extra properties.
      */
-    protected Map extraProperties = new HashMap();
+    protected Map<Object, Object> extraProperties = new HashMap<Object, Object>();
 
     /**
      * Constructs a new instance.
@@ -395,7 +395,7 @@ public class StateImpl implements State
      *
      * @return The set of keys.
      */
-    public Set getExtraPropertiesKeys()
+    public Set<Object> getExtraPropertiesKeys()
     {
         return extraProperties.keySet();
     }

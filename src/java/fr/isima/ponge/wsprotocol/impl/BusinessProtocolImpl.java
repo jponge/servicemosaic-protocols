@@ -88,7 +88,7 @@ public class BusinessProtocolImpl implements BusinessProtocol
     /**
      * The states.
      */
-    protected Set states = new HashSet();
+    protected Set<State> states = new HashSet<State>();
 
     /**
      * The initial state.
@@ -108,12 +108,12 @@ public class BusinessProtocolImpl implements BusinessProtocol
     /**
      * The operations.
      */
-    protected Set operations = new HashSet();
+    protected Set<Operation> operations = new HashSet<Operation>();
 
     /**
      * The extra properties.
      */
-    protected Map extraProperties = new HashMap();
+    protected Map<Object, Object> extraProperties = new HashMap<Object, Object>();
 
     /**
      * Instanciates a new empty business protocol (i.e. with no states and no operations).
@@ -224,7 +224,7 @@ public class BusinessProtocolImpl implements BusinessProtocol
      *
      * @return The set of keys.
      */
-    public Set getExtraPropertiesKeys()
+    public Set<Object> getExtraPropertiesKeys()
     {
         return extraProperties.keySet();
     }
@@ -244,7 +244,7 @@ public class BusinessProtocolImpl implements BusinessProtocol
      * 
      * @see fr.isima.ponge.wsprotocol.BusinessProtocol#getStates()
      */
-    public Set getStates()
+    public Set<State> getStates()
     {
         return Collections.unmodifiableSet(states);
     }
@@ -319,7 +319,7 @@ public class BusinessProtocolImpl implements BusinessProtocol
      * 
      * @see fr.isima.ponge.wsprotocol.BusinessProtocol#getOperations()
      */
-    public Set getOperations()
+    public Set<Operation> getOperations()
     {
         return Collections.unmodifiableSet(operations);
     }

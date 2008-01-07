@@ -66,6 +66,6 @@ public interface ExtraPropertiesKeeper
      *
      * @return The set of keys.
      */
-    public Set getExtraPropertiesKeys();
+    public Set<Object> getExtraPropertiesKeys();
 
 }

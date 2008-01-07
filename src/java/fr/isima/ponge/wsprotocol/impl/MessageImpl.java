@@ -83,7 +83,7 @@ public class MessageImpl implements Message
     /**
      * The extra properties.
      */
-    protected Map extraProperties = new HashMap();
+    protected Map<Object, Object> extraProperties = new HashMap<Object, Object>();
 
     /**
      * Constructs a new instance.
@@ -171,7 +171,7 @@ public class MessageImpl implements Message
      *
      * @return The set of keys.
      */
-    public Set getExtraPropertiesKeys()
+    public Set<Object> getExtraPropertiesKeys()
     {
         return extraProperties.keySet();
     }

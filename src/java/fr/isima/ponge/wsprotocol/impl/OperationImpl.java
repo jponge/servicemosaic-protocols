@@ -115,7 +115,7 @@ public class OperationImpl implements Operation
     /**
      * The extra properties.
      */
-    protected Map extraProperties = new HashMap();
+    protected Map<Object, Object> extraProperties = new HashMap<Object, Object>();
 
     /**
      * Name generator counter for temporary backward compatibility.
@@ -288,7 +288,7 @@ public class OperationImpl implements Operation
      *
      * @return The set of keys.
      */
-    public Set getExtraPropertiesKeys()
+    public Set<Object> getExtraPropertiesKeys()
     {
         return extraProperties.keySet();
     }

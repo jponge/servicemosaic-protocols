@@ -57,7 +57,7 @@ public interface BusinessProtocol extends ExtraPropertiesKeeper, Serializable
      *
      * @return The states of the protocol.
      */
-    public Set getStates();
+    public Set<State> getStates();
 
     /**
      * Gets the protocol initial state.
@@ -85,7 +85,7 @@ public interface BusinessProtocol extends ExtraPropertiesKeeper, Serializable
      *
      * @return The protocol operations.
      */
-    public Set getOperations();
+    public Set<Operation> getOperations();
 
     /* ---- Expected protocol operations. ---- */
 
