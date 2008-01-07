@@ -145,6 +145,8 @@
                 <include name="*/**"/>
                 <include name=".classpath"/>
                 <include name=".project"/>
+                <include name=".antlr-eclipse"/>
+                <include name=".settings/**"/>
                 <exclude name="bin/**"/>
                 <exclude name="${build.dir}/**"/>
             </zipfileset>
