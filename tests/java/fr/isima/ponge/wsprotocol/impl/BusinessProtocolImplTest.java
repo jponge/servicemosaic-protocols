@@ -87,7 +87,8 @@ public class BusinessProtocolImplTest extends TestCase
         bp3.addOperation(factory.createOperation("T1", s0, s1, m));
     }
 
-    public void testAddRemoveOperationLogic()
+    @SuppressWarnings("unchecked")
+	public void testAddRemoveOperationLogic()
     {
         Iterator it;
         String str;

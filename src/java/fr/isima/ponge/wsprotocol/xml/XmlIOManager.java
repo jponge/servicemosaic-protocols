@@ -100,7 +100,8 @@ public class XmlIOManager
      * @return The protocol.
      * @throws DocumentException Thrown if an error occurs.
      */
-    public BusinessProtocol readBusinessProtocol(Reader reader) throws DocumentException
+    @SuppressWarnings("unchecked")
+	public BusinessProtocol readBusinessProtocol(Reader reader) throws DocumentException
     {
         // Vars
         Iterator it;
@@ -231,7 +232,8 @@ public class XmlIOManager
      * @param writer   The writer to use.
      * @throws IOException Thrown in case an I/O error occurs.
      */
-    public void writeBusinessProtocol(BusinessProtocol protocol, Writer writer) throws IOException
+    @SuppressWarnings("unchecked")
+	public void writeBusinessProtocol(BusinessProtocol protocol, Writer writer) throws IOException
     {
         // Root
         Document document = DocumentHelper.createDocument();
