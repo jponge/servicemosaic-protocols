@@ -186,4 +186,8 @@ public class BooleanNode implements IRootConstraintNode
         this.rightChild = rightChild;
     }
 
+    public IConstraintNode deepCopy()
+    {
+        return new BooleanNode(getSymbol(), (IRootConstraintNode) getLeftChild().deepCopy(), (IRootConstraintNode) getRightChild().deepCopy());
+    }
 }

@@ -31,7 +31,7 @@ package fr.isima.ponge.wsprotocol.timed.constraints;
  *
  * @author Julien Ponge (ponge@isima.fr)
  */
-public interface IConstraintNode
+public interface IConstraintNode extends Cloneable
 {
     /**
      * Gets the negation of this node.
@@ -39,4 +39,12 @@ public interface IConstraintNode
      * @return The negation.
      */
     public IConstraintNode negate();
+
+    /**
+     * Return a deep copy of the node (hence it includes its children).
+     * We opted for this mechanism instead of Object#clone() since it is more involving (checked exceptions, casts, ...).
+     *
+     * @return The deep copy.
+     */
+    public IConstraintNode deepCopy();
 }

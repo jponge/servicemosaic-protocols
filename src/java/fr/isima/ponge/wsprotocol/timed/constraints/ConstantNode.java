@@ -54,6 +54,11 @@ public class ConstantNode implements IConstraintNode
         return this;
     }
 
+    public IConstraintNode deepCopy()
+    {
+        return new ConstantNode(getConstant());
+    }
+
     /* (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
      */

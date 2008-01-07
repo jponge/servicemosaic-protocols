@@ -27,6 +27,7 @@
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
 import junit.framework.TestCase;
+import junit.framework.Test;
 
 public class CInvokeNodeTest extends TestCase
 {
@@ -42,6 +43,13 @@ public class CInvokeNodeTest extends TestCase
         CInvokeNode ciNode = new CInvokeNode(node);
 
         TestCase.assertEquals("C-Invoke(T1 < 5)", ciNode.toString());
+
+        ComparisonNode node2 = new ComparisonNode(ComparisonNode.GREATER_EQ, new VariableNode("T2"), new ConstantNode(10));
+        ciNode = new CInvokeNode(new BooleanNode(BooleanNode.AND, node, node2));
+        TestCase.assertEquals("C-Invoke((T1 < 5) && (T2 >= 10))", ciNode.toString());
+
+        CInvokeNode copy = (CInvokeNode) ciNode.deepCopy();
+        TestCase.assertEquals(ciNode.toString(), copy.toString());
     }
 
 }

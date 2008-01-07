@@ -157,6 +157,11 @@ public class ComparisonNode implements IRootConstraintNode
         return new ComparisonNode(leftChild, rightChild, NEGATIONS.get(symbol));
     }
 
+    public IConstraintNode deepCopy()
+    {
+        return new ComparisonNode(getLeftChild().deepCopy(), getRightChild().deepCopy(), getSymbol());
+    }
+
     /*
      * (non-Javadoc)
      * 

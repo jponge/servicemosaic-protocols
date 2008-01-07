@@ -54,6 +54,11 @@ public class VariableNode implements IConstraintNode
         return this;
     }
 
+    public IConstraintNode deepCopy()
+    {
+        return new VariableNode(getVariableName());
+    }
+
     /* (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
      */

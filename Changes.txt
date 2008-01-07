@@ -1,5 +1,9 @@
 -------------------------------------------------------------------------------
 
+2008.01.07 (Julien Ponge):
+
+    - Temporal constraints: support for deep copy.
+
 2007.12.30 (Julien Ponge):
 
     - Java 5 migration (generics). Addresses #21.

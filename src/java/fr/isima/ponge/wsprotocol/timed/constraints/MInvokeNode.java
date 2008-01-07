@@ -83,6 +83,11 @@ public class MInvokeNode implements IConstraintNode
         return new MInvokeNode((IRootConstraintNode) node.negate());
     }
 
+    public IConstraintNode deepCopy()
+    {
+        return new MInvokeNode((IRootConstraintNode) getNode().deepCopy());
+    }
+
     /**
      * Gets the expression constraint node.
      *

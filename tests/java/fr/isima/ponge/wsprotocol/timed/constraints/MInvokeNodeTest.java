@@ -39,9 +39,12 @@ public class MInvokeNodeTest extends TestCase
         VariableNode var = new VariableNode("T1");
         ConstantNode cst = new ConstantNode(5);
         ComparisonNode node = new ComparisonNode(ComparisonNode.EQ, var, cst);
-        MInvokeNode ciNode = new MInvokeNode(node);
+        MInvokeNode miNode = new MInvokeNode(node);
 
-        TestCase.assertEquals("M-Invoke(T1 = 5)", ciNode.toString());
+        TestCase.assertEquals("M-Invoke(T1 = 5)", miNode.toString());
+
+        MInvokeNode copy = (MInvokeNode) miNode.deepCopy();
+        TestCase.assertEquals(miNode.toString(), copy.toString());
     }
 
 }
