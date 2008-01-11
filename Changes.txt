@@ -1,5 +1,9 @@
 -------------------------------------------------------------------------------
 
+2008.01.11 (Julien Ponge):
+
+    - Constraint helpers: disjunction-free test and disjunction computation.
+
 2008.01.07 (Julien Ponge):
 
     - Temporal constraints: support for deep copy.
