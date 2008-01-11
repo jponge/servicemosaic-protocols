@@ -4,6 +4,7 @@
 
     - Constraint helpers: disjunction-free test and disjunction computation.
     - New constraints model, including diagonal constraints (x - y # k).
+    - TemporalConstraintTreeWalker checks that M-Invoke constraints are valid.
 
 2008.01.07 (Julien Ponge):
 

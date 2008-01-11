@@ -64,4 +64,30 @@ public class ConstraintHelperTest extends TestCase
             assertEquals(expected[i], disjunctions.get(i).toString());
         }
     }
+
+    public void testIsValidMInvoke() throws TokenStreamException, RecognitionException
+    {
+        TemporalConstraintLexer lexer = new TemporalConstraintLexer(new StringReader("M-Invoke((T1 = 3) && ((T2 >= 6) || (T3 < 5)))"));
+        TemporalConstraintParser parser = new TemporalConstraintParser(lexer);
+        TemporalConstraintTreeWalker walker = new TemporalConstraintTreeWalker();
+        parser.constraint();
+        CommonAST tree = (CommonAST) parser.getAST();
+        IConstraintNode constraintNode = walker.constraint(tree);
+
+        ConstraintHelper helper = new ConstraintHelper();
+        assertTrue(helper.isValidMInvoke(constraintNode));
+
+        lexer = new TemporalConstraintLexer(new StringReader("M-Invoke((T1 = 3) || ((T2 >= 6) || (T3 < 5)))"));
+        parser = new TemporalConstraintParser(lexer);
+        parser.constraint();
+        tree = (CommonAST) parser.getAST();
+        try
+        {
+            walker.constraint(tree);
+            fail("M-Invoke((T1 = 3) || ((T2 >= 6) || (T3 < 5))) should not be parsed since it is not valid.");
+        }
+        catch (Exception e)
+        {
+        }
+    }
 }

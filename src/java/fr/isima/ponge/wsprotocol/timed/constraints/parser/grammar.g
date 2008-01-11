@@ -190,6 +190,10 @@ rootNode returns [IRootConstraintNode node]
 	;
 
 constraint returns [IConstraintNode constraint]
+options
+{
+    defaultErrorHandler = false;
+}
 {
 	constraint = null;
 	IRootConstraintNode root;
@@ -202,20 +206,13 @@ constraint returns [IConstraintNode constraint]
 	|
 	  #(MINVOKE root=rootNode)
 	  {
-	  	/*if (root instanceof BooleanNode)
-	  	{
-	  		throw new RecognitionException("Boolean expressions are not allowed in M-Invoke constraints.");
-	  	}
-	  	if (root instanceof ComparisonNode)
-	  	{
-	  		ComparisonNode comp = (ComparisonNode) root;
-	  		if (!comp.getSymbol().equals(ComparisonNode.EQ))
-	  		{
-	  			throw new RecognitionException("Bad comparison operator.");
-	  		}
-	  	}*/
-	  	
-	  	constraint = new MInvokeNode(root);
+	  	ConstraintHelper helper = new ConstraintHelper();
+	  	MInvokeNode miNode = new MInvokeNode(root);
+	  	if (!helper.isValidMInvoke(miNode))
+	    {
+	        throw new RecognitionException(root + " is not a valid M-Invoke constraint.");
+	    }
+	    constraint = miNode;
 	  }
 	;
 /* ............................................................................................. */

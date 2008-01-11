@@ -36,17 +36,29 @@ public class GrammarTestCase extends TestCase
 {
     public void testGrammar()
     {
-        String[] input = {"C-Invoke((((T1 < 5) && (T2 >= 10)) || (T3 = 7)))",
-                "C-Invoke((T1< 3) && (T2 >=5))", "M-Invoke(T1 = 3)", "C-Invoke(T1 < 3)",
-                "M-Invoke(T1 = 3)", "M-Invoke((T1 = 3) || (T2 = 2))",
+        String[] input = {
+                "C-Invoke((((T1 < 5) && (T2 >= 10)) || (T3 = 7)))",
+                "C-Invoke((T1< 3) && (T2 >=5))",
+                "M-Invoke(T1 = 3)",
+                "C-Invoke(T1 < 3)",
+                "M-Invoke(T1 = 3)",
+                "M-Invoke((T1 = 3) || (T2 = 2))",
                 "C-Invoke(T1 - T2 < 3)",
-                "M-Invoke((T1 = 3) && ((T1 - T0 <= 10) || (T2 - T0 >= 5)))"
+                "M-Invoke((T1 = 3) && ((T1 - T0 <= 10) || (T2 - T0 >= 5)))",
+                "M-Invoke((T1 = 3) && ((T2 >= 6) || (T3 < 5)))",
+                "M-Invoke((T1 = 3) || ((T2 >= 6) || (T3 < 5)))"
         };
-        String[] output = {"C-Invoke(((T1 < 5) && (T2 >= 10)) || (T3 = 7))",
-                "C-Invoke((T1 < 3) && (T2 >= 5))", "M-Invoke(T1 = 3)", "C-Invoke(T1 < 3)",
-                "M-Invoke(T1 = 3)", "M-Invoke((T1 = 3) || (T2 = 2))",
+        String[] output = {
+                "C-Invoke(((T1 < 5) && (T2 >= 10)) || (T3 = 7))",
+                "C-Invoke((T1 < 3) && (T2 >= 5))",
+                "M-Invoke(T1 = 3)",
+                "C-Invoke(T1 < 3)",
+                "M-Invoke(T1 = 3)",
+                "M-Invoke((T1 = 3) || (T2 = 2))",
                 "C-Invoke(T1 - T2 < 3)",
-                "M-Invoke((T1 = 3) && ((T1 - T0 <= 10) || (T2 - T0 >= 5)))"
+                "M-Invoke((T1 = 3) && ((T1 - T0 <= 10) || (T2 - T0 >= 5)))",
+                "M-Invoke((T1 = 3) && ((T2 >= 6) || (T3 < 5)))",
+                null
         };
         TemporalConstraintTreeWalker walker = new TemporalConstraintTreeWalker();
 

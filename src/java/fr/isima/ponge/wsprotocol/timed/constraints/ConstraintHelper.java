@@ -23,7 +23,8 @@ public class ConstraintHelper
     public List<IConstraintNode> makeDisjunctionFree(IConstraintNode constraintNode)
     {
         List<IConstraintNode> disjunctions = new ArrayList<IConstraintNode>();
-        disjunctions.add(constraintNode);
+        IConstraintNode startNode = constraintNode.deepCopy();
+        disjunctions.add(startNode);
 
         boolean allDisjointFree = false;
         while (!allDisjointFree)
@@ -128,5 +129,49 @@ public class ConstraintHelper
     public String operatorNegation(String operator)
     {
         return NEGATIONS.get(operator);
+    }
+
+    /**
+     * Checks wether a MInvoke constraint is valid.
+     *
+     * @param node The MInvoke constraint.
+     * @return <code>true</code> if the constraint is valid, <code>false</code> otherwise.
+     */
+    public boolean isValidMInvoke(IConstraintNode node)
+    {
+        List<IConstraintNode> disjunctions = makeDisjunctionFree(node);
+        for (IConstraintNode disjunction : disjunctions)
+        {
+            if (!containsEqualityCheck(disjunction))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean containsEqualityCheck(IConstraintNode node)
+    {
+        if (node instanceof ComparisonNode)
+        {
+            ComparisonNode comparisonNode = (ComparisonNode) node;
+            if (ComparisonConstants.EQ.equals(comparisonNode.getSymbol()))
+            {
+                return true;
+            }
+        }
+
+        if (node instanceof IRootConstraintNode)
+        {
+            IRootConstraintNode rootConstraintNode = (IRootConstraintNode) node;
+            return containsEqualityCheck(rootConstraintNode.getLeftChild())
+                    || containsEqualityCheck(rootConstraintNode.getRightChild());
+        }
+        else if (node instanceof IConstraintFunctionNode)
+        {
+            return containsEqualityCheck(((IConstraintFunctionNode) node).getNode());
+        }
+
+        return false;
     }
 }
