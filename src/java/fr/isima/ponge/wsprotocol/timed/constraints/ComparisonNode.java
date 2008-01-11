@@ -35,38 +35,8 @@ import java.util.TreeMap;
  *
  * @author Julien Ponge (ponge@isima.fr)
  */
-public class ComparisonNode implements IRootConstraintNode
+public class ComparisonNode implements IRootConstraintNode, ComparisonConstants
 {
-    /**
-     * The LESS symbol.
-     */
-    public static final String LESS = "<";
-
-    /**
-     * The LESS_EQ symbol.
-     */
-    public static final String LESS_EQ = "<=";
-
-    /**
-     * The EQ symbol.
-     */
-    public static final String EQ = "=";
-
-    /**
-     * The NEQ symbol.
-     */
-    public static final String NEQ = "!=";
-
-    /**
-     * The GREATER symbol.
-     */
-    public static final String GREATER = ">";
-
-    /**
-     * The GREATER_EQ symbol.
-     */
-    public static final String GREATER_EQ = ">=";
-
     private static final Map<String, String> NEGATIONS;
 
     static
