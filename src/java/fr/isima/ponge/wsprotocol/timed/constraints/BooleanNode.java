@@ -178,7 +178,7 @@ public class BooleanNode implements IRootConstraintNode, BooleanConstants
 
     public IConstraintNode deepCopy()
     {
-        return new BooleanNode(getSymbol(), (IRootConstraintNode) getLeftChild().deepCopy(), (IRootConstraintNode) getRightChild().deepCopy());
+        return new BooleanNode(new String(getSymbol()), (IRootConstraintNode) getLeftChild().deepCopy(), (IRootConstraintNode) getRightChild().deepCopy());
     }
 
     public void replaceChildWith(IConstraintNode oldChild, IConstraintNode newChild)

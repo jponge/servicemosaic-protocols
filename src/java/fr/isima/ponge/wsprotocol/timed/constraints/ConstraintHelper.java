@@ -51,9 +51,9 @@ public class ConstraintHelper
         {
             IConstraintFunctionNode fnode = (IConstraintFunctionNode) node;
             IConstraintFunctionNode fcopy = (IConstraintFunctionNode) copy;
-            breakDisjunction(fnode.getNode(), fcopy.getNode(), fnode, fcopy);
+            breakDisjunction(fnode.getNode(), fcopy.getNode(), node, copy);
         }
-        else if ((node instanceof BooleanNode) && ((BooleanNode) node).getSymbol().equals(BooleanNode.OR))
+        else if ((node instanceof BooleanNode) && BooleanNode.OR.equals(((BooleanNode) node).getSymbol()))
         {
             BooleanNode bnode = (BooleanNode) node;
             BooleanNode bcopy = (BooleanNode) copy;
@@ -63,7 +63,7 @@ public class ConstraintHelper
         else if (node instanceof IRootConstraintNode)
         {
             IRootConstraintNode rnode = (IRootConstraintNode) node;
-            IRootConstraintNode rcopy = (IRootConstraintNode) node;
+            IRootConstraintNode rcopy = (IRootConstraintNode) copy;
             if (isDisjunctionFree(rnode.getLeftChild()))
             {
                 breakDisjunction(rnode.getRightChild(), rcopy.getRightChild(), rnode, rcopy);
@@ -91,7 +91,8 @@ public class ConstraintHelper
                 return false;
             }
         }
-        else if (constraintNode instanceof IRootConstraintNode)
+
+        if (constraintNode instanceof IRootConstraintNode)
         {
             IRootConstraintNode rnode = (IRootConstraintNode) constraintNode;
             return isDisjunctionFree(rnode.getLeftChild()) && isDisjunctionFree(rnode.getRightChild());
@@ -101,6 +102,7 @@ public class ConstraintHelper
             IConstraintFunctionNode fnode = (IConstraintFunctionNode) constraintNode;
             return isDisjunctionFree(fnode.getNode());
         }
+
         return true;
     }
 

@@ -115,7 +115,7 @@ public class ComparisonNode implements IRootConstraintNode, ComparisonConstants
 
     public IConstraintNode deepCopy()
     {
-        return new ComparisonNode(getLeftChild().deepCopy(), getRightChild().deepCopy(), getSymbol());
+        return new ComparisonNode(getLeftChild().deepCopy(), getRightChild().deepCopy(), new String(getSymbol()));
     }
 
     public void replaceChildWith(IConstraintNode oldChild, IConstraintNode newChild)

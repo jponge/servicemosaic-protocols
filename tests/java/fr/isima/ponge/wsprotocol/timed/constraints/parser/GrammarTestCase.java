@@ -38,10 +38,16 @@ public class GrammarTestCase extends TestCase
     {
         String[] input = {"C-Invoke((((T1 < 5) && (T2 >= 10)) || (T3 = 7)))",
                 "C-Invoke((T1< 3) && (T2 >=5))", "M-Invoke(T1 = 3)", "C-Invoke(T1 < 3)",
-                "M-Invoke(T1 = 3)", "M-Invoke((T1 = 3) || (T2 = 2))"};
+                "M-Invoke(T1 = 3)", "M-Invoke((T1 = 3) || (T2 = 2))",
+                "C-Invoke(T1 - T2 < 3)",
+                "M-Invoke((T1 = 3) && ((T1 - T0 <= 10) || (T2 - T0 >= 5)))"
+        };
         String[] output = {"C-Invoke(((T1 < 5) && (T2 >= 10)) || (T3 = 7))",
                 "C-Invoke((T1 < 3) && (T2 >= 5))", "M-Invoke(T1 = 3)", "C-Invoke(T1 < 3)",
-                "M-Invoke(T1 = 3)", "M-Invoke((T1 = 3) || (T2 = 2))"};
+                "M-Invoke(T1 = 3)", "M-Invoke((T1 = 3) || (T2 = 2))",
+                "C-Invoke(T1 - T2 < 3)",
+                "M-Invoke((T1 = 3) && ((T1 - T0 <= 10) || (T2 - T0 >= 5)))"
+        };
         TemporalConstraintTreeWalker walker = new TemporalConstraintTreeWalker();
 
         for (int i = 0; i < input.length; ++i)

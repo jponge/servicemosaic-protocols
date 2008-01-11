@@ -28,14 +28,21 @@ public class ConstraintHelperTest extends TestCase
         tree = (CommonAST) parser.getAST();
         IConstraintNode constraint2 = walker.constraint(tree);
 
+        lexer = new TemporalConstraintLexer(new StringReader("C-Invoke((T1 < 2) && (((T1 < 3) || (T2 >= 6)) || (T3 = 5)))"));
+        parser = new TemporalConstraintParser(lexer);
+        parser.constraint();
+        tree = (CommonAST) parser.getAST();
+        IConstraintNode constraint3 = walker.constraint(tree);
+
         ConstraintHelper helper = new ConstraintHelper();
         assertTrue(helper.isDisjunctionFree(constraint1));
         assertFalse(helper.isDisjunctionFree(constraint2));
+        assertFalse(helper.isDisjunctionFree(constraint3));
     }
 
     public void testBreakDisjunctions() throws TokenStreamException, RecognitionException
     {
-        TemporalConstraintLexer lexer = new TemporalConstraintLexer(new StringReader("C-Invoke(((T1 < 3) || (T2 >= 6)) || (T3 = 5))"));
+        TemporalConstraintLexer lexer = new TemporalConstraintLexer(new StringReader("C-Invoke((T1 < 2) && (((T1 < 3) || (T2 >= 6)) || (T3 = 5)))"));
         TemporalConstraintParser parser = new TemporalConstraintParser(lexer);
         TemporalConstraintTreeWalker walker = new TemporalConstraintTreeWalker();
         parser.constraint();
@@ -48,9 +55,9 @@ public class ConstraintHelperTest extends TestCase
         assertEquals(3, disjunctions.size());
 
         String[] expected = {
-                "C-Invoke(T1 < 3)",
-                "C-Invoke(T3 = 5)",
-                "C-Invoke(T2 >= 6)"
+                "C-Invoke((T1 < 2) && (T1 < 3))",
+                "C-Invoke((T1 < 2) && (T3 = 5))",
+                "C-Invoke((T1 < 2) && (T2 >= 6))"
         };
         for (int i = 0; i < expected.length; ++i)
         {

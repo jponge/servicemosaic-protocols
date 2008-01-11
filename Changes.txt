@@ -3,6 +3,7 @@
 2008.01.11 (Julien Ponge):
 
     - Constraint helpers: disjunction-free test and disjunction computation.
+    - New constraints model, including diagonal constraints (x - y # k).
 
 2008.01.07 (Julien Ponge):
 

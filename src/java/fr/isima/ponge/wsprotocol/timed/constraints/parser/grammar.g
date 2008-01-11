@@ -1,29 +1,3 @@
-/* 
- * CDDL HEADER START 
- * 
- * The contents of this file are subject to the terms of the 
- * Common Development and Distribution License (the "License"). 
- * You may not use this file except in compliance with the License. 
- * 
- * You can obtain a copy of the license at LICENSE.txt 
- * or at http://www.opensource.org/licenses/cddl1.php. 
- * See the License for the specific language governing permissions 
- * and limitations under the License. 
- * 
- * When distributing Covered Code, include this CDDL HEADER in each 
- * file and include the License file at LICENSE.txt. 
- * If applicable, add the following below this CDDL HEADER, with the 
- * fields enclosed by brackets "[]" replaced with your own identifying 
- * information: Portions Copyright [yyyy] [name of copyright owner] 
- * 
- * CDDL HEADER END 
- */ 
-
-/* 
- * Copyright 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
- */ 
-
 /* ............................................................................................. */
 
 header
@@ -63,13 +37,17 @@ ciConstraint!
 	;
 ciConstraintParam : LPAREN! ciExpr (BOOLOP^ ciExpr)* RPAREN!;
 
+diffExpr : VAR MINUSOP^ VAR;
+
 miExpr : VAR COMPOP^ CONST
        | CONST COMPOP^ VAR
+       | diffExpr COMPOP^ CONST
        | LPAREN! miExpr (BOOLOP^ miExpr)* RPAREN!
        ;
 
 ciExpr : VAR COMPOP^ CONST
         | CONST COMPOP^ VAR
+        | diffExpr COMPOP^ CONST
         | LPAREN! ciExpr (BOOLOP^ ciExpr)* RPAREN!
         ;
 
@@ -125,6 +103,12 @@ options
 	paraphrase = "a comparison operator";
 } : ("=" | "!=" | "<=" | "<" | ">=" | ">");
 
+MINUSOP
+options
+{
+    paraphrase = "a minus operator";
+} : "-";
+
 BOOLOP
 options
 {
@@ -154,6 +138,23 @@ terminal returns [IConstraintNode node]
 	  c:CONST { node = new ConstantNode(Integer.parseInt(c.getText())); }
 	;
 
+diagonal returns [IConstraintNode diag]
+{
+    diag = null;
+    IConstraintNode var1;
+    IConstraintNode var2;
+}
+    :
+      #(MINUSOP var1=terminal var2=terminal)
+      {
+          if (!(var1 instanceof VariableNode) || !(var2 instanceof VariableNode))
+          {
+              throw new RecognitionException("Difference can only be made between variables.");
+          }
+          diag = new DiagonalVariablesPair((VariableNode) var1, (VariableNode) var2);
+      }
+    ;
+
 rootNode returns [IRootConstraintNode node]
 {
 	IConstraintNode left;
@@ -161,6 +162,15 @@ rootNode returns [IRootConstraintNode node]
 	node = null;
 }
 	:
+      (#(COMPOP MINUSOP)) => #(o2:COMPOP left=diagonal right=terminal)
+	  {
+	    if (!(right instanceof ConstantNode))
+	    {
+	        throw new RecognitionException("Diagonal constraints require a right-hand constant.");
+	    }
+	    node = new DiagonalNode((DiagonalVariablesPair) left, o2.getText(), (ConstantNode) right);
+	  }
+	|
 	  #(o1:COMPOP left=terminal right=terminal)
 	  {
 	  	if (left instanceof VariableNode)
@@ -173,9 +183,9 @@ rootNode returns [IRootConstraintNode node]
 	  	}
 	  }
 	|
-	  #(o2:BOOLOP left=rootNode right=rootNode)
+	  #(o3:BOOLOP left=rootNode right=rootNode)
 	  {
-	  	node = new BooleanNode(o2.getText(), (IRootConstraintNode)left, (IRootConstraintNode)right);
+	  	node = new BooleanNode(o3.getText(), (IRootConstraintNode)left, (IRootConstraintNode)right);
 	  }
 	;
 

@@ -56,7 +56,7 @@ public class VariableNode implements IConstraintNode
 
     public IConstraintNode deepCopy()
     {
-        return new VariableNode(getVariableName());
+        return new VariableNode(new String(getVariableName()));
     }
 
     /* (non-Javadoc)
