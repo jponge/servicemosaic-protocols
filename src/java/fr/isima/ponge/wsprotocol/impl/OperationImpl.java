@@ -133,6 +133,7 @@ public class OperationImpl implements Operation
      * @deprecated Use a constructor that takes a name for the operation as a parameter. This
      *             constructor will provide an identifier for backward compatibility.
      */
+    @Deprecated
     public OperationImpl(State sourceState, State targetState, Message message,
                          OperationKind operationKind)
     {
@@ -179,6 +180,7 @@ public class OperationImpl implements Operation
      * @deprecated Use a constructor that takes a name for the operation as a parameter. This
      *             constructor will provide an identifier for backward compatibility.
      */
+    @Deprecated
     public OperationImpl(State sourceState, State targetState, Message message)
     {
         this(generateOperationName(), sourceState, targetState, message, OperationKind.EXPLICIT);
@@ -187,7 +189,7 @@ public class OperationImpl implements Operation
     /**
      * Convenience constructor to instanciate an explicit operation.
      *
-     * @param name
+     * @param name        The operation name.
      * @param sourceState The source state.
      * @param targetState The target state.
      * @param message     The message.

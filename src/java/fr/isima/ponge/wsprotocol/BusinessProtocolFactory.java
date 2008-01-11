@@ -92,7 +92,7 @@ public interface BusinessProtocolFactory
      * @param sourceState The source state.
      * @param targetState The target state.
      * @param message     The operation message.
-     * @param kind
+     * @param kind        The operation kind.
      * @return A new operation instance.
      * @see BusinessProtocolFactory#createOperation(String, State, State, Message, OperationKind)
      * @deprecated Operations should be explicitely created with a name.

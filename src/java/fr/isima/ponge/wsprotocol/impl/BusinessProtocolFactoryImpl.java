@@ -63,6 +63,7 @@ public class BusinessProtocolFactoryImpl implements BusinessProtocolFactory
      * @see fr.isima.ponge.wsprotocol.BusinessProtocolFactory#createOperation(fr.isima.ponge.wsprotocol.State,
      *      fr.isima.ponge.wsprotocol.State, fr.isima.ponge.wsprotocol.Message)
      */
+    @Deprecated
     public Operation createOperation(State sourceState, State targetState, Message message)
     {
         return new OperationImpl(sourceState, targetState, message);
@@ -81,6 +82,7 @@ public class BusinessProtocolFactoryImpl implements BusinessProtocolFactory
     /* (non-Javadoc)
      * @see fr.isima.ponge.wsprotocol.BusinessProtocolFactory#createOperation(fr.isima.ponge.wsprotocol.State, fr.isima.ponge.wsprotocol.State, fr.isima.ponge.wsprotocol.Message, fr.isima.ponge.wsprotocol.OperationKind)
      */
+    @Deprecated
     public Operation createOperation(State sourceState, State targetState, Message message, OperationKind kind)
     {
         return new OperationImpl(sourceState, targetState, message, kind);

@@ -39,13 +39,25 @@ public class DiagonalVariablesPair implements IRootConstraintNode
 
     public boolean equals(Object o)
     {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+        {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass())
+        {
+            return false;
+        }
 
         DiagonalVariablesPair that = (DiagonalVariablesPair) o;
 
-        if (!firstVariable.equals(that.firstVariable)) return false;
-        if (!secondVariable.equals(that.secondVariable)) return false;
+        if (!firstVariable.equals(that.firstVariable))
+        {
+            return false;
+        }
+        if (!secondVariable.equals(that.secondVariable))
+        {
+            return false;
+        }
 
         return true;
     }
@@ -83,7 +95,7 @@ public class DiagonalVariablesPair implements IRootConstraintNode
     @Override
     public String toString()
     {
-        return new StringBuilder().append(firstVariable + " - ").append(secondVariable).toString();
+        return new StringBuilder().append(firstVariable).append(" - ").append(secondVariable).toString();
     }
 
     public IConstraintNode getLeftChild()
