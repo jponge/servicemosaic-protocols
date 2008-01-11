@@ -107,4 +107,9 @@ public class VariableNode implements IConstraintNode
     {
         this.variableName = variableName;
     }
+
+    public void replaceChildWith(IConstraintNode oldChild, IConstraintNode newChild)
+    {
+        // nothing...
+    }
 }

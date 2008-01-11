@@ -190,4 +190,22 @@ public class BooleanNode implements IRootConstraintNode
     {
         return new BooleanNode(getSymbol(), (IRootConstraintNode) getLeftChild().deepCopy(), (IRootConstraintNode) getRightChild().deepCopy());
     }
+
+    public void replaceChildWith(IConstraintNode oldChild, IConstraintNode newChild)
+    {
+        if (!(newChild instanceof IRootConstraintNode))
+        {
+            return;
+        }
+
+        if (oldChild == leftChild)
+        {
+            leftChild = (IRootConstraintNode) newChild;
+        }
+        else if (oldChild == rightChild)
+        {
+            rightChild = (IRootConstraintNode) newChild;
+        }
+    }
+
 }

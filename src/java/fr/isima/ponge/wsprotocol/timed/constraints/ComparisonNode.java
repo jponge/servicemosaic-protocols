@@ -162,6 +162,18 @@ public class ComparisonNode implements IRootConstraintNode
         return new ComparisonNode(getLeftChild().deepCopy(), getRightChild().deepCopy(), getSymbol());
     }
 
+    public void replaceChildWith(IConstraintNode oldChild, IConstraintNode newChild)
+    {
+        if (oldChild == leftChild)
+        {
+            leftChild = newChild;
+        }
+        else if (oldChild == rightChild)
+        {
+            rightChild = newChild;
+        }
+    }
+
     /*
      * (non-Javadoc)
      * 

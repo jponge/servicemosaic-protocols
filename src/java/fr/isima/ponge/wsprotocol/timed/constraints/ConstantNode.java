@@ -59,6 +59,11 @@ public class ConstantNode implements IConstraintNode
         return new ConstantNode(getConstant());
     }
 
+    public void replaceChildWith(IConstraintNode oldChild, IConstraintNode newChild)
+    {
+        // nothing...
+    }
+
     /* (non-Javadoc)
      * @see java.lang.Object#equals(java.lang.Object)
      */

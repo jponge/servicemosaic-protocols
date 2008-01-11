@@ -31,7 +31,7 @@ package fr.isima.ponge.wsprotocol.timed.constraints;
  *
  * @author Julien Ponge (ponge@isima.fr)
  */
-public class CInvokeNode implements IConstraintNode
+public class CInvokeNode implements IConstraintFunctionNode
 {
     private IRootConstraintNode node;
 
@@ -86,6 +86,14 @@ public class CInvokeNode implements IConstraintNode
     public IConstraintNode deepCopy()
     {
         return new CInvokeNode((IRootConstraintNode) getNode().deepCopy());
+    }
+
+    public void replaceChildWith(IConstraintNode oldChild, IConstraintNode newChild)
+    {
+        if ((oldChild == node) && (newChild instanceof IRootConstraintNode))
+        {
+            node = (IRootConstraintNode) newChild;
+        }
     }
 
     /**

@@ -47,4 +47,6 @@ public interface IConstraintNode extends Cloneable
      * @return The deep copy.
      */
     public IConstraintNode deepCopy();
+
+    public void replaceChildWith(IConstraintNode oldChild, IConstraintNode newChild);
 }
