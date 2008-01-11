@@ -44,7 +44,6 @@ public class ConstraintHelperTest extends TestCase
 
         ConstraintHelper helper = new ConstraintHelper();
         List<IConstraintNode> disjunctions = helper.makeDisjunctionFree(constraint);
-        System.out.println(disjunctions);
 
         assertEquals(3, disjunctions.size());
 
