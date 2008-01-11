@@ -1,7 +1,11 @@
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
+import static fr.isima.ponge.wsprotocol.timed.constraints.ComparisonConstants.*;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Various utilities for constraints manipulation.
@@ -98,5 +102,29 @@ public class ConstraintHelper
             return isDisjunctionFree(fnode.getNode());
         }
         return true;
+    }
+
+    private static final Map<String, String> NEGATIONS;
+
+    static
+    {
+        NEGATIONS = new TreeMap<String, String>();
+        NEGATIONS.put(LESS, GREATER_EQ);
+        NEGATIONS.put(LESS_EQ, GREATER);
+        NEGATIONS.put(EQ, NEQ);
+        NEGATIONS.put(NEQ, EQ);
+        NEGATIONS.put(GREATER, LESS_EQ);
+        NEGATIONS.put(GREATER_EQ, LESS);
+    }
+
+    /**
+     * Returns the negation of an operator.
+     *
+     * @param operator The operator.
+     * @return The operator negation.
+     */
+    public String operatorNegation(String operator)
+    {
+        return NEGATIONS.get(operator);
     }
 }

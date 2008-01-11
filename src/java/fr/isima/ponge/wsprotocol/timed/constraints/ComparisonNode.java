@@ -26,9 +26,6 @@
 
 package fr.isima.ponge.wsprotocol.timed.constraints;
 
-import java.util.Map;
-import java.util.TreeMap;
-
 /**
  * A comparision node between a variable and a constant. They can either be placed on the left or
  * the right of the expression.
@@ -37,18 +34,7 @@ import java.util.TreeMap;
  */
 public class ComparisonNode implements IRootConstraintNode, ComparisonConstants
 {
-    private static final Map<String, String> NEGATIONS;
-
-    static
-    {
-        NEGATIONS = new TreeMap<String, String>();
-        NEGATIONS.put(LESS, GREATER_EQ);
-        NEGATIONS.put(LESS_EQ, GREATER);
-        NEGATIONS.put(EQ, NEQ);
-        NEGATIONS.put(NEQ, EQ);
-        NEGATIONS.put(GREATER, LESS_EQ);
-        NEGATIONS.put(GREATER_EQ, LESS);
-    }
+    private static final ConstraintHelper CONSTRAINT_HELPER = new ConstraintHelper();
 
     private IConstraintNode leftChild;
 
@@ -124,7 +110,7 @@ public class ComparisonNode implements IRootConstraintNode, ComparisonConstants
     public IConstraintNode negate()
     {
 
-        return new ComparisonNode(leftChild, rightChild, NEGATIONS.get(symbol));
+        return new ComparisonNode(leftChild, rightChild, CONSTRAINT_HELPER.operatorNegation(symbol));
     }
 
     public IConstraintNode deepCopy()
