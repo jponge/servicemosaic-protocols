@@ -4,6 +4,7 @@ import fr.isima.ponge.wsprotocol.BusinessProtocol
 import fr.isima.ponge.wsprotocol.BusinessProtocolFactory
 import fr.isima.ponge.wsprotocol.Operation
 import fr.isima.ponge.wsprotocol.State
+import fr.isima.ponge.wsprotocol.StandardExtraProperties
 import fr.isima.ponge.wsprotocol.timed.constraints.BooleanNode
 
 class IntersectionOperator extends BinaryOperator

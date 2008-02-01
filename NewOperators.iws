@@ -15,7 +15,11 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" name="Default" comment="" />
+    <list default="true" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/IntersectionOperatorTest.groovy" afterPath="$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/IntersectionOperatorTest.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NewOperators.iws" afterPath="$PROJECT_DIR$/NewOperators.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/IntersectionOperator.groovy" afterPath="$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/IntersectionOperator.groovy" />
+    </list>
     <ignored path="NewOperators.iws" />
     <ignored path=".idea/workspace.xml" />
   </component>
@@ -80,16 +84,16 @@
       <file leaf-file-name="Operators.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/Operators.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="29" selection-start="651" selection-end="651" vertical-scroll-proportion="-0.38902438">
+            <state line="16" column="29" selection-start="651" selection-end="651" vertical-scroll-proportion="0.020731708">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IntersectionOperator.groovy" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="IntersectionOperator.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/IntersectionOperator.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="13" selection-start="513" selection-end="513" vertical-scroll-proportion="0.06849315">
+            <state line="44" column="13" selection-start="1482" selection-end="1482" vertical-scroll-proportion="0.16936488">
               <folding />
             </state>
           </provider>
@@ -98,13 +102,13 @@
       <file leaf-file-name="IntersectionOperatorTest.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/IntersectionOperatorTest.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.2902439">
+            <state line="52" column="67" selection-start="2120" selection-end="2120" vertical-scroll-proportion="0.85180575">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestingUtils.groovy" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TestingUtils.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/TestingUtils.groovy">
           <provider selected="true" editor-type-id="text-editor">
             <state line="15" column="13" selection-start="535" selection-end="535" vertical-scroll-proportion="0.3109756">
@@ -266,24 +270,34 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
   <component name="RunManager" selected="JUnit.Tests">
-    <configuration default="true" type="GroovyScriptRunConfigurationType" factoryName="Groovy Script">
+    <configuration default="true" type="TestNG" factoryName="TestNG" enabled="false" merge="false">
       <module name="" />
-      <setting name="path" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workDir" value="C:\Documents and Settings\Administrateur\Mes documents\Code\ServiceMosaic\NewOperators\." />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="ADDITIONAL_CLASS_PATH" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method>
+        <option name="Make" value="true" />
+      </method>
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="" />
@@ -320,34 +334,12 @@
       <module name="" />
       <envs />
     </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG" enabled="false" merge="false">
+    <configuration default="true" type="GroovyScriptRunConfigurationType" factoryName="Groovy Script">
       <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="ADDITIONAL_CLASS_PATH" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method>
-        <option name="Make" value="true" />
-      </method>
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="C:\Documents and Settings\Administrateur\Mes documents\Code\ServiceMosaic\NewOperators\." />
     </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -355,6 +347,18 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
     </configuration>
     <configuration default="false" name="Tests" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="NewOperators" />
@@ -435,7 +439,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1288" height="1002" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="11" />
@@ -446,19 +450,19 @@
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="12" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" order="13" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290398" order="13" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" order="7" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24939074" order="1" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="0" />
       <window_info id="Maven projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="5" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="6" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30656934" order="0" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30656934" order="0" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="10" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="6" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="9" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48711944" order="2" />
-      <window_info id="SVN Repositories" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6206089" order="-1" />
+      <window_info id="SVN Repositories" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6206089" order="8" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="5" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="0" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
@@ -539,23 +543,9 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.5945946" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/IntersectionOperator.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="13" selection-start="513" selection-end="513" vertical-scroll-proportion="0.06849315">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/Operators.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="29" selection-start="651" selection-end="651" vertical-scroll-proportion="-0.38902438">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/IntersectionOperatorTest.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="288" selection-end="288" vertical-scroll-proportion="0.2902439">
+        <state line="16" column="29" selection-start="651" selection-end="651" vertical-scroll-proportion="0.020731708">
           <folding />
         </state>
       </provider>
@@ -563,6 +553,20 @@
     <entry file="file://$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/TestingUtils.groovy">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="13" selection-start="535" selection-end="535" vertical-scroll-proportion="0.3109756">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/IntersectionOperatorTest.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="67" selection-start="2120" selection-end="2120" vertical-scroll-proportion="0.85180575">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/IntersectionOperator.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="13" selection-start="1482" selection-end="1482" vertical-scroll-proportion="0.16936488">
           <folding />
         </state>
       </provider>
