@@ -24,7 +24,7 @@ class IntersectionOperator extends BinaryOperator
     {
         BusinessProtocol result = factory.createBusinessProtocol(protocolName(p1, p2))
         def resultStates = [:]
-        def operationMapping = [[:], [:]]
+        def operationMapping = [:]
 
         // Walk each state combination 
         def stateSpace = [p1.states.asList(), p2.states.asList()].combinations()
@@ -58,6 +58,16 @@ class IntersectionOperator extends BinaryOperator
                     }
                 }
 
+                // Temporary variables rewriting
+                if (!isOperationConstraintEmpty(o1))
+                {
+                    rewriteConstraintVariables(o1) { name -> "_${name}" }
+                }
+                if (!isOperationConstraintEmpty(o2))
+                {
+                    rewriteConstraintVariables(o2) { name -> "${name}_" }
+                }
+
                 // Add the operation
                 def Operation operation = factory.createOperation(
                         operationName(o1, o2),
@@ -65,11 +75,24 @@ class IntersectionOperator extends BinaryOperator
                         resultStates[targetState],
                         factory.createMessage(o1.message.name, o1.message.polarity),
                         o1.operationKind)
+                def conjunction = constraintConjunction(o1, o2)
+                if (conjunction != "")
+                {
+                    operation.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, conjunction)
+                }
                 result.addOperation(operation)
 
                 // Keep the mapping for rewriting the constraints
-                operationMapping[0][o1] = operation
-                operationMapping[1][o2] = operation
+                operationMapping["_${o1.name}"] = operation.name
+                operationMapping["${o2.name}_"] = operation.name    
+            }
+        }
+
+        // Constraints rewriting
+        result.operations.each { op ->
+            if (!isOperationConstraintEmpty(op))
+            {
+                rewriteConstraintVariables(op) { name -> operationMapping[name] }
             }
         }
 

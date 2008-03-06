@@ -7,6 +7,11 @@ import fr.isima.ponge.wsprotocol.timed.constraints.IConstraintNode
 import fr.isima.ponge.wsprotocol.timed.constraints.parser.TemporalConstraintLexer
 import fr.isima.ponge.wsprotocol.timed.constraints.parser.TemporalConstraintParser
 import fr.isima.ponge.wsprotocol.timed.constraints.parser.TemporalConstraintTreeWalker
+import fr.isima.ponge.wsprotocol.Operation
+import fr.isima.ponge.wsprotocol.StandardExtraProperties
+import fr.isima.ponge.wsprotocol.timed.constraints.IRootConstraintNode
+import fr.isima.ponge.wsprotocol.timed.constraints.VariableNode
+import fr.isima.ponge.wsprotocol.timed.constraints.IConstraintFunctionNode
 
 abstract class Operator
 {
@@ -27,6 +32,11 @@ abstract class Operator
         (constraint == null) || ("" == constraint)
     }
 
+    protected boolean isOperationConstraintEmpty(Operation operation)
+    {
+        return isConstraintEmpty(operation.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT))
+    }
+
     protected IConstraintNode parseConstraint(String constraint)
     {
         TemporalConstraintLexer lexer
@@ -43,6 +53,30 @@ abstract class Operator
         catch (Exception e)
         {
             return null
+        }
+    }
+
+    protected void rewriteConstraintVariables(Operation operation, Closure rewriter)
+    {
+        IConstraintNode root = parseConstraint(operation.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT))
+        findAndRewriteVariables(root, rewriter)
+        operation.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, root.toString()) 
+    }
+
+    private void findAndRewriteVariables(IConstraintNode node, Closure rewriter)
+    {
+        if (node instanceof IRootConstraintNode)
+        {
+            findAndRewriteVariables(node.leftChild, rewriter)
+            findAndRewriteVariables(node.rightChild, rewriter)
+        }
+        else if (node instanceof VariableNode)
+        {
+            node.setVariableName(rewriter(node.variableName))
+        }
+        else if (node instanceof IConstraintFunctionNode)
+        {
+            findAndRewriteVariables(node.node, rewriter)
         }
     }
 }

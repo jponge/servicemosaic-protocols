@@ -16,9 +16,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NewOperators.iml" afterPath="$PROJECT_DIR$/NewOperators.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/IntersectionOperatorTest.groovy" afterPath="$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/IntersectionOperatorTest.groovy" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/OperatorTest.groovy" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NewOperators.iws" afterPath="$PROJECT_DIR$/NewOperators.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/IntersectionOperatorTest.groovy" afterPath="$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/IntersectionOperatorTest.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/IntersectionOperator.groovy" afterPath="$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/IntersectionOperator.groovy" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/Operators.groovy" afterPath="$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/Operators.groovy" />
     </list>
     <ignored path="NewOperators.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,10 +83,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Operators.groovy" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Operators.groovy" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/Operators.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="29" selection-start="651" selection-end="651" vertical-scroll-proportion="-0.38902438">
+            <state line="38" column="41" selection-start="1392" selection-end="1392" vertical-scroll-proportion="0.3599004">
               <folding />
             </state>
           </provider>
@@ -93,16 +95,25 @@
       <file leaf-file-name="IntersectionOperator.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/IntersectionOperator.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="48" selection-start="1962" selection-end="1962" vertical-scroll-proportion="-0.6724782">
+            <state line="91" column="25" selection-start="3490" selection-end="3490" vertical-scroll-proportion="1.5454545">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IntersectionOperatorTest.groovy" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="IntersectionOperatorTest.groovy" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/IntersectionOperatorTest.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="40" selection-start="1257" selection-end="1257" vertical-scroll-proportion="0.66127026">
+            <state line="36" column="44" selection-start="1442" selection-end="1442" vertical-scroll-proportion="0.76214194">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OperatorTest.groovy" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/OperatorTest.groovy">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="71" selection-start="726" selection-end="779" vertical-scroll-proportion="0.46575344">
               <folding />
             </state>
           </provider>
@@ -155,10 +166,6 @@
         <PATH_ELEMENT>
           <option name="myItemId" value="NewOperators" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="Libraries" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.LibraryGroupNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -274,6 +281,31 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
   </component>
   <component name="RunManager" selected="JUnit.Tests">
+    <tempConfiguration default="false" name="OperatorTest.testVariablesRewriting" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+      <pattern value="fr.isima.ponge.wsprotocol.operators.*" />
+      <module name="NewOperators" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="fr.isima.ponge.wsprotocol.operators" />
+      <option name="MAIN_CLASS_NAME" value="fr.isima.ponge.wsprotocol.operators.OperatorTest" />
+      <option name="METHOD_NAME" value="testVariablesRewriting" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="ADDITIONAL_CLASS_PATH" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method>
+        <option name="Make" value="true" />
+      </method>
+    </tempConfiguration>
     <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -388,8 +420,9 @@
         <option name="Make" value="true" />
       </method>
     </configuration>
-    <list size="1">
+    <list size="2">
       <item index="0" class="java.lang.String" itemvalue="JUnit.Tests" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.OperatorTest.testVariablesRewriting" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -442,7 +475,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1288" height="1002" extended-state="0" />
+    <frame x="-4" y="-4" width="1288" height="1002" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
@@ -454,7 +487,7 @@
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="12" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290398" order="13" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3286052" order="13" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32930514" order="7" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24939074" order="1" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="0" />
@@ -465,7 +498,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="6" />
       <window_info id="Duplicates" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="9" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290398" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4145199" order="2" />
       <window_info id="SVN Repositories" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.6206089" order="8" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="5" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="0" />
@@ -481,7 +514,7 @@
     <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improved unit tests." />
+    <option name="LAST_COMMIT_MESSAGE" value="- Improved temporal constraint conjunction computation.&#10;- Minor: Groovy 1.5.4 migration." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -493,6 +526,7 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value="Improved unit tests." />
+    <MESSAGE value="- Improved temporal constraint conjunction computation.&#10;- Minor: Groovy 1.5.4 migration." />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -533,11 +567,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/intersection/p1-inter-p2.wsprotocol">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="36" selection-start="2501" selection-end="2524" vertical-scroll-proportion="0.8006757" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/intersection/p2.wsprotocol">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.972973" />
@@ -555,23 +584,86 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/Operators.groovy">
+    <entry file="file://$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/intersection/p1-inter-p2.wsprotocol">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="29" selection-start="651" selection-end="651" vertical-scroll-proportion="-0.38902438">
+        <state line="71" column="61" selection-start="2114" selection-end="2114" vertical-scroll-proportion="0.4680851">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/IntersectionOperator.groovy">
+    <entry file="jar://$PROJECT_DIR$/lib/ws-protocol-0.5.0-SNAPSHOT.jar!/fr/isima/ponge/wsprotocol/timed/constraints/IConstraintNode.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="48" selection-start="1962" selection-end="1962" vertical-scroll-proportion="-0.6724782">
+        <state line="5" column="17" selection-start="185" selection-end="185" vertical-scroll-proportion="0.08553459">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/ws-protocol-0.5.0-SNAPSHOT.jar!/fr/isima/ponge/wsprotocol/timed/constraints/IRootConstraintNode.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="17" selection-start="185" selection-end="185" vertical-scroll-proportion="0.08374384">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/ws-protocol-0.5.0-SNAPSHOT.jar!/fr/isima/ponge/wsprotocol/timed/constraints/VariableNode.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="181" selection-end="181" vertical-scroll-proportion="0.08553459">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/ws-protocol-0.5.0-SNAPSHOT.jar!/fr/isima/ponge/wsprotocol/timed/constraints/DiagonalNode.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="181" selection-end="181" vertical-scroll-proportion="0.16425121">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/ws-protocol-0.5.0-SNAPSHOT.jar!/fr/isima/ponge/wsprotocol/timed/constraints/CInvokeNode.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="181" selection-end="181" vertical-scroll-proportion="0.086845465">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/ws-protocol-0.5.0-SNAPSHOT.jar!/fr/isima/ponge/wsprotocol/timed/constraints/IConstraintFunctionNode.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="17" selection-start="185" selection-end="185" vertical-scroll-proportion="0.086845465">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/IntersectionOperatorTest.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="40" selection-start="1257" selection-end="1257" vertical-scroll-proportion="0.66127026">
+        <state line="36" column="44" selection-start="1442" selection-end="1442" vertical-scroll-proportion="0.76214194">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/fr/isima/ponge/wsprotocol/operators/OperatorTest.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="71" selection-start="726" selection-end="779" vertical-scroll-proportion="0.46575344">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/ws-protocol-0.5.0-SNAPSHOT.jar!/fr/isima/ponge/wsprotocol/Operation.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="17" selection-start="167" selection-end="167" vertical-scroll-proportion="0.08292683">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/IntersectionOperator.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="25" selection-start="3490" selection-end="3490" vertical-scroll-proportion="1.5454545">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fr/isima/ponge/wsprotocol/operators/Operators.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="41" selection-start="1392" selection-end="1392" vertical-scroll-proportion="0.3599004">
           <folding />
         </state>
       </provider>
