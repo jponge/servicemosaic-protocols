@@ -40,15 +40,16 @@ class IntersectionOperatorTest extends TestCase
         Message m = factory.createMessage("m", Polarity.POSITIVE)
         Operation op0 = factory.createOperation("op0", s, s, m)
         Operation op1 = factory.createOperation("op1", s, s, m)
-        Operation op2 = factory.createOperation("op0", s, s, m)
+        Operation op2 = factory.createOperation("op2", s, s, m)
 
         op1.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, c1)
         op2.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, c2)
 
         def IntersectionOperator operator = new IntersectionOperator()
 
+        assertEquals "", operator.constraintConjunction(op0, op0)
         assertEquals c1, operator.constraintConjunction(op0, op1)
-        assertEquals c1, operator.constraintConjunction(op1, op0)
+        assertEquals c2, operator.constraintConjunction(op2, op0)
 
         assertEquals "C-Invoke((T1 < 2) && ((T1 >= 3) && (T3 < 4)))", operator.constraintConjunction(op1, op2)
     }
