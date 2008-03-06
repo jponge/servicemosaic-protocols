@@ -6,6 +6,7 @@ import fr.isima.ponge.wsprotocol.Operation
 import fr.isima.ponge.wsprotocol.State
 import fr.isima.ponge.wsprotocol.StandardExtraProperties
 import fr.isima.ponge.wsprotocol.timed.constraints.BooleanNode
+import fr.isima.ponge.wsprotocol.Polarity
 
 class IntersectionOperator extends BinaryOperator
 {
@@ -73,7 +74,7 @@ class IntersectionOperator extends BinaryOperator
                         operationName(o1, o2),
                         resultStates[sourceState],
                         resultStates[targetState],
-                        factory.createMessage(o1.message.name, o1.message.polarity),
+                        factory.createMessage(o1.message.name, polarity(o1.message.polarity)),
                         o1.operationKind)
                 def conjunction = constraintConjunction(o1, o2)
                 if (conjunction != "")
@@ -117,6 +118,11 @@ class IntersectionOperator extends BinaryOperator
     protected String protocolName(BusinessProtocol p1, BusinessProtocol p2)
     {
         "(${p1.name} ||ti ${p2.name})"
+    }
+
+    protected Polarity polarity(Polarity p)
+    {
+        p 
     }
 
     protected String constraintConjunction(Operation o1, Operation o2)

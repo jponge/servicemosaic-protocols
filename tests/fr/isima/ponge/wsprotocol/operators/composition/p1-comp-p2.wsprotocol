@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<business-protocol>
+  <name>(p1 ||tc p2)</name>
+  <state>
+    <name>(s2,s2)</name>
+    <final>true</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>375</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>480</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>(s1,s1)</name>
+    <final>false</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>260</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>93</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>(s0,s0)</name>
+    <final>false</final>
+    <initial-state/>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>40</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>58</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <operation>
+    <message>
+      <name>m1</name>
+      <polarity>null</polarity>
+    </message>
+    <name>T1_T1</name>
+    <source>(s1,s1)</source>
+    <target>(s2,s2)</target>
+    <kind>explicit</kind>
+    <extra-property type="java.lang.String">
+      <name>wsprotocol.temporal.constraint</name>
+      <value>C-Invoke((T0_T0 &lt; 20) &amp;&amp; (T0_T0 &lt; 10))</value>
+    </extra-property>
+  </operation>
+  <operation>
+    <message>
+      <name>m0</name>
+      <polarity>null</polarity>
+    </message>
+    <name>T0_T0</name>
+    <source>(s0,s0)</source>
+    <target>(s1,s1)</target>
+    <kind>explicit</kind>
+  </operation>
+</business-protocol>
