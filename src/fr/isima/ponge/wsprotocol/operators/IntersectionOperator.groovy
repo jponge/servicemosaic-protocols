@@ -1,12 +1,6 @@
 package fr.isima.ponge.wsprotocol.operators
 
-import fr.isima.ponge.wsprotocol.BusinessProtocol
-import fr.isima.ponge.wsprotocol.BusinessProtocolFactory
-import fr.isima.ponge.wsprotocol.Operation
-import fr.isima.ponge.wsprotocol.State
-import fr.isima.ponge.wsprotocol.StandardExtraProperties
-import fr.isima.ponge.wsprotocol.timed.constraints.BooleanNode
-import fr.isima.ponge.wsprotocol.Polarity
+import fr.isima.ponge.wsprotocol.*
 
 class IntersectionOperator extends BinaryOperator
 {
@@ -23,7 +17,7 @@ class IntersectionOperator extends BinaryOperator
     @Override
     BusinessProtocol apply(BusinessProtocol p1, BusinessProtocol p2)
     {
-        BusinessProtocol result = factory.createBusinessProtocol(protocolName(p1, p2))
+        BusinessProtocol result = getFactory().createBusinessProtocol(protocolName(p1, p2))
         def resultStates = [:]
         def operationMapping = [:]
 
@@ -48,7 +42,7 @@ class IntersectionOperator extends BinaryOperator
                 [sourceState, targetState].each {s ->
                     if (!resultStates.containsKey(s))
                     {
-                        def state = factory.createState(stateName(s[0], s[1]), s[0].finalState && s[1].finalState)
+                        def state = getFactory().createState(stateName(s[0], s[1]), s[0].finalState && s[1].finalState)
                         state.setInitialState(s[0].initialState && s[1].initialState)
                         resultStates[s] = state
                         result.addState(state)
@@ -70,11 +64,11 @@ class IntersectionOperator extends BinaryOperator
                 }
 
                 // Add the operation
-                def Operation operation = factory.createOperation(
+                def Operation operation = getFactory().createOperation(
                         operationName(o1, o2),
                         resultStates[sourceState],
                         resultStates[targetState],
-                        factory.createMessage(o1.message.name, polarity(o1.message.polarity)),
+                        getFactory().createMessage(o1.message.name, polarity(o1.message.polarity)),
                         o1.operationKind)
                 def conjunction = constraintConjunction(o1, o2)
                 if (conjunction != "")
@@ -123,33 +117,5 @@ class IntersectionOperator extends BinaryOperator
     protected Polarity polarity(Polarity p)
     {
         p 
-    }
-
-    protected String constraintConjunction(Operation o1, Operation o2)
-    {
-        def c1 = o1.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT);
-        def c2 = o2.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT);
-
-        // Simple cases
-        if (isConstraintEmpty(c1) && isConstraintEmpty(c2))
-        {
-            return ""
-        }
-        else if (isConstraintEmpty(c2))
-        {
-            return c1
-        }
-        else if (isConstraintEmpty(c1))
-        {
-            return c2
-        }
-
-        // "true" intersection
-        def ast = parseConstraint(c1)
-        def root1 = ast.node
-        def root2 = parseConstraint(c2).node
-        BooleanNode andNode = new BooleanNode(BooleanNode.AND, root1, root2)
-        ast.node = andNode
-        return ast.toString()
     }
 }
