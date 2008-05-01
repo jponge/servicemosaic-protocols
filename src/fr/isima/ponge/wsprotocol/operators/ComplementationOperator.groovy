@@ -39,6 +39,9 @@ class ComplementationOperator extends UnaryOperator
 
         // Add operations
         protocol.states.each { State state ->
+            def operationsMap = [:]
+            state.outgoingOperations.collect { it.message.name }.unique().each { operationsMap[it] = [] } 
+
             state.outgoingOperations.each { Operation operation ->
                 Operation newOperation = getFactory().createOperation(
                         statesMap[operation.sourceState],
@@ -46,6 +49,11 @@ class ComplementationOperator extends UnaryOperator
                         getFactory().createMessage(operation.message.name, operation.message.polarity),
                         operation.operationKind)
                 complement.addOperation(newOperation)
+                operationsMap[newOperation.message.name] << newOperation
+            }
+
+            operationsMap.each { messageName, operations ->
+                // Compute the negation
             }
         }
 
