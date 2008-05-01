@@ -62,7 +62,7 @@ abstract class Operator
     {
         IConstraintNode root = parseConstraint(operation.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT))
         findAndRewriteVariables(root, rewriter)
-        operation.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, root.toString()) 
+        operation.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, root.toString())
     }
 
     protected String constraintConjunction(Operation o1, Operation o2)
@@ -91,6 +91,48 @@ abstract class Operator
         BooleanNode andNode = new BooleanNode(BooleanNode.AND, root1, root2)
         ast.node = andNode
         return ast.toString()
+    }
+
+    protected String negateConstraint(Operation op)
+    {
+        def constraint = op.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT)
+        if (isConstraintEmpty(constraint))
+        {
+            return ""
+        }
+
+        def NEGATIONS = [
+                (BooleanNode.AND): BooleanNode.OR,
+                (BooleanNode.OR): BooleanNode.AND,
+                (ComparisonNode.LESS): ComparisonNode.GREATER_EQ,
+                (ComparisonNode.LESS_EQ): ComparisonNode.GREATER,
+                (ComparisonNode.GREATER): ComparisonNode.LESS_EQ,
+                (ComparisonNode.GREATER_EQ): ComparisonNode.LESS,
+                (ComparisonNode.EQ): ComparisonNode.NEQ,
+                (ComparisonNode.NEQ): ComparisonNode.EQ
+        ]
+
+        def ast = parseConstraint(constraint)
+        findAndRewriteOperators(ast.node) {operator -> NEGATIONS[operator] }
+        return ast.toString()
+    }
+
+    private void findAndRewriteOperators(IConstraintNode node, Closure rewriter)
+    {
+        if ((node instanceof ComparisonNode) || (node instanceof BooleanNode))
+        {
+            node.symbol = rewriter(node.symbol)
+            findAndRewriteOperators(node.leftChild, rewriter)
+            findAndRewriteOperators(node.rightChild, rewriter)
+        }
+        else if (node instanceof DiagonalNode)
+        {
+            node.operator = rewriter(node.operator)
+        }
+        else if (node instanceof IConstraintFunctionNode)
+        {
+            findAndRewriteVariables(node.node, rewriter)
+        }
     }
 
     private void findAndRewriteVariables(IConstraintNode node, Closure rewriter)
