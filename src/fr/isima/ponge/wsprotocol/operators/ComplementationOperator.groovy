@@ -1,9 +1,6 @@
 package fr.isima.ponge.wsprotocol.operators
 
-import fr.isima.ponge.wsprotocol.BusinessProtocol
-import fr.isima.ponge.wsprotocol.BusinessProtocolFactory
-import fr.isima.ponge.wsprotocol.State
-import fr.isima.ponge.wsprotocol.Operation
+import fr.isima.ponge.wsprotocol.*
 
 class ComplementationOperator extends UnaryOperator
 {
@@ -23,7 +20,7 @@ class ComplementationOperator extends UnaryOperator
         def statesMap = [:]
 
         // Copy states with reversed final state
-        protocol.states.each { State state ->
+        protocol.states.each {State state ->
             State newState = getFactory().createState(state.name, !state.finalState)
             complement.addState(newState)
             if (state.initialState)
@@ -38,23 +35,60 @@ class ComplementationOperator extends UnaryOperator
         complement.addState(q)
 
         // Add operations
-        protocol.states.each { State state ->
+        protocol.states.each {State state ->
             def operationsMap = [:]
-            state.outgoingOperations.collect { it.message.name }.unique().each { operationsMap[it] = [] } 
+            state.outgoingOperations.collect { it.message }.unique().each { operationsMap[it] = [] }
 
-            state.outgoingOperations.each { Operation operation ->
+            // Copy the operations
+            state.outgoingOperations.each {Operation operation ->
                 Operation newOperation = getFactory().createOperation(
                         statesMap[operation.sourceState],
                         statesMap[operation.targetState],
                         getFactory().createMessage(operation.message.name, operation.message.polarity),
                         operation.operationKind)
+                newOperation.putExtraProperty(
+                        StandardExtraProperties.TEMPORAL_CONSTRAINT,
+                        operation.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT))
                 complement.addOperation(newOperation)
-                operationsMap[newOperation.message.name] << newOperation
+                if (newOperation.operationKind == OperationKind.EXPLICIT)
+                {
+                    operationsMap[newOperation.message] << newOperation
+                }
             }
 
-            operationsMap.each { messageName, operations ->
-                // Compute the negation
+            // Add the negation operation
+            operationsMap.each {message, operations ->
+                Operation fakeOperation = factory.createOperation("FAKE", null, null, null)
+                Operation negationOperation = getFactory().createOperation(
+                        statesMap[state], q,
+                        getFactory().createMessage(message.name, message.polarity),
+                        OperationKind.EXPLICIT)
+                operations.each {Operation operation ->
+                    fakeOperation.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, negateConstraint(operation))
+                    negationOperation.putExtraProperty(
+                            StandardExtraProperties.TEMPORAL_CONSTRAINT,
+                            constraintConjunction(negationOperation, fakeOperation))
+                }
+                complement.addOperation(negationOperation)
             }
+
+            // Add the remaining negation operations
+            (protocol.messages - operationsMap.keySet()).each {message ->
+                Operation negationOperation = getFactory().createOperation(
+                        statesMap[state], q,
+                        getFactory().createMessage(message.name, message.polarity),
+                        OperationKind.EXPLICIT)
+                complement.addOperation(negationOperation)
+            }
+        }
+
+        // Add q -> q operations
+        protocol.messages.each {message ->
+            Operation negationOperation = getFactory().createOperation(
+                    q, q,
+                    getFactory().createMessage(message.name, message.polarity),
+                    OperationKind.EXPLICIT)
+            complement.addOperation(negationOperation)
         }
 
         return complement;
