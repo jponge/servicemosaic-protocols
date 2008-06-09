@@ -35,26 +35,24 @@ class ComplementationOperatorTest extends TestCase
         return p
     }
 
-    def buildSimpleProtocolComplement(String name = "^P")
-    {
-        BusinessProtocol p = buildSimpleProtocol(name)
-
-        p.states.each { it.setInitialState(!it.initialState) }
-        p.operations.find { it.name == "T2" }.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, "C-Invoke(T1 >= 3)")
-        p.operations.find { it.name == "T3" }.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, "C-Invoke(T1 <= 4)")
-    }
-
     void testComplement()
     {
         def protocol = buildSimpleProtocol()
-        def complement = buildSimpleProtocolComplement()
 
         ComplementationOperator operator = new ComplementationOperator()
         def result = operator.apply(protocol)
 
-        // TEMPORARY!!!
-        def list = result.operations.collect { "${it} - ${it.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT)}" }
-        println "${list.size()} operations:"
-        println list.join("\n")
+        assertEquals 4, result.states.size()
+        assertEquals 10, result.operations.size()
+        assertNotNull result.operations.find {
+            it.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT) == "C-Invoke((T1 >= 3) && (T1 <= 4))"
+        }
+
+        /*
+         * Useful for debug...
+         * def list = result.operations.collect { "${it} - ${it.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT)}" }
+         * println "${list.size()} operations:"
+         * println list.join("\n")
+         */
     }
 }

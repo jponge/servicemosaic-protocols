@@ -56,7 +56,7 @@ class ComplementationOperator extends UnaryOperator
                 }
             }
 
-            // Add the negation operation
+            // Add the negation operation, if any
             operationsMap.each {message, operations ->
                 Operation fakeOperation = factory.createOperation("FAKE", null, null, null)
                 Operation negationOperation = getFactory().createOperation(
@@ -64,12 +64,16 @@ class ComplementationOperator extends UnaryOperator
                         getFactory().createMessage(message.name, message.polarity),
                         OperationKind.EXPLICIT)
                 operations.each {Operation operation ->
-                    fakeOperation.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, negateConstraint(operation))
+                    def constraintNegation = negateConstraint(operation)
+                    fakeOperation.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, constraintNegation)
                     negationOperation.putExtraProperty(
                             StandardExtraProperties.TEMPORAL_CONSTRAINT,
                             constraintConjunction(negationOperation, fakeOperation))
                 }
-                complement.addOperation(negationOperation)
+                if (!isOperationConstraintEmpty(negationOperation))
+                {
+                    complement.addOperation(negationOperation)
+                }
             }
 
             // Add the remaining negation operations
