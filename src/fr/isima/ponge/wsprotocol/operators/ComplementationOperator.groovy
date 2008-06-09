@@ -43,6 +43,7 @@ class ComplementationOperator extends UnaryOperator
             // Copy the operations
             state.outgoingOperations.each {Operation operation ->
                 Operation newOperation = getFactory().createOperation(
+                        operation.name,
                         statesMap[operation.sourceState],
                         statesMap[operation.targetState],
                         getFactory().createMessage(operation.message.name, operation.message.polarity),
