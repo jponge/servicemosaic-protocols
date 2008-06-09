@@ -15,15 +15,18 @@ class IntersectionOperator extends BinaryOperator
     }
 
     @Override
-    BusinessProtocol apply(BusinessProtocol p1, BusinessProtocol p2)
+    BusinessProtocol apply(BusinessProtocol protocol1, BusinessProtocol protocol2)
     {
+        BusinessProtocol p1 = cloneProtocol(protocol1)
+        BusinessProtocol p2 = cloneProtocol(protocol2)
+
         BusinessProtocol result = getFactory().createBusinessProtocol(protocolName(p1, p2))
         def resultStates = [:]
         def operationMapping = [:]
 
         // Walk each state combination 
         def stateSpace = [p1.states.asList(), p2.states.asList()].combinations()
-        stateSpace.each {s1, s2 ->
+        stateSpace.each {State s1, State s2 ->
 
             // Compute the common outgoing operations
             if (s1.outgoingOperations.isEmpty() || s2.outgoingOperations.isEmpty())
@@ -33,7 +36,7 @@ class IntersectionOperator extends BinaryOperator
             def common = [s1.outgoingOperations, s2.outgoingOperations].combinations().findAll {o1, o2 -> match(o1, o2)}
 
             // Add each of them to the intersection protocol
-            common.each {o1, o2 ->
+            common.each {Operation o1, Operation o2 ->
 
                 def sourceState = [s1, s2]
                 def targetState = [o1.targetState, o2.targetState]
@@ -84,7 +87,7 @@ class IntersectionOperator extends BinaryOperator
         }
 
         // Constraints rewriting
-        result.operations.each { op ->
+        result.operations.each { Operation op ->
             if (!isOperationConstraintEmpty(op))
             {
                 rewriteConstraintVariables(op) { name -> operationMapping[name] }

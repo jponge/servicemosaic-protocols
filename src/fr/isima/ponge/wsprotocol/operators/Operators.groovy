@@ -1,9 +1,6 @@
 package fr.isima.ponge.wsprotocol.operators
 
-import fr.isima.ponge.wsprotocol.BusinessProtocol
-import fr.isima.ponge.wsprotocol.BusinessProtocolFactory
-import fr.isima.ponge.wsprotocol.Operation
-import fr.isima.ponge.wsprotocol.StandardExtraProperties
+import fr.isima.ponge.wsprotocol.*
 import fr.isima.ponge.wsprotocol.impl.BusinessProtocolFactoryImpl
 import fr.isima.ponge.wsprotocol.timed.constraints.*
 import fr.isima.ponge.wsprotocol.timed.constraints.parser.TemporalConstraintLexer
@@ -150,6 +147,38 @@ abstract class Operator
         {
             findAndRewriteVariables(node.node, rewriter)
         }
+    }
+
+    protected BusinessProtocol cloneProtocol(BusinessProtocol protocol)
+    {
+        BusinessProtocolFactory factory = getFactory()
+        BusinessProtocol clone = factory.createBusinessProtocol(protocol.name)
+
+        def statesMap = [:]
+        protocol.states.each {State state ->
+            State newState = factory.createState(state.name, state.finalState)
+            clone.addState(newState)
+            if (state.initialState)
+            {
+                clone.setInitialState(newState)
+            }
+            statesMap[state] = newState
+        }
+
+        protocol.operations.each {Operation operation ->
+            Operation newOperation = factory.createOperation(
+                    operation.name,
+                    statesMap[operation.sourceState],
+                    statesMap[operation.targetState],
+                    getFactory().createMessage(operation.message.name, operation.message.polarity),
+                    operation.operationKind)
+            newOperation.putExtraProperty(
+                    StandardExtraProperties.TEMPORAL_CONSTRAINT,
+                    operation.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT))
+            clone.addOperation(newOperation)
+        }
+
+        return clone
     }
 }
 

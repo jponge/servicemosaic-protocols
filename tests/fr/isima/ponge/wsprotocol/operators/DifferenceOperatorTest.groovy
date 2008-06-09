@@ -2,9 +2,10 @@ package fr.isima.ponge.wsprotocol.operators
 
 import fr.isima.ponge.wsprotocol.*
 import fr.isima.ponge.wsprotocol.impl.*
+
 import junit.framework.TestCase
 
-class ComplementationOperatorTest extends TestCase
+class DifferenceOperatorTest extends TestCase
 {
     BusinessProtocolFactory factory = new BusinessProtocolFactoryImpl()
 
@@ -35,17 +36,24 @@ class ComplementationOperatorTest extends TestCase
         return p
     }
 
-    void testComplement()
+    void testDifference()
     {
-        def protocol = buildSimpleProtocol()
+        def p1 = buildSimpleProtocol()
+        def p2 = buildSimpleProtocol()
+        p2.removeOperation(p2.operations.find { it.name == "T3" })
 
-        ComplementationOperator operator = new ComplementationOperator()
-        def result = operator.apply(protocol)
+        DifferenceOperator difference = new DifferenceOperator()
+        def result = difference.apply(p1, p2)
 
-        assertEquals 4, result.states.size()
-        assertEquals 10, result.operations.size()
-        assertNotNull result.operations.find {
-            it.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT) == "C-Invoke((T1 <= 4) && (T1 >= 3))"
-        }
+        println "P1"
+        TestingUtils.dumpOperations p1
+        println ""
+
+        println "P2"
+        TestingUtils.dumpOperations p2
+        println ""
+
+        println "P1 ||td P2"
+        TestingUtils.dumpOperations result
     }
 }

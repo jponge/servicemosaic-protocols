@@ -25,7 +25,7 @@ class IntersectionOperatorTest extends TestCase
         assertEquals result, p3
 
         def t1_t1 = result.operations.find {it.name == "T1_T1"}
-        
+
         assertNotSame t1_t1,  null
         assertEquals "C-Invoke(T0_T0 < 10)", t1_t1.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT)
     }

@@ -25,7 +25,20 @@ class OperatorTest extends TestCase
         assertEquals "C-Invoke((_T1 >= 3) && (_T3 < 4))", op.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT) 
     }
 
-    void testConstraintNegatiob()
+    void testClone()
+    {
+        def base = "tests/fr/isima/ponge/wsprotocol/operators/"
+        BusinessProtocol p1 = TestingUtils.loadProtocol(base + "intersection/p1.wsprotocol")
+
+        Operator operator = new MockOperator()
+        def clone = operator.cloneProtocol(p1)
+
+        assertEquals p1.states.size(), clone.states.size()
+        assertEquals p1.operations.size(), clone.operations.size()
+        assertEquals p1, clone
+    }
+
+    void testConstraintNegation()
     {
         BusinessProtocolFactory factory = new BusinessProtocolFactoryImpl()
 

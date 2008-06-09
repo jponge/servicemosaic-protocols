@@ -14,8 +14,9 @@ class ComplementationOperator extends UnaryOperator
         super(factory)
     }
 
-    public BusinessProtocol apply(BusinessProtocol protocol)
+    public BusinessProtocol apply(BusinessProtocol p)
     {
+        BusinessProtocol protocol = cloneProtocol(p)
         BusinessProtocol complement = getFactory().createBusinessProtocol("^${protocol.name}")
         def statesMap = [:]
 
