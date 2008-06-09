@@ -24,6 +24,14 @@ class DifferenceOperator extends BinaryOperator
     @Override
     public BusinessProtocol apply(BusinessProtocol protocol1, BusinessProtocol protocol2)
     {
+        println "clone(p1)"
+        TestingUtils.dumpOperations cloneProtocol(protocol1)
+        println ""
+
+        println "clone(^p2)"
+        TestingUtils.dumpOperations complement.apply(cloneProtocol(protocol2))
+        println ""
+        
         intersection.apply(cloneProtocol(protocol1), complement.apply(cloneProtocol(protocol2)))
     }
 
