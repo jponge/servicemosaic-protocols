@@ -24,7 +24,13 @@ class IntersectionOperator extends BinaryOperator
         def resultStates = [:]
         def operationMapping = [:]
 
-        // Walk each state combination 
+        // Variables rewriting stuff
+        p1.operations.findAll { !isOperationConstraintEmpty(it) }.each { rewriteConstraintVariables(it) { name -> "_${name}" } }
+        p2.operations.findAll { !isOperationConstraintEmpty(it) }.each { rewriteConstraintVariables(it) { name -> "${name}_" } }
+        p1.operations.each { operationMapping["_${it.name}"] = [] }
+        p2.operations.each { operationMapping["${it.name}_"] = [] }
+
+        // Walk each state combination
         def stateSpace = [p1.states.asList(), p2.states.asList()].combinations()
         stateSpace.each {State s1, State s2 ->
 
@@ -56,16 +62,6 @@ class IntersectionOperator extends BinaryOperator
                     }
                 }
 
-                // Temporary variables rewriting
-                if (!isOperationConstraintEmpty(o1))
-                {
-                    rewriteConstraintVariables(o1) { name -> "_${name}" }
-                }
-                if (!isOperationConstraintEmpty(o2))
-                {
-                    rewriteConstraintVariables(o2) { name -> "${name}_" }
-                }
-
                 // Add the operation
                 def Operation operation = getFactory().createOperation(
                         operationName(o1, o2),
@@ -81,19 +77,45 @@ class IntersectionOperator extends BinaryOperator
                 result.addOperation(operation)
 
                 // Keep the mapping for rewriting the constraints
-                operationMapping["_${o1.name}"] = operation.name
-                operationMapping["${o2.name}_"] = operation.name    
+                operationMapping["_${o1.name}"] << operation.name
+                operationMapping["${o2.name}_"] << operation.name
             }
         }
 
         // Constraints rewriting
         result.operations.each { Operation op ->
-            if (!isOperationConstraintEmpty(op))
-            {
-                rewriteConstraintVariables(op) { name -> operationMapping[name] }
+            if (isOperationConstraintEmpty(op)) { return }
+            String originalConstraint = op.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT)
+            def originalVars = listVariablesInOperationConstraint(op)
+            def mappedCombinations = originalVars.collect { operationMapping[it] }.combinations()
+            def fakeOperations = []
+            mappedCombinations.size().times {
+                Operation fakeOperation = factory.createOperation("FAKE", null, null, null)
+                fakeOperation.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, originalConstraint)
+                fakeOperations << fakeOperation
             }
+            Iterator<Operation> fakeIterator = fakeOperations.iterator()
+            mappedCombinations.each { combination ->
+                def varPairs = [originalVars, combination].transpose()
+                Operation fakeOp = fakeIterator.next()
+                varPairs.each { pair ->
+                    rewriteConstraintVariables(fakeOp) { name -> (name == pair[0]) ? pair[1] : name }
+                }
+            }
+            def disjunction = fakeOperations.inject(null) { current, next ->
+                if (current == null)
+                {
+                    return next.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT)
+                }
+                else
+                {
+                    Operation fakeOperation = factory.createOperation("FAKE", null, null, null)
+                    fakeOperation.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, current)
+                    return constraintDisjunction(fakeOperation, next)
+                }
+            }
+            op.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, disjunction)
         }
-
         return result;
     }
 
@@ -119,6 +141,6 @@ class IntersectionOperator extends BinaryOperator
 
     protected Polarity polarity(Polarity p)
     {
-        p 
+        p
     }
 }
