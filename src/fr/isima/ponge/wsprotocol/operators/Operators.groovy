@@ -62,7 +62,29 @@ abstract class Operator
         operation.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, root.toString())
     }
 
-    protected String constraintConjunction(Operation o1, Operation o2)
+    private List collectVariableNames(IConstraintNode node)
+    {
+        if (node instanceof IRootConstraintNode)
+        {
+            return [collectVariableNames(node.leftChild), collectVariableNames(node.rightChild)]
+        }
+        else if (node instanceof VariableNode)
+        {
+            return [node.variableName]
+        }
+        else if (node instanceof IConstraintFunctionNode)
+        {
+            return [collectVariableNames(node.node)]
+        }
+    }
+
+    protected List listVariablesInOperationConstraint(Operation operation)
+    {
+        IConstraintNode constraintNode = this.parseConstraint(operation.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT))
+        return collectVariableNames(constraintNode).flatten().unique() - null
+    }
+
+    private String constraintCombination(Operation o1, Operation o2, symbol)
     {
         def c1 = o1.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT);
         def c2 = o2.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT);
@@ -85,9 +107,19 @@ abstract class Operator
         def ast = parseConstraint(c1)
         def root1 = ast.node
         def root2 = parseConstraint(c2).node
-        BooleanNode andNode = new BooleanNode(BooleanNode.AND, root1, root2)
+        BooleanNode andNode = new BooleanNode(symbol, root1, root2)
         ast.node = andNode
         return ast.toString()
+    }
+
+    protected String constraintConjunction(Operation o1, Operation o2)
+    {
+        constraintCombination(o1, o2, BooleanNode.AND)
+    }
+
+    protected String constraintDisjunction(Operation o1, Operation o2)
+    {
+        constraintCombination(o1, o2, BooleanNode.OR)
     }
 
     protected String negateConstraint(Operation op)

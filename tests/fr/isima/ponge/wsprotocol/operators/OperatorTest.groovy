@@ -25,6 +25,17 @@ class OperatorTest extends TestCase
         assertEquals "C-Invoke((_T1 >= 3) && (_T3 < 4))", op.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT) 
     }
 
+    void testListVariablesInOperationConstraint()
+    {
+        BusinessProtocolFactory factory = new BusinessProtocolFactoryImpl()
+        Operation fakeOperation = factory.createOperation("FAKE", null, null, null)
+        fakeOperation.putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, "C-Invoke( (T0 - T2 < 10) || ((T1 < 3) && (T2 < 4)) )")
+
+        Operator operator = new MockOperator()
+        def vars = operator.listVariablesInOperationConstraint(fakeOperation)
+        assertEquals (["T0", "T1", "T2"], vars.sort())
+    }
+
     void testClone()
     {
         def base = "tests/fr/isima/ponge/wsprotocol/operators/"
