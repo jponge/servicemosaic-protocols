@@ -19,6 +19,7 @@ class ComplementationOperator extends UnaryOperator
         BusinessProtocol protocol = cloneProtocol(p)
         BusinessProtocol complement = getFactory().createBusinessProtocol("^${protocol.name}")
         def statesMap = [:]
+        int newOperationsCounter = 0;
 
         // Copy states with reversed final state
         protocol.states.each {State state ->
@@ -62,6 +63,7 @@ class ComplementationOperator extends UnaryOperator
             operationsMap.each {message, operations ->
                 Operation fakeOperation = factory.createOperation("FAKE", null, null, null)
                 Operation negationOperation = getFactory().createOperation(
+                        "nT${newOperationsCounter++}",
                         statesMap[state], q,
                         getFactory().createMessage(message.name, message.polarity),
                         OperationKind.EXPLICIT)
@@ -81,6 +83,7 @@ class ComplementationOperator extends UnaryOperator
             // Add the remaining negation operations
             (protocol.messages - operationsMap.keySet()).each {message ->
                 Operation negationOperation = getFactory().createOperation(
+                        "nT${newOperationsCounter++}",
                         statesMap[state], q,
                         getFactory().createMessage(message.name, message.polarity),
                         OperationKind.EXPLICIT)
@@ -91,6 +94,7 @@ class ComplementationOperator extends UnaryOperator
         // Add q -> q operations
         protocol.messages.each {message ->
             Operation negationOperation = getFactory().createOperation(
+                    "nT${newOperationsCounter++}",
                     q, q,
                     getFactory().createMessage(message.name, message.polarity),
                     OperationKind.EXPLICIT)

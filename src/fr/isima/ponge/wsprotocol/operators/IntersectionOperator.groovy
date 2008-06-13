@@ -77,9 +77,19 @@ class IntersectionOperator extends BinaryOperator
                 result.addOperation(operation)
 
                 // Keep the mapping for rewriting the constraints
-                operationMapping["_${o1.name}"] << operation.name
-                operationMapping["${o2.name}_"] << operation.name
+                ["_${o1.name}", "${o2.name}_"].each {
+                    if (!operationMapping[it].contains(operation.name))
+                    {
+                        operationMapping[it] << operation.name
+                    }
+                }
             }
+        }
+
+        // Prune!
+        def removedOperations = pruneProtocol(result)
+        operationMapping.each { k, v ->
+            operationMapping[k] = operationMapping[k].findAll { !removedOperations.contains(it) }
         }
 
         // Constraints rewriting

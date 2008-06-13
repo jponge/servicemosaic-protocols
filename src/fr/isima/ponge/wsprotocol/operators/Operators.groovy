@@ -212,6 +212,41 @@ abstract class Operator
 
         return clone
     }
+
+    protected List<String> pruneProtocol(BusinessProtocol protocol)
+    {
+        def removedOperationsNames = []
+        
+        def deadlockStates = [1]
+        while (!deadlockStates.empty)
+        {
+            deadlockStates = protocol.states.findAll { State s -> (!s.finalState) && (s.outgoingOperations.size() == 0) }
+            deadlockStates.each { State s ->
+                def incomingOperations = s.incomingOperations.findAll { true }
+                incomingOperations.each { Operation o ->
+                    protocol.removeOperation(o)
+                    removedOperationsNames << o.name
+                }
+                protocol.removeState(s)
+            }
+        }
+
+        def isolatedStates = [1]
+        while (!isolatedStates.empty)
+        {
+            isolatedStates = protocol.states.findAll { State s -> (!s.initialState) && (s.incomingOperations.size() == 0) }
+            isolatedStates.each { State s ->
+                def outgoingOperations = s.outgoingOperations.findAll { true }
+                outgoingOperations.each { Operation o ->
+                    protocol.removeOperation(o)
+                    removedOperationsNames << o.name
+                }
+                protocol.removeState(s)
+            }
+        }
+
+        return removedOperationsNames
+    }
 }
 
 abstract class UnaryOperator extends Operator

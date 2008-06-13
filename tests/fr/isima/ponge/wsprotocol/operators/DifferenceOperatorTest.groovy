@@ -4,6 +4,7 @@ import fr.isima.ponge.wsprotocol.*
 import fr.isima.ponge.wsprotocol.impl.*
 
 import junit.framework.TestCase
+import fr.isima.ponge.wsprotocol.xml.XmlIOManager
 
 class DifferenceOperatorTest extends TestCase
 {
@@ -38,22 +39,13 @@ class DifferenceOperatorTest extends TestCase
 
     void testDifference()
     {
-        def p1 = buildSimpleProtocol()
-        def p2 = buildSimpleProtocol()
+        def p1 = buildSimpleProtocol("P1")
+        def p2 = buildSimpleProtocol("P2")
         p2.removeOperation(p2.operations.find { it.name == "T3" })
 
         DifferenceOperator difference = new DifferenceOperator()
         def result = difference.apply(p1, p2)
-
-        println "P1"
-        TestingUtils.dumpOperations p1
-        println ""
-
-        println "P2"
-        TestingUtils.dumpOperations p2
-        println ""
-
-        println "P1 ||td P2"
-        TestingUtils.dumpOperations result
+        
+        assertEquals 6, result.states.size()
     }
 }
