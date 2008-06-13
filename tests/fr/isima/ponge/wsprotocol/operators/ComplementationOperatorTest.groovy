@@ -44,6 +44,13 @@ class ComplementationOperatorTest extends TestCase
 
         assertEquals 4, result.states.size()
         assertEquals 10, result.operations.size()
+
+        assertTrue result.initialState.name == "s1"
+        assertTrue result.initialState.finalState
+        assertTrue result.states.find { it.name == "s2" }.finalState
+        assertFalse result.states.find { it.name == "s3" }.finalState
+        assertTrue result.states.find { it.name == "_q_" }.finalState
+
         assertNotNull result.operations.find {
             (it.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT) == "C-Invoke((T1 >= 3) && (T1 <= 4))") ||
                     (it.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT) == "C-Invoke((T1 <= 4) && (T1 >= 3))")
