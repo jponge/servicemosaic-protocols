@@ -28,6 +28,12 @@ class IntersectionOperatorTest extends TestCase
 
         assertNotSame t1_t1,  null
         assertEquals "C-Invoke(T0_T0 < 10)", t1_t1.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT)
+
+        p2.states.find { it.name == "s1" }.finalState = true
+        result = operator.apply(p1, p2)
+
+        assertFalse result.states.find { it.name == "(s1,s1)" }.finalState
+        assertTrue result.states.find { it.name == "(s2,s2)" }.finalState 
     }
 
     void testConstraintConjunction()
