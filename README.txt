@@ -31,7 +31,7 @@ The unit tests have the following dependencies (jar included in lib/):
 
    3. Licenses
 
-The Protocols library is covered by the CDDL license (see LICENSE.txt).
+The Protocols library is covered by the LGPLv3 license (see LICENSE.txt).
 
-The libraries developped by the Apache Software Foundation are covered by the
+The libraries developed by the Apache Software Foundation are covered by the
 Apache Software License (see LICENSE.apache-libraries.txt).
