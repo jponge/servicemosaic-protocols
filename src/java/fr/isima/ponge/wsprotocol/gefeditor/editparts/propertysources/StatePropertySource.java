@@ -1,27 +1,22 @@
 /* 
- * CDDL HEADER START 
+ * Copyright 2005-2008 Julien Ponge <http://julien.ponge.info/>.
+ * Copyright 2005-2008 Universite Blaise Pascal, LIMOS, Clermont-Ferrand, France.
+ * Copyright 2005-2008 The University of New South Wales, Sydney, Australia.
  * 
- * The contents of this file are subject to the terms of the 
- * Common Development and Distribution License (the "License"). 
- * You may not use this file except in compliance with the License. 
+ * This file is part of ServiceMosaic Protocols <http://servicemosaic.isima.fr/>.
  * 
- * You can obtain a copy of the license at LICENSE.txt 
- * or at http://www.opensource.org/licenses/cddl1.php. 
- * See the License for the specific language governing permissions 
- * and limitations under the License. 
+ * ServiceMosaic Protocols is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  * 
- * When distributing Covered Code, include this CDDL HEADER in each 
- * file and include the License file at LICENSE.txt. 
- * If applicable, add the following below this CDDL HEADER, with the 
- * fields enclosed by brackets "[]" replaced with your own identifying 
- * information: Portions Copyright [yyyy] [name of copyright owner] 
+ * ServiceMosaic Protocols is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
  * 
- * CDDL HEADER END 
- */ 
-
-/* 
- * Copyright 2005, 2006 Julien Ponge. All rights reserved. 
- * Use is subject to license terms. 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with ServiceMosaic Protocols.  If not, see <http://www.gnu.org/licenses/>.
  */ 
 
 package fr.isima.ponge.wsprotocol.gefeditor.editparts.propertysources;
