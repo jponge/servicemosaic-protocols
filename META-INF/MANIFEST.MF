@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: WS-Protocol API
 Bundle-SymbolicName: fr.isima.ponge.wsprotocol
-Bundle-Version: 0.4.0
+Bundle-Version: 1.0.0
 Bundle-ClassPath: .
 Bundle-Vendor: Julien Ponge
 Bundle-Localization: plugin
