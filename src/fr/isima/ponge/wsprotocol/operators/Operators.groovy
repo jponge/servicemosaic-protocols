@@ -28,6 +28,11 @@ import fr.isima.ponge.wsprotocol.timed.constraints.parser.TemporalConstraintLexe
 import fr.isima.ponge.wsprotocol.timed.constraints.parser.TemporalConstraintParser
 import fr.isima.ponge.wsprotocol.timed.constraints.parser.TemporalConstraintTreeWalker
 
+/**
+ * Abstract operator class.
+ *
+ * @author Julien Ponge
+ */
 abstract class Operator
 {
     BusinessProtocolFactory factory
@@ -270,6 +275,11 @@ abstract class Operator
     }
 }
 
+/**
+ * Unary operator abstract class.
+ *
+ * @author Julien Ponge
+ */
 abstract class UnaryOperator extends Operator
 {
     UnaryOperator()
@@ -282,9 +292,20 @@ abstract class UnaryOperator extends Operator
         super(factory)
     }
 
+    /**
+     * Method that applies the operator effect on a business protocol.
+     *
+     * @param protocol the input business protocol
+     * @return the resulting business protocol
+     */
     abstract BusinessProtocol apply(BusinessProtocol protocol)
 }
 
+/**
+ * Binary operator abstract class.
+ *
+ * @author Julien Ponge
+ */
 abstract class BinaryOperator extends Operator
 {
     BinaryOperator()
@@ -297,5 +318,12 @@ abstract class BinaryOperator extends Operator
         super(factory)
     }
 
+    /**
+     * Applies the operator effect on two business protocols.
+     *
+     * @param protocol1 the first protocol
+     * @param protocol2 the second protocol
+     * @return the resulting business protocol
+     */
     abstract BusinessProtocol apply(BusinessProtocol protocol1, BusinessProtocol protocol2)
 }

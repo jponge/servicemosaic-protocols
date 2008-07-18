@@ -25,6 +25,11 @@ import fr.isima.ponge.wsprotocol.BusinessProtocol
 import fr.isima.ponge.wsprotocol.Operation
 import fr.isima.ponge.wsprotocol.Polarity
 
+/**
+ * Computes the parallel composition of two protocols.
+ *
+ * @author Julien Ponge
+ */
 class CompositionOperator extends IntersectionOperator
 {
     protected boolean match(Operation o1, Operation o2)

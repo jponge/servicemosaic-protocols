@@ -23,6 +23,11 @@ package fr.isima.ponge.wsprotocol.operators
 
 import fr.isima.ponge.wsprotocol.*
 
+/**
+ * Computes the intersection of 2 protocols.
+ *
+ * @author Julien Ponge
+ */
 class IntersectionOperator extends BinaryOperator
 {
     IntersectionOperator()

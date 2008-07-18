@@ -23,6 +23,11 @@ package fr.isima.ponge.wsprotocol.operators
 
 import fr.isima.ponge.wsprotocol.*
 
+/**
+ * Computes the difference between 2 protocols.
+ *
+ * @author Julien Ponge
+ */
 class DifferenceOperator extends BinaryOperator
 {
     private IntersectionOperator intersection;

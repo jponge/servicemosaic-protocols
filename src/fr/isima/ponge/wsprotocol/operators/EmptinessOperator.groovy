@@ -30,6 +30,22 @@ import fr.isima.ponge.wsprotocol.timed.constraints.parser.*
 import groovy.xml.MarkupBuilder
 
 
+/**
+ * Checks whether a protocol is empty or not, i.e., whether it supports at least a
+ * conversation of not.
+ *
+ * The operator relies on UPPAAL which must be obtained from http://uppaal.com/ (note
+ * that it is published under a restrictive, non-opensource license).
+ *
+ * The path to the 'verifyta' executable can be passed to the constructor, or specified
+ * either from:
+ * <ul>
+ *  <li>a <em>VERIFYTA</em> environment variable</li>
+ *  <li>a <em>verifyta</em> property passed to the JVM</li>
+ * </ul>
+ *
+ * @author Julien Ponge
+ */
 class EmptinessOperator
 {
     String verifytaPath

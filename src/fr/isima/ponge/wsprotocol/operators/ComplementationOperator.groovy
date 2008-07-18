@@ -23,6 +23,13 @@ package fr.isima.ponge.wsprotocol.operators
 
 import fr.isima.ponge.wsprotocol.*
 
+/**
+ * Computes the complement of a business protocol.
+ * The resulting protocol recognizes all the timed conversations that
+ * are not recognized by the input one.
+ *
+ * @author Julien Ponge
+ */
 class ComplementationOperator extends UnaryOperator
 {
     ComplementationOperator()
