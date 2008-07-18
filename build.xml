@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    
+    Ant build file
+    
+    By Julien Ponge (ponge@isima.fr)
+    
+-->
+<project basedir="." name="WS-Protocol" default="dist">
+
+    <!--
+        Preambule.
+    -->
+    <property file="ant.properties"/>
+
+    <!-- classpath for compiling the sources -->
+    <path id="classpath.src">
+        <fileset dir="${basedir}">
+            <include name="${lib.dir}/*.jar"/>
+        </fileset>
+    </path>
+    <path id="classpath.test">
+        <path refid="classpath.src"/>
+        <path path="${build.java.dir}"/>
+        <path path="${build.tests.dir}"/>
+    </path>
+    <path id="classpath.groovy">
+        <pathelement path="${lib.dir}/groovy-all-1.5.6.jar"/>
+    </path>
+
+    <!--
+       Groovy compiler
+    -->
+    <taskdef name="groovyc"
+         classname="org.codehaus.groovy.ant.Groovyc"
+         classpathref="classpath.groovy"/>
+    <taskdef name="groovydoc"
+         classname="org.codehaus.groovy.ant.Groovydoc"
+         classpathref="classpath.groovy"/>
+
+    <!--
+        Creates the required folders for the building process.
+    -->
+    <target name="init">
+        <tstamp/>
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.java.dir}"/>
+        <mkdir dir="${build.jars.dir}"/>
+        <mkdir dir="${build.dist.dir}"/>
+        <mkdir dir="${build.javadoc}"/>
+        <mkdir dir="${build.tests.dir}"/>
+    </target>
+
+    <!--
+        Compiles the classes.
+    -->
+    <target name="compile" depends="init">
+        <groovyc srcdir="${src.dir}" destdir="${build.java.dir}" classpathref="classpath.src">
+            <javac debug="${debug}" debuglevel="${debug.level}"
+                   target="${target.java.version}" source="${source.java.version}"/>
+        </groovyc>
+        <copy todir="${build.java.dir}">
+            <fileset dir="${src.dir}">
+                <include name="**/*.properties"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <!--
+        Creates the javadocs.
+    -->
+    <target name="javadoc" depends="init">
+        <groovydoc sourcepath="${src.dir}" destdir="${build.javadoc} "/>
+    </target>
+
+    <!--
+        Tests suite.
+    -->
+    <target name="test" depends="compile">
+        <groovyc srcdir="${tests.dir}" destdir="${build.tests.dir}" classpathref="classpath.test">
+            <javac debug="${debug}" debuglevel="${debug.level}"
+                   target="${target.java.version}" source="${source.java.version}"/>
+        </groovyc>
+        <copy todir="${build.tests.dir}">
+            <fileset dir="${tests.dir}">
+                <include name="**/*"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <junit haltonfailure="true" showoutput="true">
+            <classpath refid="classpath.test"/>
+            <formatter type="brief" usefile="false"/>
+            <batchtest>
+                <fileset dir="${build.tests.dir}">
+                    <include name="**/*Test.class"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <!--
+        Creates the archives.
+    -->
+    <target name="dist" depends="compile,test,javadoc">
+        <!-- jar -->
+        <jar destfile="${build.jars.dir}/${product.jar}">
+            <fileset dir="${build.java.dir}">
+                <include name="**/*"/>
+                <exclude name="**/*Test*"/>
+            </fileset>
+        </jar>
+        <!-- binary archive -->
+        <zip destfile="${build.dist.dir}/${product.bin}.zip">
+            <zipfileset dir="${build.jars.dir}" prefix="${product.archprefix}">
+                <include name="${product.jar}"/>
+            </zipfileset>
+            <zipfileset dir="${basedir}" prefix="${product.archprefix}">
+                <include name="${lib.dir}/*.jar"/>
+                <exclude name="${lib.dir}/junit.jar"/>
+                <include name="*.txt"/>
+            </zipfileset>
+            <zipfileset dir="${build.javadoc}" prefix="${product.archprefix}/doc/javadoc">
+                <include name="**/*"/>
+            </zipfileset>
+        </zip>
+        <!-- source archive -->
+        <zip destfile="${build.dist.dir}/${product.src}.zip">
+            <zipfileset dir="${basedir}" prefix="${product.archprefix}">
+                <include name="*/**"/>
+                <include name=".classpath"/>
+                <include name=".project"/>
+                <include name=".settings/**"/>
+                <exclude name="bin/**"/>
+                <exclude name="${build.dir}/**"/>
+            </zipfileset>
+        </zip>
+        <!-- md5 checksums -->
+        <checksum file="${build.dist.dir}/${product.bin}.zip" forceoverwrite="yes"/>
+        <checksum file="${build.dist.dir}/${product.src}.zip" forceoverwrite="yes"/>
+    </target>
+
+    <!--
+        Cleans up everything.
+    -->
+    <target name="clean" depends="init">
+        <delete dir="${build.dir}"/>
+    </target>
+
+</project>

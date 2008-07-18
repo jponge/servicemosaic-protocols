@@ -26,7 +26,6 @@ import fr.isima.ponge.wsprotocol.operators.EmptinessOperator
 * along with ServiceMosaic Protocols.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 /*
  * This is not implemented as a JUnit test case as there is a dependency
  * on UPPAAL which is an external tool with licensing restrictions.
