@@ -21,18 +21,49 @@
 
 package fr.isima.ponge.wsprotocol.operators
 
+import java.io.*
+
 import fr.isima.ponge.wsprotocol.*
+import fr.isima.ponge.wsprotocol.timed.constraints.*
+import fr.isima.ponge.wsprotocol.timed.constraints.parser.*
+
 import groovy.xml.MarkupBuilder
+
 
 class EmptinessOperator
 {
+    String verifytaPath
+
+    EmptinessOperator(String verifytaPath)
+    {
+        this.verifytaPath = verifytaPath
+    }
+
     boolean isEmpty(BusinessProtocol protocol)
     {
-        def writer = new StringWriter()
+        File xml = File.createTempFile("ServiceMosaicProtocolsEmptiness", ".xml")
+        File queries = File.createTempFile("ServiceMosaicProtocolsEmptiness", ".q")
 
-        buildUppaalXML(writer, protocol)
+        def xmlWriter = new StringWriter()
+        buildUppaalXML(xmlWriter, protocol)
+        xml.withWriter { out -> out.write(xmlWriter.toString()) }
 
-        println writer.toString()
+        queries.withWriter { out ->
+            protocol.finalStates.each { state ->
+                out.writeLine "E<>Process.${state.name}"
+            }
+        }
+
+        def command = "${verifytaPath} -s \"${xml.canonicalPath}\" \"${queries.canonicalPath}\""
+        def process = command.execute()
+        boolean empty = true
+        process.in.eachLine { line ->
+            if (line.contains('-- Property is satisfied'))
+            {
+                empty = false
+            }
+        }
+        return empty
     }
 
     private void buildUppaalXML(writer, BusinessProtocol protocol)
@@ -65,9 +96,85 @@ class EmptinessOperator
                     transition {
                         source ref: op.sourceState.name
                         target ref: op.targetState.name
+                        label kind: 'assignment', resetsFor(op)
+                        label kind: 'guard', guardFor(op)
                     }
                 }
             }
+            system 'Process = Template();\nsystem Process;'
+        }
+    }
+
+    private String resetsFor(Operation op)
+    {
+        "x_${op.name} = 0, bx_${op.name} = true, y_${op.targetState.name} = 0"
+    }
+
+    private String guardFor(Operation op)
+    {
+        def constraint = op.getExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT)
+        if (constraint == null || "".equals(constraint))
+        {
+            return ""
+        }
+
+        TemporalConstraintLexer lexer
+        TemporalConstraintParser parser
+        TemporalConstraintTreeWalker walker = new TemporalConstraintTreeWalker()
+
+        lexer = new TemporalConstraintLexer(new StringReader(constraint))
+        parser = new TemporalConstraintParser(lexer)
+        try
+        {
+            parser.constraint()
+            def astRoot =  walker.constraint(parser.getAST())
+            return computeGuard(astRoot.node)
+        }
+        catch (Exception e)
+        {
+            return ""
+        }
+    }
+
+    private String computeGuard(IConstraintNode node)
+    {
+        if (node instanceof BooleanNode)
+        {
+            def symbol = (node.symbol == BooleanNode.AND) ? 'and' : 'or'
+            return "${computeGuard(node.leftChild)} ${symbol} ${computeGuard(node.rightChild)}"
+        }
+        else if (node instanceof ComparisonNode)
+        {
+            if (node.leftChild instanceof VariableNode)
+            {
+                def variable = node.leftChild
+                def constant = node.rightChild
+                if (constant.constant == -1)
+                {
+                    return "(bx_${variable.variableName} ${node.symbol} false)"
+                }
+                else
+                {
+                    return "(x_${variable.variableName} ${node.symbol} ${constant.constant})"
+                }
+            }
+            else
+            {
+                def variable = node.rightChild
+                def constant = node.leftChild
+                if (constant.constant == -1)
+                {
+                    return "(false ${node.symbol} bx_${variable.variableName})"
+                }
+                else
+                {
+                    return "(${constant.constant} ${node.symbol} x_${variable.variableName})"
+                }
+            }
+        }
+        else if (node instanceof DiagonalNode)
+        {
+            return "(x_${node.firstVariable} - x_${node.secondVariable} ${node.operator} ${node.constantNode.constant})"            
         }
     }
 }

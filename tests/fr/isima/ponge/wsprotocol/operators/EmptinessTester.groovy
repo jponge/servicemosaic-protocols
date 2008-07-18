@@ -54,11 +54,12 @@ def buildSimpleProtocol(String name = "P")
             factory.createOperation("T2", states[1], states[2], messages[1]),
             factory.createOperation("T3", states[1], states[0], messages[1])
     ].each { p.addOperation it }
-    operations[1].putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, "C-Invoke(T1 < 3)")
+    operations[1].putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, "C-Invoke((T1 < 3) && (T1 < 5))")
     operations[2].putExtraProperty(StandardExtraProperties.TEMPORAL_CONSTRAINT, "C-Invoke(T1 > 4)")
 
     return p
 }
 
-EmptinessOperator op = new EmptinessOperator()
-op.isEmpty(buildSimpleProtocol())
+path = "C:\\Program Files\\uppaal-4.0.6\\bin-Win32\\verifyta.exe"
+EmptinessOperator op = new EmptinessOperator(path)
+println op.isEmpty(buildSimpleProtocol())
