@@ -36,7 +36,18 @@ class EmptinessOperator
 
     EmptinessOperator(String verifytaPath)
     {
-        this.verifytaPath = verifytaPath
+        if (verifytaPath == null)
+        {
+            this.verifytaPath = System.getenv('VERIFYTA')
+            if (verifytaPath == null)
+            {
+                this.verifytaPath = System.getProperty("verifyta")
+            }
+        }
+        else
+        {
+            this.verifytaPath = verifytaPath
+        }
     }
 
     boolean isEmpty(BusinessProtocol protocol)
