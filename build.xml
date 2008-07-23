@@ -7,7 +7,7 @@
     By Julien Ponge (ponge@isima.fr)
     
 -->
-<project basedir="." name="WS-Protocol" default="dist">
+<project basedir="." name="ProtocolAnalysisLibrary" default="dist">
 
     <!--
         Preambule.
