@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Linking with WSDL</title>
+</head>
+<body>
+
+<h1>Linking with WSDL</h1>
+
+<p>The web services business protocol editor can take advantage of WSDL definition files
+to make sure that the messages used to describe the protocol match what the service
+actually supports.</p>
+
+<ol>
+    <li>Click anywhere outside an element of the protocol to make the protocol the selected
+    element. The properties view should reflect the change accordingly by showing only
+    protocol properties.</li>
+    
+    <li>Change the protocol WSDL URL property to point to the service WSDL. For local files,
+    please make sure that the URL starts with <code>file://</code>, for instance
+    <code>file://c/some-folder/my.wsdl</code> or <code>file:///home/julien/my.wsdl</code>.</li>
+    
+    <li>When editing transitions, the message property is now displayed in a drop-down list containing
+    the messages gathered from the WSDL description.</li>
+</ol>
+
+</body>
+</html>
