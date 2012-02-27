@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.1"?>
+
+<product name="%productName" id="org.eclipse.sdk.ide" application="org.eclipse.ui.ide.workbench" useFeatures="false">
+
+   <aboutInfo>
+      <image path="eclipse_lg.gif"/>
+      <text>
+         %productBlurb
+      </text>
+   </aboutInfo>
+
+   <configIni use="default"/>
+
+   <launcherArgs>
+   </launcherArgs>
+
+   <windowImages i16="eclipse.gif" i32="eclipse32.gif"/>
+
+   <launcher name="protocols-demo">
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <plugins>
+      <plugin id="au.unsw.singh.wsoperation"/>
+      <plugin id="com.ibm.icu"/>
+      <plugin id="fr.isima.lebeausempe.wsprotocol.emptiness"/>
+      <plugin id="fr.isima.lebeausempe.wsprotocol.emptiness.ui"/>
+      <plugin id="fr.isima.ponge.wsprotocol"/>
+      <plugin id="fr.isima.ponge.wsprotocol.gefeditor"/>
+      <plugin id="fr.isima.ponge.wsprotocol.help"/>
+      <plugin id="fr.isima.ponge.wsprotocol.timed.operators"/>
+      <plugin id="fr.isima.ponge.wsprotocol.timed.operators.ui"/>
+      <plugin id="fr.isima.ponge.wsprotocol.wsoperations"/>
+      <plugin id="fr.isima.rivetgarcia.bpel2protocol"/>
+      <plugin id="org.antlr"/>
+      <plugin id="org.apache.ant"/>
+      <plugin id="org.apache.axis"/>
+      <plugin id="org.apache.commons.logging"/>
+      <plugin id="org.apache.commons_logging"/>
+      <plugin id="org.apache.jakarta_log4j"/>
+      <plugin id="org.apache.lucene"/>
+      <plugin id="org.apache.wsil4j"/>
+      <plugin id="org.apache.xerces"/>
+      <plugin id="org.dom4j"/>
+      <plugin id="org.eclipse.ant.core"/>
+      <plugin id="org.eclipse.bpel.common.model"/>
+      <plugin id="org.eclipse.bpel.common.ui"/>
+      <plugin id="org.eclipse.bpel.model"/>
+      <plugin id="org.eclipse.bpel.ui"/>
+      <plugin id="org.eclipse.compare"/>
+      <plugin id="org.eclipse.core.commands"/>
+      <plugin id="org.eclipse.core.contenttype"/>
+      <plugin id="org.eclipse.core.expressions"/>
+      <plugin id="org.eclipse.core.filebuffers"/>
+      <plugin id="org.eclipse.core.filesystem"/>
+      <plugin id="org.eclipse.core.filesystem.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.core.resources"/>
+      <plugin id="org.eclipse.core.resources.compatibility" fragment="true"/>
+      <plugin id="org.eclipse.core.resources.hpux"/>
+      <plugin id="org.eclipse.core.resources.linux"/>
+      <plugin id="org.eclipse.core.resources.macosx"/>
+      <plugin id="org.eclipse.core.resources.win32" fragment="true"/>
+      <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.core.runtime.compatibility"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
+      <plugin id="org.eclipse.core.variables"/>
+      <plugin id="org.eclipse.debug.core"/>
+      <plugin id="org.eclipse.debug.ui"/>
+      <plugin id="org.eclipse.draw2d"/>
+      <plugin id="org.eclipse.emf.codegen"/>
+      <plugin id="org.eclipse.emf.common"/>
+      <plugin id="org.eclipse.emf.common.ui"/>
+      <plugin id="org.eclipse.emf.ecore"/>
+      <plugin id="org.eclipse.emf.ecore.change"/>
+      <plugin id="org.eclipse.emf.ecore.edit"/>
+      <plugin id="org.eclipse.emf.ecore.xmi"/>
+      <plugin id="org.eclipse.emf.edit"/>
+      <plugin id="org.eclipse.emf.edit.ui"/>
+      <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.preferences"/>
+      <plugin id="org.eclipse.equinox.registry"/>
+      <plugin id="org.eclipse.gef"/>
+      <plugin id="org.eclipse.help"/>
+      <plugin id="org.eclipse.help.appserver"/>
+      <plugin id="org.eclipse.help.base"/>
+      <plugin id="org.eclipse.help.ui"/>
+      <plugin id="org.eclipse.help.webapp"/>
+      <plugin id="org.eclipse.jdt.core"/>
+      <plugin id="org.eclipse.jdt.debug"/>
+      <plugin id="org.eclipse.jdt.launching"/>
+      <plugin id="org.eclipse.jem.util"/>
+      <plugin id="org.eclipse.jface"/>
+      <plugin id="org.eclipse.jface.text"/>
+      <plugin id="org.eclipse.ltk.core.refactoring"/>
+      <plugin id="org.eclipse.ltk.ui.refactoring"/>
+      <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.osgi.util"/>
+      <plugin id="org.eclipse.sdk"/>
+      <plugin id="org.eclipse.search"/>
+      <plugin id="org.eclipse.swt"/>
+      <plugin id="org.eclipse.swt.carbon.macosx.ppc"/>
+      <plugin id="org.eclipse.swt.gtk.linux.ppc"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86"/>
+      <plugin id="org.eclipse.swt.gtk.linux.x86_64"/>
+      <plugin id="org.eclipse.swt.gtk.solaris.sparc"/>
+      <plugin id="org.eclipse.swt.motif.aix.ppc"/>
+      <plugin id="org.eclipse.swt.motif.hpux.PA_RISC"/>
+      <plugin id="org.eclipse.swt.motif.linux.x86"/>
+      <plugin id="org.eclipse.swt.motif.solaris.sparc"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.team.core"/>
+      <plugin id="org.eclipse.team.ui"/>
+      <plugin id="org.eclipse.text"/>
+      <plugin id="org.eclipse.tomcat"/>
+      <plugin id="org.eclipse.ui"/>
+      <plugin id="org.eclipse.ui.carbon"/>
+      <plugin id="org.eclipse.ui.cheatsheets"/>
+      <plugin id="org.eclipse.ui.console"/>
+      <plugin id="org.eclipse.ui.editors"/>
+      <plugin id="org.eclipse.ui.forms"/>
+      <plugin id="org.eclipse.ui.ide"/>
+      <plugin id="org.eclipse.ui.navigator"/>
+      <plugin id="org.eclipse.ui.navigator.resources"/>
+      <plugin id="org.eclipse.ui.views"/>
+      <plugin id="org.eclipse.ui.views.properties.tabbed"/>
+      <plugin id="org.eclipse.ui.win32" fragment="true"/>
+      <plugin id="org.eclipse.ui.workbench"/>
+      <plugin id="org.eclipse.ui.workbench.texteditor"/>
+      <plugin id="org.eclipse.update.configurator"/>
+      <plugin id="org.eclipse.update.core"/>
+      <plugin id="org.eclipse.update.core.linux"/>
+      <plugin id="org.eclipse.update.core.win32" fragment="true"/>
+      <plugin id="org.eclipse.update.ui"/>
+      <plugin id="org.eclipse.wst.command.env"/>
+      <plugin id="org.eclipse.wst.command.env.core"/>
+      <plugin id="org.eclipse.wst.command.env.ui"/>
+      <plugin id="org.eclipse.wst.common.core"/>
+      <plugin id="org.eclipse.wst.common.emf"/>
+      <plugin id="org.eclipse.wst.common.emfworkbench.integration"/>
+      <plugin id="org.eclipse.wst.common.environment"/>
+      <plugin id="org.eclipse.wst.common.frameworks"/>
+      <plugin id="org.eclipse.wst.common.project.facet.core"/>
+      <plugin id="org.eclipse.wst.common.ui"/>
+      <plugin id="org.eclipse.wst.common.uriresolver"/>
+      <plugin id="org.eclipse.wst.internet.monitor.core"/>
+      <plugin id="org.eclipse.wst.server.core"/>
+      <plugin id="org.eclipse.wst.sse.core"/>
+      <plugin id="org.eclipse.wst.sse.ui"/>
+      <plugin id="org.eclipse.wst.validation"/>
+      <plugin id="org.eclipse.wst.ws"/>
+      <plugin id="org.eclipse.wst.ws.parser"/>
+      <plugin id="org.eclipse.wst.ws.ui"/>
+      <plugin id="org.eclipse.wst.wsdl"/>
+      <plugin id="org.eclipse.wst.wsdl.ui"/>
+      <plugin id="org.eclipse.wst.wsdl.validation"/>
+      <plugin id="org.eclipse.wst.xml.core"/>
+      <plugin id="org.eclipse.wst.xml.ui"/>
+      <plugin id="org.eclipse.wst.xmleditor.doc.user"/>
+      <plugin id="org.eclipse.wst.xsd.core"/>
+      <plugin id="org.eclipse.wst.xsd.ui"/>
+      <plugin id="org.eclipse.xsd"/>
+      <plugin id="org.eclipse.xsd.edit"/>
+      <plugin id="org.uddi4j"/>
+      <plugin id="org.wsdl4j"/>
+   </plugins>
+
+</product>
