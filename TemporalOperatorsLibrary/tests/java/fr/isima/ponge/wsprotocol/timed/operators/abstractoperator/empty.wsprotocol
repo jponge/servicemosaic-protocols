@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<business-protocol>
+  <name>New protocol</name>
+  <state>
+    <name>s2</name>
+    <final>true</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>460</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>257</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>s0</name>
+    <final>false</final>
+    <initial-state/>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>96</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>304</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>s4</name>
+    <final>false</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>430</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>620</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>s1</name>
+    <final>false</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>277</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>201</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>s3</name>
+    <final>false</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>188</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>584</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <operation>
+    <message>
+      <name>m0</name>
+      <polarity>positive</polarity>
+    </message>
+    <name>T0</name>
+    <source>s1</source>
+    <target>s2</target>
+    <kind>explicit</kind>
+  </operation>
+  <operation>
+    <message>
+      <name>m1</name>
+      <polarity>negative</polarity>
+    </message>
+    <name>T1</name>
+    <source>s3</source>
+    <target>s4</target>
+    <kind>explicit</kind>
+  </operation>
+  <operation>
+    <message>
+      <name>m2</name>
+      <polarity>positive</polarity>
+    </message>
+    <name>T2</name>
+    <source>s3</source>
+    <target>s3</target>
+    <kind>explicit</kind>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.relative.bendpoints</name>
+      <value>-20:-70:-30:-80:20:-70:30:-80</value>
+    </extra-property>
+  </operation>
+  <operation>
+    <message>
+      <name>m3</name>
+      <polarity>positive</polarity>
+    </message>
+    <name>T3</name>
+    <source>s4</source>
+    <target>s1</target>
+    <kind>explicit</kind>
+  </operation>
+  <operation>
+    <message>
+      <name>m4</name>
+      <polarity>negative</polarity>
+    </message>
+    <name>T4</name>
+    <source>s1</source>
+    <target>s3</target>
+    <kind>explicit</kind>
+  </operation>
+</business-protocol>

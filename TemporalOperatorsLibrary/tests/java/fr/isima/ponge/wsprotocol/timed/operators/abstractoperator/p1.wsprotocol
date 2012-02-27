@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<business-protocol>
+  <name>New protocol</name>
+  <state>
+    <name>s9</name>
+    <final>false</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>99</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>525</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>s7</name>
+    <final>false</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>271</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>223</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>s8</name>
+    <final>true</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>309</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>609</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>s6</name>
+    <final>false</final>
+    <initial-state/>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>62</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>200</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <operation>
+    <message>
+      <name>m5</name>
+      <polarity>positive</polarity>
+    </message>
+    <name>T5</name>
+    <source>s6</source>
+    <target>s7</target>
+    <kind>explicit</kind>
+  </operation>
+  <operation>
+    <message>
+      <name>m6</name>
+      <polarity>negative</polarity>
+    </message>
+    <name>T6</name>
+    <source>s7</source>
+    <target>s8</target>
+    <kind>explicit</kind>
+  </operation>
+</business-protocol>

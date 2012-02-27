@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<business-protocol>
+  <name>^p1</name>
+  <state>
+    <name>mu</name>
+    <final>true</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>247</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>404</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>s2</name>
+    <final>false</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>444</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>71</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>s0</name>
+    <final>false</final>
+    <initial-state/>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>39</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>71</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <state>
+    <name>s1</name>
+    <final>false</final>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.height</name>
+      <value>60</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.y</name>
+      <value>247</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.x</name>
+      <value>71</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.width</name>
+      <value>100</value>
+    </extra-property>
+  </state>
+  <operation>
+    <message>
+      <name>m0</name>
+      <polarity>negative</polarity>
+    </message>
+    <name>Tmu1</name>
+    <source>mu</source>
+    <target>mu</target>
+    <kind>explicit</kind>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.relative.bendpoints</name>
+      <value>-46:-94:-46:-94:31:-83:31:-83</value>
+    </extra-property>
+  </operation>
+  <operation>
+    <message>
+      <name>m1</name>
+      <polarity>positive</polarity>
+    </message>
+    <name>Tcomp0</name>
+    <source>s0</source>
+    <target>mu</target>
+    <kind>explicit</kind>
+  </operation>
+  <operation>
+    <message>
+      <name>m1</name>
+      <polarity>positive</polarity>
+    </message>
+    <name>T1</name>
+    <source>s1</source>
+    <target>s2</target>
+    <kind>explicit</kind>
+    <extra-property type="java.lang.String">
+      <name>wsprotocol.temporal.constraint</name>
+      <value>C-Invoke(T0 &lt; 10)</value>
+    </extra-property>
+  </operation>
+  <operation>
+    <message>
+      <name>m0</name>
+      <polarity>negative</polarity>
+    </message>
+    <name>Tcomp4</name>
+    <source>s2</source>
+    <target>mu</target>
+    <kind>explicit</kind>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.relative.bendpoints</name>
+      <value>311:66:-22:263:505:3:172:200:473:-221:140:-24</value>
+    </extra-property>
+  </operation>
+  <operation>
+    <message>
+      <name>m0</name>
+      <polarity>negative</polarity>
+    </message>
+    <name>Tcomp1</name>
+    <source>s1</source>
+    <target>mu</target>
+    <kind>explicit</kind>
+  </operation>
+  <operation>
+    <message>
+      <name>m0</name>
+      <polarity>negative</polarity>
+    </message>
+    <name>T0</name>
+    <source>s0</source>
+    <target>s1</target>
+    <kind>explicit</kind>
+  </operation>
+  <operation>
+    <message>
+      <name>m1</name>
+      <polarity>positive</polarity>
+    </message>
+    <name>Tcomp3</name>
+    <source>s2</source>
+    <target>mu</target>
+    <kind>explicit</kind>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.relative.bendpoints</name>
+      <value>425:-2:92:195:454:-174:121:23</value>
+    </extra-property>
+  </operation>
+  <operation>
+    <message>
+      <name>m1</name>
+      <polarity>positive</polarity>
+    </message>
+    <name>Tcomp2</name>
+    <source>s1</source>
+    <target>mu</target>
+    <kind>explicit</kind>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.relative.bendpoints</name>
+      <value>169:170:-164:170</value>
+    </extra-property>
+    <extra-property type="java.lang.String">
+      <name>wsprotocol.temporal.constraint</name>
+      <value>C-Invoke(T0 &gt;= 10)</value>
+    </extra-property>
+  </operation>
+  <operation>
+    <message>
+      <name>m1</name>
+      <polarity>positive</polarity>
+    </message>
+    <name>Tmu0</name>
+    <source>mu</source>
+    <target>mu</target>
+    <kind>explicit</kind>
+    <extra-property type="java.lang.String">
+      <name>gef.wsprotocol.editor.relative.bendpoints</name>
+      <value>-10:106:-10:106:67:88:67:88</value>
+    </extra-property>
+  </operation>
+</business-protocol>
