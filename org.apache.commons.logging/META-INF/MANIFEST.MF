@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Commons Logging API
+Bundle-SymbolicName: org.apache.commons.logging
+Bundle-Version: 1.0.4
+Bundle-ClassPath: .
+Bundle-Vendor: Julien Ponge
+Bundle-Localization: plugin
+Export-Package: org.apache.commons.logging,
+ org.apache.commons.logging.impl
