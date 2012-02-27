@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Temporal Operators Plug-in
+Bundle-SymbolicName: fr.isima.ponge.wsprotocol.timed.operators
+Bundle-Version: 0.0.4
+Bundle-ClassPath: .
+Bundle-Vendor: Julien Ponge
+Bundle-Localization: plugin
+Export-Package: fr.isima.ponge.wsprotocol.timed.operators
+Require-Bundle: fr.isima.ponge.wsprotocol,
+ org.antlr,
+ org.apache.commons.logging,
+ org.dom4j
