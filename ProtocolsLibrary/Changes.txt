@@ -1,0 +1,146 @@
+-------------------------------------------------------------------------------
+
+2008.01.11 (Julien Ponge):
+
+    - Constraint helpers: disjunction-free test and disjunction computation.
+    - New constraints model, including diagonal constraints (x - y # k).
+    - TemporalConstraintTreeWalker checks that M-Invoke constraints are valid.
+
+2008.01.07 (Julien Ponge):
+
+    - Temporal constraints: support for deep copy.
+
+2007.12.30 (Julien Ponge):
+
+    - Java 5 migration (generics). Addresses #21.
+    - Ant JUnit task.
+
+2007.12.29 (Julien Ponge):
+
+    - Relaxed M-Invoke constraints definition to reflect the new model.
+      (it still requires the introduction of diagonal constraints)
+
+-------------------------------------------------------------------------------
+
+Release 0.4.0 (release-0.4.0) (2006.06.27)
+
+2006.06.26 (Julien Ponge):
+
+    - Ensure that M-Invoke constraints have a single ComparisonNode with "="
+      as the symbol. Closes #16.
+    - Temporal constraints lexer: elements have been paraphrased to provide
+      comprehensive error reports.
+
+2006.06.14 (Julien Ponge):
+
+    - BusinessProtocolImpl: recompute the final states in getFinalStates().
+
+2006.06.13 (Julien Ponge):
+
+    - BusinessProtocolImpl: fixed a bug where messages were systematically
+      removed from the protocol. This is now done only if no other operation
+      carries the same message. Closes bug #18.
+
+2006.06.09 (Julien Ponge):
+
+    - First round of temporal constraints extensions, using AntLR to generate
+      the constraints language parser.
+    - Operations now need to have a name (ex: T1). The XML persistence has been
+      adapted to automatically generate names to support legacy protocols.
+      Also, OperationImpl will generate unique identifiers when calling the
+      previous (now deprecated) constructors.
+
+2006.03.29 (Julien Ponge):
+
+    - Applied the CDDL License.
+
+2005.11.27 (Julien Ponge):
+
+    - OperationKind support (needed to describe interaction protocols).
+
+2005.10.31 (Julien Ponge):
+
+    - Don't give an extra properties handler when there is none for a requested
+      class.
+
+2005.08.22 (Julien Ponge):
+
+    - New StandardExtraProperties interface.
+    - New flexible extra properties persistence system.
+
+2005.08.15 (Julien Ponge):
+
+    - Rewritten XmlIOManager implementation using Dom4J.
+
+-------------------------------------------------------------------------------
+
+Release 0.3.0 (release-0-3-0) (2005.08.07)
+
+2005.08.07 (Julien Ponge):
+    - Relocated src/ and tests/ to src/java/ and tests/java/.
+    - I18N support.
+
+2005.08.03 (Julien Ponge):
+    - BusinessProtocolHandler: JDK 1.4 compatibility fix (Integer.valueOf(int)
+      is JDK 1.5).
+
+2005.07.19 (Julien Ponge):
+    - State: added setInitialState / isInitialState methods.
+
+2005.07.16 (Julien Ponge):
+    - Extra properties of the form String/String (key/value) are persistent by
+      XmlIOManager.
+    - NOTE: XmlIOManager will need to be rewritten someday...
+    - Ant build: take care of source and target compatibility - set to 1.4 -.
+
+2005.07.15 (Julien Ponge):
+    - Extra properties management has been refactored to an
+      ExtraPropertiesKeeper interface which is extended by the interfaces of
+      the model.
+
+2005.04.21 (Julien Ponge):
+    - OperationImpl, MessageImpl: added the missing listener delegates methods.
+
+-------------------------------------------------------------------------------
+
+Release 0.2.0 (release-0-2-0) (2005.03.29)
+
+2005.03.29 (Julien Ponge):
+
+    - Ant build: generate MD5 checksums for the distribution archives.
+    - Applied a MIT-style license.
+
+2005.03.14 (Julien Ponge):
+
+    - Documentation in the doc folder.
+
+2005.03.02 (Julien Ponge):
+
+    - fr.isima.ponge.wsprotocol.impl.*: added support for extra properties.
+
+2005.02.28 (Julien Ponge):
+
+    - BusinessProtocolImpl: added the PropertyChangeSupport delegates.
+    - BusinessProtocolImpl: safer hashCode().
+
+2005.02.25 (Julien Ponge):
+
+    - BusinessProtocolImpl: make the initial state beeing null when removing
+      the matching state from the protocol.
+
+2005.02.24 (Julien Ponge):
+	
+    - Added model changes notifications support in package
+      fr.isima.ponge.wsprotocol.impl (java.beans based).
+      
+    - BusinessProtocolImplTest: a test was not deterministic, fixed.
+
+-------------------------------------------------------------------------------
+
+Release 0.1.0 (release-0-1-0) (2005.02.23)
+
+2005.02.24 (Julien Ponge):
+
+    - Initial model working with an XML mapping.
+
+-------------------------------------------------------------------------------
